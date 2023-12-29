@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
+{
+    public class Categoria
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdCategoria { get; set; }
+        [Required(ErrorMessage = "Codigo es obligatorio")]
+
+        public int Codigo { get; set; }
+        [Required(ErrorMessage = "Nombre es obligatorio")]
+        [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
+        public string? Nombre { get; set; }
+        [Required(ErrorMessage = "Descripcion es obligatorio")]
+        [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
+        public string? Descripcion { get; set; }
+
+        [NotMapped]
+        public int Top_Aux { get; set; }
+        public ICollection<Producto>? Producto { get; set; }
+
+
+    }
+}

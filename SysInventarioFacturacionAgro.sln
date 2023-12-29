@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysInventarioFacturacionAgro.UI.AppWebAspNetCore", "SysInventarioFacturacionAgro.UI.AppWebAspNetCore\SysInventarioFacturacionAgro.UI.AppWebAspNetCore.csproj", "{C4A8EE43-1A2D-47D8-B2E9-F15D96326E0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysInventarioFacturacionAgro.AccesoADatos", "SysInventarioFacturacionAgro.AccesoADatos\SysInventarioFacturacionAgro.AccesoADatos.csproj", "{9FB59ECB-40AE-4CDA-8C64-41A31E89EA78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysInventarioFacturacionAgro.EntidadesDeNegocio", "SysInventarioFacturacionAgro.EntidadesDeNegocio\SysInventarioFacturacionAgro.EntidadesDeNegocio.csproj", "{72BD7C69-84BB-442B-A631-C3A86F8D7FD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysInventarioFacturacionAgro.LogicaDeNegocio", "SysInventarioFacturacionAgro.LogicaDeNegocio\SysInventarioFacturacionAgro.LogicaDeNegocio.csproj", "{9E086142-26EB-41C1-8458-06AD9BA0FDE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4A8EE43-1A2D-47D8-B2E9-F15D96326E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A8EE43-1A2D-47D8-B2E9-F15D96326E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A8EE43-1A2D-47D8-B2E9-F15D96326E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A8EE43-1A2D-47D8-B2E9-F15D96326E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB59ECB-40AE-4CDA-8C64-41A31E89EA78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB59ECB-40AE-4CDA-8C64-41A31E89EA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB59ECB-40AE-4CDA-8C64-41A31E89EA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB59ECB-40AE-4CDA-8C64-41A31E89EA78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72BD7C69-84BB-442B-A631-C3A86F8D7FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72BD7C69-84BB-442B-A631-C3A86F8D7FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72BD7C69-84BB-442B-A631-C3A86F8D7FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72BD7C69-84BB-442B-A631-C3A86F8D7FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E086142-26EB-41C1-8458-06AD9BA0FDE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E086142-26EB-41C1-8458-06AD9BA0FDE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E086142-26EB-41C1-8458-06AD9BA0FDE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E086142-26EB-41C1-8458-06AD9BA0FDE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04FADE8A-65E9-4C70-8F04-ED3848E19A18}
+	EndGlobalSection
+EndGlobal

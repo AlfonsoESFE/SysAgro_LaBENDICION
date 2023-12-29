@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SysInventarioFacturacionAgro.UI.AppWebAspNetCore.props" />
+</Project>
