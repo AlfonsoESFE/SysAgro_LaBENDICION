@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5A97UUJUPgoix9eTN454man7JQXBZqlU+kmHzYBchPjz5Hkdihw+R0kuERGoWIdr9dHJ1OwdKQlvCc2aiA0oLA==",
+  "dgSpecHash": "3qvobkRgLps4RTdJNX57hT24ZTTDTKgwARJXODPjCU7ZbsewqQ5lYxb+x8AByAjUhVAFp6K8J+vwyyQP7pO+8A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.LogicaDeNegocio\\SysInventarioFacturacionAgro.LogicaDeNegocio.csproj",
+  "projectFilePath": "C:\\Users\\MINEDUCYT\\Desktop\\ffff\\SysAgro_LaBENDICION\\SysInventarioFacturacionAgro.LogicaDeNegocio\\SysInventarioFacturacionAgro.LogicaDeNegocio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MINEDUCYT\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\MINEDUCYT\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

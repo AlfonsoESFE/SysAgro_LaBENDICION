@@ -5,12 +5,84 @@
       "PackagePath": "staticwebassets\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\Carritocompra-removebg-preview.png",
+      "PackagePath": "staticwebassets\\IMG\\Carritocompra-removebg-preview.png"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\LOS_REPORTES-removebg-preview.png",
+      "PackagePath": "staticwebassets\\IMG\\LOS_REPORTES-removebg-preview.png"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\Logo.png",
+      "PackagePath": "staticwebassets\\IMG\\Logo.png"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\Nike.jpeg",
+      "PackagePath": "staticwebassets\\IMG\\Nike.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\Usuario-removebg-preview.png",
+      "PackagePath": "staticwebassets\\IMG\\Usuario-removebg-preview.png"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\ZapatoIcon-removebg-preview.png",
+      "PackagePath": "staticwebassets\\IMG\\ZapatoIcon-removebg-preview.png"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\ZeroStresLogo.png",
+      "PackagePath": "staticwebassets\\IMG\\ZeroStresLogo.png"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\png lg.png",
+      "PackagePath": "staticwebassets\\IMG\\png lg.png"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\css\\Home.css",
+      "PackagePath": "staticwebassets\\css\\Home.css"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\css\\Inicio.css",
+      "PackagePath": "staticwebassets\\css\\Inicio.css"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\css\\Login.css",
+      "PackagePath": "staticwebassets\\css\\Login.css"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\css\\Menu.css",
+      "PackagePath": "staticwebassets\\css\\Menu.css"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\css\\StyleTable.css",
+      "PackagePath": "staticwebassets\\css\\StyleTable.css"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\css\\Venta.css",
+      "PackagePath": "staticwebassets\\css\\Venta.css"
+    },
+    {
       "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\js\\Inicio.js",
+      "PackagePath": "staticwebassets\\js\\Inicio.js"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\js\\JavaScriptHome.js",
+      "PackagePath": "staticwebassets\\js\\JavaScriptHome.js"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\js\\Menu.js",
+      "PackagePath": "staticwebassets\\js\\Menu.js"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\js\\Venta.js",
+      "PackagePath": "staticwebassets\\js\\Venta.js"
     },
     {
       "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\js\\site.js",
@@ -195,6 +267,38 @@
     {
       "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\icofont\\demo.html",
+      "PackagePath": "staticwebassets\\lib\\icofont\\demo.html"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\icofont\\fonts\\icofont.eot",
+      "PackagePath": "staticwebassets\\lib\\icofont\\fonts\\icofont.eot"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\icofont\\fonts\\icofont.svg",
+      "PackagePath": "staticwebassets\\lib\\icofont\\fonts\\icofont.svg"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\icofont\\fonts\\icofont.ttf",
+      "PackagePath": "staticwebassets\\lib\\icofont\\fonts\\icofont.ttf"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\icofont\\fonts\\icofont.woff",
+      "PackagePath": "staticwebassets\\lib\\icofont\\fonts\\icofont.woff"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\icofont\\fonts\\icofont.woff2",
+      "PackagePath": "staticwebassets\\lib\\icofont\\fonts\\icofont.woff2"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\icofont\\icofont.css",
+      "PackagePath": "staticwebassets\\lib\\icofont\\icofont.css"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\icofont\\icofont.min.css",
+      "PackagePath": "staticwebassets\\lib\\icofont\\icofont.min.css"
     },
     {
       "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysInventarioFacturacionAgro\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",

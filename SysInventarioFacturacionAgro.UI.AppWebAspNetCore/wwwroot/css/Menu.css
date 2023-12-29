@@ -1,0 +1,184 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    /* Google Fonts: https://fonts.google.com/?selection.family=Poppins*/
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #102c54;
+    padding: 0px;
+    overflow: auto;
+    align-items: center;
+    align-content:flex-start;
+    z-index:2;
+}
+
+
+    header .labelMenu {
+        padding:30px;
+        color: #FFf;
+        tansition: all 0.2s;
+        width: 40px;
+        height: 70px;
+        display: inline-block;
+        margin-left:auto;
+        margin-right:0;
+        text-align:center;
+        line-height: 40px;
+        border-radius: 1000px;
+    }
+
+        header .labelMenu:hover {
+            background-color: #0099ff;
+            cursor: pointer;
+        }
+
+/* NAVGATION: */
+
+.menu {
+    width: 250px; /* Ancho de la barra lateral */
+    height: 100%; /* Altura completa */
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background: linear-gradient(to right, #102c54, #222); /* Color de fondo del menú */
+    color: white; /* Color del texto en el menú */
+    transition: width 0.3s; /* Transición suave para cambiar el ancho del menú */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido es largo */
+    z-index: 999; /* Asegura que el menú esté en la parte superior */
+}
+
+    .menu h1 {
+        background-color: #313a45;
+        text-align: center;
+        color: #DDD;
+        padding: 10px;
+    }
+
+    .menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .menu ul li {
+            padding: 10px;
+        }
+
+            .menu ul li a {
+                color: white;
+                text-decoration: none;
+                display: block;
+            }
+
+
+        .menu ul a {
+            display: flex;
+            padding: 10px;
+            color: #444;
+            transition: all 0.2s;
+        }
+                .menu ul li {
+            padding: 10px;
+        }
+
+            .menu ul li a {
+                color: white;
+                text-decoration: none;
+                display: block;
+            }
+
+
+        .menu ul a {
+            display: flex;
+            padding: 10px;
+            color: #444;
+            transition: all 0.2s;
+        }
+
+    .menu a:hover {
+        background-color: #DDD;
+    }
+
+    .menu ul:first-child {
+        border-bottom: 1px solid #DDD;
+    }
+    /* A primeira <ul> do menu (primeiro filho (first-child)) */
+
+    .menu ul a li:first-child {
+        margin-right: 10px;
+    }
+
+    /* A primeira <li> de cada <ul> do menu (primeiro filho (first-child)) (Icones) */
+
+    /* Cores Icones */
+
+    .menu ul a .icone2 {
+        color: #ff9933;
+    }
+
+    .menu ul a .icone3 {
+        color: #6666cc;
+    }
+
+    .menu ul a .icone4 {
+        color: #663300;
+    }
+
+    .menu ul:last-child a:hover li:first-child {
+        color: #222;
+    }
+
+/* Na ultima <ul>, quando o mouse passas sobre os links de cada uma, a primeira <li> muda a cor para um cinza mais escuro */
+
+
+/* Opacidade quando o menu é aberto */
+
+.opacMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 40;
+}
+
+
+p {
+    text-align: center;
+    padding: 40px;
+    color: #DDD;
+    font-size: 50px;
+    text-shadow: 1px 1px 1px #222;
+}
+
+    p span {
+        color: #ff3366;
+    }
+
+.dashboard-nav-list {
+    max-height: 300px; /* Establece la altura máxima para el menú */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido excede la altura máxima */
+}
+
+
+/*la tipografia de la letra*/
+.croissant-title {
+    font-family: "Curlz MT", sans-serif;
+    text-align:center;
+    color:white;
+    /* Otros estilos de fuente, como tamaño, color, etc. */
+}

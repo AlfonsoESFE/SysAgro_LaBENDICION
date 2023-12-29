@@ -34,6 +34,7 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Display(Name = "Fecha registro")]
         public DateTime FechaRegistro { get; set; }
         public ICollection<Factura>? Factura { get; set; }
+        public ICollection<AjusteInventario>? AjusteInventario { get; set; }
         public Rol Rol { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }

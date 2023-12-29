@@ -1,0 +1,59 @@
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="~/css/Login.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+<div class="login-box">
+    <div class="imagen">
+        <img src="~/IMG/ZeroStresLogo.png" alt="Logo" />
+    </div>
+
+    <form asp-action="Login" style="width: 15rem;">
+       
+        <div class="user-box">
+            <input asp-for="Login" class="form-control form-control-lg" placeholder="Ingrese su usuario" />
+
+        </div>
+        
+
+        <div class="user-box">
+            <input asp-for="Password" class="form-control form-control-lg" placeholder="Introduce la contraseña" />
+        </div>
+
+        <center>
+            <a href="">
+                <span></span>
+                <span></span>
+                    
+                  <div class="form-group">
+
+                        <input type="submit"value="E N T R A R" class="btn wider-button" />
+                </div>
+                <span class="text-danger">@ViewBag.Error</span>
+                @Html.ActionLink("Registrarse", "Create",null,null,  new { @class = "btn regis-button" })
+            </a>
+
+        </center>
+       
+    </form>
+</div>
+</body>
+
+</html>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

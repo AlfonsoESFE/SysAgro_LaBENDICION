@@ -1,0 +1,246 @@
+﻿/* Estilo específico para la tabla con el ID "miTablaEspecial" */
+.tablaBusqueda {
+    max-height: 20px;
+    height: 10px;
+    width: 100%; /* Ancho de la tabla al 100% del contenedor */
+    border-collapse: collapse; /* Colapsar los bordes de las celdas */
+    background-color: #f2f2f2; /* Color de fondo de la tabla */
+    overflow-y: auto;
+    overflow-x: auto;
+    table-layout:initial;
+}
+
+    /* Estilo para las celdas de encabezado */
+    .tablaBusqueda th {
+        background-color: #102c54; /* Color de fondo del encabezado */
+        color: white; /* Color de texto del encabezado */
+        height: 40px; /* Alto de las celdas de encabezado */
+        text-align: center; /* Alineación del texto en el encabezado */
+        position: sticky;
+        top: 0; /* La posición fija en la parte superior de la tabla */
+        z-index: 1;
+        
+    }
+
+    /* Estilo para las celdas de datos */
+    .tablaBusqueda td {
+        background-color: white; /* Color de fondo de las celdas de datos */
+        color: #333; /* Color de texto de las celdas de datos */
+        height: 30px; /* Alto de las celdas de datos */
+        text-align: left; /* Alineación del texto en las celdas de datos */
+        padding: 3px; /* Espaciado interno de las celdas de datos */
+        border: 1px solid #ccc; /* Borde de 1 píxel con color gris claro */
+        position: sticky;
+        
+    }
+
+
+        .tablaBusqueda td:first-child {
+            width: 0px; /* Cambiar el ancho de la primera columna según tus necesidades */
+        }
+
+        .tablaBusqueda th:first-child {
+            width: 0px; /* Cambiar el ancho de la primera columna según tus necesidades */
+        }
+
+.PrimeraColumnaBusqueda{
+    width:0%;
+}
+
+.BarraSuperior {
+    background-color: #102c54;
+    text-align: left;
+    text-emphasis-color: white;
+    height: 60px;
+    align-items: center;
+    align-content: center;
+    display: flex;
+}
+
+.BarraInferio {
+    background-color: #102c54;
+    text-align: left;
+    text-emphasis-color: white;
+    height: 60px;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    height: 50px;
+}
+
+
+
+.BtnImprimir {
+    align-content: center;
+    background-color: #ea8a21;
+    padding: 10px;
+    vertical-align: central;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido del botón */
+    justify-content: flex-start; /* Alinea el contenido a la izquierda */
+    border-radius: 5px;
+    border-color: transparent;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.Borde {
+    background-color: white;
+    border-color: black;
+}
+
+.TextLitlle {
+    text-align: center;
+    align-content: center;
+    color: white;
+    height: 50px;
+    width: 100%;
+    background-color: #102c54;
+    font-weight: bold; /* Aplicar negrita */
+    font-size: 20px; /* Aumentar el tamaño de la fuente (cambia el valor según tus preferencias) */
+}
+
+.tablaDetalles {
+    max-height: 20px;
+    height: 10px;
+    width: 107%; /* Ancho de la tabla al 100% del contenedor */
+    border-collapse: collapse; /* Colapsar los bordes de las celdas */
+    background-color: #f2f2f2; /* Color de fondo de la tabla */
+    overflow-y: auto;
+    table-layout: fixed;
+}
+
+    /* Estilo para las celdas de encabezado */
+    .tablaDetalles th {
+        background-color: #102c54; /* Color de fondo del encabezado */
+        color: white; /* Color de texto del encabezado */
+        height: 40px; /* Alto de las celdas de encabezado */
+        text-align: center; /* Alineación del texto en el encabezado */
+       
+    }
+
+    /* Estilo para las celdas de datos */
+    .tablaDetalles td {
+        background-color: white; /* Color de fondo de las celdas de datos */
+        color: #333; /* Color de texto de las celdas de datos */
+        height: 30px; /* Alto de las celdas de datos */
+        text-align: left; /* Alineación del texto en las celdas de datos */
+        padding: 3px; /* Espaciado interno de las celdas de datos */
+        border: 1px solid #ccc; /* Borde de 1 píxel con color gris claro */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+        .tablaDetalles td:first-child,
+        .tablaDetalles th:first-child {
+            width: 0px; /* Puedes ajustar este valor según tus necesidades */
+        }
+
+.PrimeraColumna {
+    width: 0%;
+    border: none; /* Elimina el borde */
+    outline: none; /* Elimina el contorno al hacer clic (pseudoclase :focus) */
+}
+
+.SiguientesColumnas {
+    border: none; /* Elimina el borde */
+    outline: none; /* Elimina el contorno al hacer clic (pseudoclase :focus) */
+}
+
+.Separation {
+    background-color: #102c54;
+}
+
+.table-container {
+    height: 167px; /* Ajusta la altura deseada para tu tabla */
+    overflow: auto; /* Habilita la barra de desplazamiento */
+}
+
+.FormContent {
+    height: 95px;
+    align-content:center;
+
+}
+
+.DataCustomer {
+    height: 40px;
+    width: 120px;
+    background: #102c54;
+    color: white;
+    padding: 10px;
+    align-content: center;
+    border-radius: 5px;
+}
+
+.DataCustomer-Result {
+    height: 40px;
+    width: 100px;
+    color: black;
+    background-color: gainsboro;
+}
+
+.ContentFormCustomer{
+    width: 98%;
+    height: 200px;
+}
+
+.DataCustomerFormaP {
+    height: 40px;
+    width: 180px;
+    background: #102c54;
+    color: white;
+    padding: 10px;
+    align-content: center;
+    border-radius: 5px;
+}
+
+.btnCalcular {
+    height: 40px;
+    width: 120px;
+    background-color: forestgreen;
+    color: white;
+    border-color: transparent;
+    border-radius: 5px;
+}
+
+
+
+.ticket-header {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: 'Courier New', monospace;
+    color: black;
+    text-shadow: none;
+}
+
+.ticket-info {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-family: 'Courier New', monospace;
+    color: black;
+    text-shadow: none;
+}
+
+.ticket-details {
+    font-size: 12px;
+    margin-top: 15px;
+    font-family: 'Courier New', monospace;
+}
+
+.ImagenTicket {
+    width: 10%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.DatosFacturaDetalle {
+    float: right;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    text-shadow: none;
+    font-size: 120%;
+    margin-left: 160px;
+}

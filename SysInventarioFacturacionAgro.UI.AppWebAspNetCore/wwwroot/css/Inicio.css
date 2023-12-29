@@ -1,0 +1,224 @@
+﻿/* Estilo para la imagen de fondo */
+/* Variables */
+:root {
+    --carousel-width: 350px; /* Ancho de cada carrusel */
+    --carousel-height: 350px;
+    --control-size: 10px;
+    --carousel-gap: 10px; /* Espacio entre carruseles */
+}
+
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales del cuerpo */
+
+/* Estilos de cada carrusel */
+.carousel-container {
+    height:350px;
+    width:350px;
+    display: inline-block;
+    margin: 10px;
+    float: left; /* Alinea los carruseles uno al lado del otro */
+}
+
+.carousel {
+    width: 350px;
+    height: 350px;
+    border-radius: 3px;
+    overflow: hidden;
+    text-align: left;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+    .carousel:hover {
+        transform: translateY(-5px); /* Eleva el carrusel 5px hacia arriba */
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2); /* Agrega una sombra */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Agrega una transición suave */
+    }
+
+    .carousel:hover .controls {
+        opacity: 1;
+    }
+
+/* Estilos de los controles */
+.controls {
+    opacity: 0;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    justify-content: space-between;
+    width: 10px;
+    z-index: 99999;
+    transition: all ease 0.5s;
+}
+
+/* Estilos de los botones de control */
+.control {
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0.5;
+    transition: ease 0.3s;
+    cursor: pointer;
+}
+
+    .control:hover {
+        opacity: 1;
+    }
+
+/* Estilos de los slides */
+.slides {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    height: 350px;
+    width: 350px; /* Ancho de los slides ajustado */
+    transition: 1s ease-in-out all;
+}
+
+.slide {
+    height: 350px;
+    width: 350px;
+}
+
+/*Tarjetas*/
+
+#sneaker {
+    height: 70px;
+    margin-right: 10px;
+}
+
+.wish {
+    background-color: organge;
+    height: 50px;
+    color: white;
+    display: flex;
+    justify-content: cover;
+}
+
+    .wish:hover {
+        color: #2F3E46;
+        cursor: pointer;
+    }
+
+
+.sneaker-card {
+    height: 400px;
+    width: 350px;
+    color: white;
+    margin: 10px;
+    background-color: #003049;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    box-shadow: -4px 8px 8px 8px rgba(0, 0, 0, 0.1);
+    float: left;
+}
+
+.sneaker-profile-pic {
+    height: 150px;
+    width: 182px;
+    border-radius: 75px;
+    object-fit: cover;
+}
+
+.wish {
+    background-color: lightgrey;
+    height: 100px;
+    color: red;
+    display: flex;
+    justify-content: center;
+}
+
+.wish-btn:hover {
+    background-color: #d62828;
+    color: white;
+    box-shadow: 0 0 15px #DA2928;
+}
+
+
+footer {
+    background-color: #003049;
+    height: 80px;
+    padding-left: 20px;
+    padding-right: 40px;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    color: #EEEEEE;
+}
+
+.h2{
+    text-align:center;
+
+}
+
+/*Modo Oscuro*/
+/* styles.css */
+
+.switch {
+    width: 100px;
+    height: 40px;
+    background: #ccc;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.slider {
+    width: 40px;
+    height: 40px;
+    background: #007BFF;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+}
+
+
+.dark-mode {
+    background-color: #121212;
+    color: #fff;
+    /* Otros estilos de modo oscuro */
+}
+
+/*Estilo del switch*/
+
+
+/* Estilo del control deslizante del interruptor */
+
+
+/* Estilo del control deslizante redondo (el botón del interruptor) */
+.slider.round {
+    border-radius: 34px;
+}
+
+/* Estilo del control deslizante cuando está encendido */
+input:checked + .slider {
+    background-color: #2196F3; /* Color del fondo cuando está encendido */
+}
+
+    /* Estilo del botón del interruptor cuando está encendido */
+    input:checked + .slider:before {
+        transform: translateX(26px); /* Posición del botón cuando está encendido */
+    }
+
+
+
+
