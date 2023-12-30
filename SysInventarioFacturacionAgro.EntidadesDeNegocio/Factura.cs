@@ -1,11 +1,6 @@
-﻿using SysInventarioFacturacionAgro.EntidadesDeNegocio;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
 {
@@ -13,56 +8,44 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int IdFactura { get; set; }
 
-        [ForeignKey("Usuario")]
-        [Required(ErrorMessage = "Usuario es obligatorio")]
-        [Display(Name = "Usuario")]
-        public int IdUsuario { get; set; }
-
-        [Required(ErrorMessage = "Numero factura es obligatorio")]
+        [Required(ErrorMessage = "NumeroFactura es obligatorio")]
         public int NumeroFactura { get; set; }
-        [Required(ErrorMessage = "Fecha facturacion es obligatorio")]
 
+        [Required(ErrorMessage = "FechaFacturacion es obligatoria")]
+        [Display(Name = "Fecha de Facturación")]
         public DateTime FechaFacturacion { get; set; }
 
-        [Required(ErrorMessage = "Descripcion es obligatorio")]
-        [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
-        public string? Descripcion { get; set; }
-        [Required(ErrorMessage = "Direccion es obligatorio")]
-        [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
-        public string? Direccion { get; set; }
-        [Required(ErrorMessage = "Telefono es obligatorio")]
-        [StringLength(15, ErrorMessage = "Maximo 15 caracteres")]
-        public string? Telefono { get; set; }
-        [Required(ErrorMessage = "Correo es obligatorio")]
-        [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
-        public string? Correo { get; set; }
-        [Display(Name = "Total")]
-        [Required(ErrorMessage = "El campo Total es obligatorio.")]
-        public decimal? Total { get; set; }
-        [Display(Name = "Descuento")]
-        [Required(ErrorMessage = "El campo Descuento es obligatorio.")]
-        [Range(0.01, 10000, ErrorMessage = "El campo Precio debe estar entre 0.01 y 10,000.")]
+        [Required(ErrorMessage = "FormaPago es obligatorio")]
+        public byte FormaPago { get; set; }
+
+        [Column(TypeName = "decimal(18, 1)")]
         public decimal? Descuento { get; set; }
-        [Display(Name = "Impuesto")]
-        [Required(ErrorMessage = "El campo Impuesto es obligatorio.")]
-        [Range(0.01, 10000, ErrorMessage = "El campo Precio debe estar entre 0.01 y 10,000.")]
+
+        [Column(TypeName = "decimal(18, 1)")]
         public decimal? Impuesto { get; set; }
 
-        [Display(Name = "Total Pagado")]
-        [Required(ErrorMessage = "El campo Total Pagado es obligatorio.")]
-        [Range(0.01, 10000, ErrorMessage = "El campo Precio debe estar entre 0.01 y 10,000.")]
-        public decimal? TotalPagado { get; set; }
+        [Required(ErrorMessage = "TotalPagado es obligatorio")]
+        [Column(TypeName = "decimal(18, 1)")]
+        public decimal TotalPagado { get; set; }
 
-        public Usuario? Usuario { get; set; }
+        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        public string NombreCliente { get; set; }
 
-        public List<DetallesFactura>? DetallesFactura { get; set; }
+        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        public string DireccionCliente { get; set; }
 
-        [NotMapped]
-        public int Top_Aux { get; set; }
+        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        public string TelefonoCliente { get; set; }
 
+        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        public string DUICliente { get; set; }
 
-        //cambios
+        [Required(ErrorMessage = "IdUsuario es obligatorio")]
+        public int IdUsuario { get; set; }
+
+        public Usuario Usuario { get; set; }
     }
 }

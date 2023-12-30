@@ -1,11 +1,6 @@
-﻿using SysInventarioFacturacionAgro.EntidadesDeNegocio;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
 {
@@ -13,42 +8,30 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdDetalleFactura { get; set; }
-        [ForeignKey("Factura")]
-        [Required(ErrorMessage = "Factura es obligatorio")]
-        [Display(Name = "Factura")]
-        public int IdFactura { get; set; }
-        [ForeignKey("Producto")]
-        [Required(ErrorMessage = "Producto es obligatorio")]
-        [Display(Name = "Producto")]
-        public int IdProducto { get; set; }
 
-        [Required(ErrorMessage = "El codigo es obligatorio")]
+        public int IdDetallesFactura { get; set; }
 
+        [Required(ErrorMessage = "Codigo es obligatorio")]
         public int Codigo { get; set; }
 
-        [Required(ErrorMessage = "la Cantidad es obligatorio")]
+        [Required(ErrorMessage = "Cantidad es obligatoria")]
         public int Cantidad { get; set; }
 
-        [Required(ErrorMessage = "la forma de pago es obligatorio")]
+        [Required(ErrorMessage = "FechaFacturacion es obligatoria")]
+        [Display(Name = "Fecha de Facturación")]
+        public DateTime FechaFacturacion { get; set; }
 
+        [Required(ErrorMessage = "Total es obligatorio")]
+        [Column(TypeName = "decimal(18, 1)")]
+        public decimal Total { get; set; }
 
-        public byte FormaDePago { get; set; }
+        [Required(ErrorMessage = "IdProducto es obligatorio")]
+        public int IdProducto { get; set; }
 
-        [Required(ErrorMessage = "la fecha de emision obligatorio")]
+        [Required(ErrorMessage = "IdFactura es obligatorio")]
+        public int IdFactura { get; set; }
 
-        public DateTime FechaEmision { get; set; }
-
-        [Required(ErrorMessage = "el valor total es obligatorio")]
-        public decimal ValorTotal { get; set; }
-        public Factura? Factura { get; set; }
-
-
-        public Producto? Producto { get; set; }
-
-        [NotMapped]
-        public int Top_Aux { get; set; }
-
+        public Producto Producto { get; set; }
+        public Factura Factura { get; set; }
     }
-
 }

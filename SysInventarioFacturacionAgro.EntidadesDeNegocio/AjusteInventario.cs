@@ -1,27 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
 {
     public class AjusteInventario
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdAjusteInventario { get; set; }
 
-        [ForeignKey("Usuario")]
-        [Required(ErrorMessage = "Usuario es obligatorio")]
-        [Display(Name = "Usuario")]
+        [Required(ErrorMessage = "TipoAjuste es obligatorio")]
+        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        public string TipoAjuste { get; set; }
+
+        [Required(ErrorMessage = "FechaAjuste es obligatorio")]
+        [Display(Name = "Fecha de Ajuste")]
+        public DateTime FechaAjuste { get; set; }
+
+        [Required(ErrorMessage = "Detalles es obligatorio")]
+        [MaxLength]
+        public string Detalles { get; set; }
+
+        [Required(ErrorMessage = "IdUsuario es obligatorio")]
         public int IdUsuario { get; set; }
 
-        public Usuario? Usuario { get; set; }
+        [Required(ErrorMessage = "IdProducto es obligatorio")]
+        public int IdProducto { get; set; }
 
-        [NotMapped]
-        public int Top_Aux { get; set; }
+        public Usuario Usuario { get; set; }
+        public Producto Producto { get; set; }
     }
 }
