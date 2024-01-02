@@ -20,4 +20,8 @@
     <ProjectReference Include="..\SysInventarioFacturacionAgro.LogicaDeNegocio\SysInventarioFacturacionAgro.LogicaDeNegocio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\DetallesFactura\" />
+  </ItemGroup>
+
 </Project>

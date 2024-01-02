@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
@@ -8,18 +7,13 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public int IdDetallesFactura { get; set; }
 
-        [Required(ErrorMessage = "Codigo es obligatorio")]
-        public int Codigo { get; set; }
+        [Required(ErrorMessage = "CodigoDetalles es obligatorio")]
+        public int CodigoDetalles { get; set; }
 
         [Required(ErrorMessage = "Cantidad es obligatoria")]
         public int Cantidad { get; set; }
-
-        [Required(ErrorMessage = "FechaFacturacion es obligatoria")]
-        [Display(Name = "Fecha de Facturación")]
-        public DateTime FechaFacturacion { get; set; }
 
         [Required(ErrorMessage = "Total es obligatorio")]
         [Column(TypeName = "decimal(18, 1)")]
@@ -31,7 +25,10 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Required(ErrorMessage = "IdFactura es obligatorio")]
         public int IdFactura { get; set; }
 
-        public Producto Producto { get; set; }
-        public Factura Factura { get; set; }
+        public Factura? Factura { get; set; }
+
+        [NotMapped]
+        public Producto? Producto { get; set; }
+
     }
 }

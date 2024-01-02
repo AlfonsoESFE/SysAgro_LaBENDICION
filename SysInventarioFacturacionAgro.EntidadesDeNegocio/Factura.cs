@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +9,6 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public int IdFactura { get; set; }
 
         [Required(ErrorMessage = "NumeroFactura es obligatorio")]
@@ -27,9 +27,15 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Column(TypeName = "decimal(18, 1)")]
         public decimal? Impuesto { get; set; }
 
-        [Required(ErrorMessage = "TotalPagado es obligatorio")]
+        [Required(ErrorMessage = "FacturaTotal es obligatorio")]
         [Column(TypeName = "decimal(18, 1)")]
-        public decimal TotalPagado { get; set; }
+        public decimal FacturaTotal { get; set; }
+
+        [Column(TypeName = "decimal(18, 1)")]
+        public decimal? FacturaPagado { get; set; }
+
+        [Column(TypeName = "decimal(18, 1)")]
+        public decimal? FacturaCambio { get; set; }
 
         [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
         public string NombreCliente { get; set; }
@@ -43,9 +49,13 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
         public string DUICliente { get; set; }
 
-        [Required(ErrorMessage = "IdUsuario es obligatorio")]
+        [ForeignKey("Usuario")]
+        [Required(ErrorMessage = "Usuario es obligatorio")]
+        [Display(Name = "Usuario")]
         public int IdUsuario { get; set; }
 
         public Usuario Usuario { get; set; }
+
+        public ICollection<DetallesFactura> DetallesFactura { get; set; }
     }
 }
