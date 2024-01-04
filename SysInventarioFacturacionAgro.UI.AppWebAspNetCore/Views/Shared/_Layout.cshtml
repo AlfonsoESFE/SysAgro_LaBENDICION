@@ -2,178 +2,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Agroservicio La Bendicion del Agricultor</title>
+    <title>@ViewData["Title"] La Bendición</title>
     <!--    https://fontawesome.com/   -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet">*@
     <!-- Incluye jQuery desde el CDN de Google -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @*Link para iconos*@
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-......" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-......" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/Home.css">
     <link rel="stylesheet" href="~/css/Menu.css">
     <link rel="stylesheet" href="~/css/Inicio.css">
-    <link rel="stylesheet" href="~/css/Venta.css">
+    <link rel="stylesheet" href="~/css/Venta.css">*@
    
+    @*PLANTILLA DE ESTILOS - TEMPLATE*@
+
+    <!-- Custom fonts for this template-->
+    <link href="~/lib/startbootstrap/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-......" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="~/lib/startbootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    @*<link href="~/css/site.css" rel="stylesheet">*@
+    <script src="~/lib/startbootstrap/vendor/jquery/jquery.js"></script>
+
+   @* <link href="~/select2.min.css" rel="stylesheet" />
+    <script src="~/select2.min.js"></script>
+    <link rel="manifest" href="/manifest.json">*@
+
+
+
 
 </head>
 
-<body>
-    <header>
-        <label class="labelMenu"><i class="fa fa-bars"></i></label>
-    </header>
-    <header>
-        @{
-            string? nombre = User.Identity.Name;
-            int? Idu = global.idu;
+<body id="page-top">
 
-        }
+    <!-- Page Wrapper -->
+    <div id="wrapper" style="overflow:auto">
+        <!-- Sidebar -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href='#'>
+                    <div class="sidebar-brand-icon" style="">
+                    </div>
+                </a>
 
-    </header>
-    <div class="menu">
-        <h1><i class="fa fa-address-card"></i></h1>
-        <nav>
-            <ul>
-                <div class="logo-container">
-                    <!-- Aquí puedes agregar el código o la imagen del logotipo de tu empresa -->
-                    <!-- Por ejemplo, si es una imagen: -->
-                    <img src="https://i.imgur.com/9RJLomZ.png" alt="Logo de la empresa" class="img-fluid logo-container" />
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-                </div>
-
-                <li class="Nombre">
-                    <a class="dashboard-nav-dropdown-item-nombre">Bienvenido @nombre </a>
-                  
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href='#'>
+                        <img class="img-fluid" src="~/IMG/logoagro200x.jpg" />
+                    </a>
                 </li>
 
-                @if (User.IsInRole("SuperAdmin"))
-                {
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Index">Usuario</a>
-                    </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Rol" asp-action="Index">Rol</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Producto" asp-action="Index">Producto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Producto" asp-action="Inventario">Inventario</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="dashboard-nav-item" asp-area="" asp-controller="Categoria" asp-action="Index">Categoria</a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Factura" asp-action="Index">Factura</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Proveedor" asp-action="Index">Proveedor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="DetalleFactura" asp-action="Index">DetalleFactura</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="DetalleFactura" asp-action="Venta">Venta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="DetalleFactura" asp-action="Reportes">Reportes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Pedido" asp-action="Index">Pedido</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="DetallePedido" asp-action="Index">DetallePedido</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Usuario" asp-action="CambiarPassword">Cambiar password</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-item" asp-area="" asp-controller="Usuario" asp-action="CerrarSesion">Cerrar sesión</a>
-                    </li>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Menu
+                </div>
 
 
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <a class="dashboard-nav-item" asp-area="" asp-controller="Usuario" asp-action="CerrarSesion">Cerrar sesión</a>
-                    </li>
-                }
-                @if (User.IsInRole("Cajero"))
-                {
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="DetalleFactura" asp-action="Venta">Venta</a>
-                    </li>
-                    
-                }
-                @if (User.IsInRole("Admin"))
-                {
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="DetalleFactura" asp-action="Venta">Venta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Producto" asp-action="Inventario">Inventario</a>
-                    </li>
-                }
+                <!-- Inicio -->
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+
+                <!-- Inventario -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario"
+                   aria-expanded="true" aria-controls="collapseInventario">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Inventario</span>
+                    </a>
+                    <div id="collapseInventario" class="collapse" aria-labelledby="headingInventario" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" asp-area="" asp-controller="AjusteInventario" asp-action="Index">Ajustes en Inventario</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Categoria" asp-action="Index">Categorías</a>
+
+                            <!-- Compras -->
+                            <a class="collapse-item collapsed" href="#" data-toggle="collapse" data-target="#collapseCompras"
+                           aria-expanded="true" aria-controls="collapseCompras">
+                                Compras
+                            </a>
+                            <div id="collapseCompras" class="collapse" aria-labelledby="headingCompras" data-parent="#collapseInventario">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <a class="collapse-item" asp-area="" asp-controller="Compra" asp-action="Index">Todas las Compras</a>
+                                    <a class="collapse-item" asp-area="" asp-controller="Compra" asp-action="Registro">Registro de Compras</a>
+                                </div>
+                            </div>
+                            <!-- Fin de subelementos de "Compras" -->
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Seguridad -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeguridad"
+                   aria-expanded="true" aria-controls="collapseSeguridad">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Seguridad</span>
+                    </a>
+                    <div id="collapseSeguridad" class="collapse" aria-labelledby="headingSeguridad" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" asp-area="" asp-controller="Rol" asp-action="Index">Roles</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Reportes -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+                   aria-expanded="true" aria-controls="collapseReportes">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Reportes</span>
+                    </a>
+                    <div id="collapseReportes" class="collapse" aria-labelledby="headingReportes" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexPrestamosActivos">Préstamos Activos</a>
+                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexCreditosMora">Créditos en Mora</a>
+                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexCobroProximo">Cobros por Cartera</a>
+                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexCobros">Cobros Detallados</a>
+                            <a class="collapse-item" target="_blank" asp-area="" asp-controller="ResolucionCredito" asp-action="Baucher">Baucher Cheque</a>
+                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="Index_RPGeneral">RP General Caja</a>
+                        </div>
+                    </div>
+                </li>
+
+
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
             </ul>
-           
+        }
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 collapsed">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <!-- Topbar Search -->
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <span class="badge badge-danger badge-counter">1+</span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Notificaciones
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <span class="font-weight-bold">
+                                            BIENVENIDO A FONDI S.A DE C.V
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="font-weight-bold">
+                                            Bienvenido al sistema @User.Identity.Name
+                                        </span>
+                                    }
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar todas las notificaciones</a>
+                        </div>
+                    </li>
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <span> @User.Identity.Name</span>
+                                }
+                                else
+                                {
+                                    <span> Anonymous</span>
+                                }
+                            </span>
+                            <img class="img-profile rounded-circle"
+                                 src="~/lib/startbootstrap/img/undraw_profile.svg">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                                @*  <a class="dropdown-item" href='@Url.Action("Edit","Usuario")'>
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Perfil
+                            </a>
+                            <a class="dropdown-item" href='@Url.Action("CambiarPassword","Usuario")'>
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" ></i>
+                            Cambiar password
+                            </a>*@
+                                <a class="dropdown-item" href='@Url.Action("Login","Usuario")' onclick="cerrarSesion()">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar session
+                                </a>
+                                <a class="dropdown-item" href='@Url.Action("CambiarPassword","Usuario")'>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cambiar Password
+                                </a>
+                            </div>
+                        }
+
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Main Content -->
+            <div id="content">
+               
+                   @RenderBody()
                 
-        </nav>
-    </div>
-    <div class="opacMenu"></div>
-
-    <!--  Jquery  -->
-    <div class='dashboard-content'>
-        <div class='dashboard-app'>
-            <div class='container'>
-                <main role="main" class="pb-2">
-                    @RenderBody()
-                </main>
             </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span style="line-height: 70px;">Copyright &copy; 3HCPS @DateTime.Now.Year</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
         </div>
+        <!-- End of Content Wrapper -->
+
     </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-   
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/Inicio.js"></script>
-    <script src="~/js/Venta.js"></script>
-    <script src="~/js/Menu.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/JavaScriptHome.js" asp-append-version="true"></script>
+    <!-- Bootstrap core JavaScript-->
 
- 
+    <script src="~/lib/startbootstrap/vendor/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/lib/startbootstrap/vendor/jquery-easing/jquery.easing.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/lib/startbootstrap/js/sb-admin-2.js"></script>
+
+    <script src="~/lib/chart-js/chart.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/lib/startbootstrap/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/lib/startbootstrap/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="~/js/site.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(function (registration) {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch(function (error) {
+                        console.log('Error al registrar el Service Worker:', error);
+                    });
+            });
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
-
 </body>
+
 </html>
