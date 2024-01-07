@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-......" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link href="~/lib/startbootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
     @*<link href="~/css/site.css" rel="stylesheet">*@
     <script src="~/lib/startbootstrap/vendor/jquery/jquery.js"></script>
 
@@ -47,21 +49,18 @@
         {
             <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href='#'>
-                    <div class="sidebar-brand-icon" style="">
-                    </div>
-                </a>
+                
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
-                <!-- Nav Item - Dashboard -->
+                <!-- Nav Item - Dashboard - Logo Imagen-->
                 <li class="nav-item active">
                     <a class="nav-link" href='#'>
-                        <img class="img-fluid" src="~/IMG/logoagro200x.jpg" />
+                        <img class="img-fluid" src="~/IMG/logoagro170x.jpg" style="margin-left: 3mm;" />
                     </a>
                 </li>
+
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
@@ -84,26 +83,47 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario"
                    aria-expanded="true" aria-controls="collapseInventario">
-                        <i class="fas fa-clipboard-list"></i>
+                        <i class="fas fa-box-open"></i>
                         <span>Inventario</span>
                     </a>
                     <div id="collapseInventario" class="collapse" aria-labelledby="headingInventario" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" asp-area="" asp-controller="AjusteInventario" asp-action="Index">Ajustes en Inventario</a>
                             <a class="collapse-item" asp-area="" asp-controller="Categoria" asp-action="Index">Categorías</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Marca" asp-action="Index">Marcas</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Producto" asp-action="Index">Productos</a>
+                            <a class="collapse-item" asp-area="" asp-controller="AjusteInventario" asp-action="Index">Ajustes en Inventario</a>
+                        </div>
+                    </div>
+                </li>
 
-                            <!-- Compras -->
-                            <a class="collapse-item collapsed" href="#" data-toggle="collapse" data-target="#collapseCompras"
-                           aria-expanded="true" aria-controls="collapseCompras">
-                                Compras
-                            </a>
-                            <div id="collapseCompras" class="collapse" aria-labelledby="headingCompras" data-parent="#collapseInventario">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    <a class="collapse-item" asp-area="" asp-controller="Compra" asp-action="Index">Todas las Compras</a>
-                                    <a class="collapse-item" asp-area="" asp-controller="Compra" asp-action="Registro">Registro de Compras</a>
-                                </div>
-                            </div>
-                            <!-- Fin de subelementos de "Compras" -->
+                <!-- Compras -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompras"
+                   aria-expanded="true" aria-controls="collapseCompras">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Compras</span>
+                    </a>
+                    <div id="collapseCompras" class="collapse" aria-labelledby="headingCompras" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" asp-area="" asp-controller="Proveedor" asp-action="Index">Proveedores</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Compra" asp-action="Index">Compras</a>
+                            <a class="collapse-item" asp-area="" asp-controller="DetallesCompra" asp-action="Index">Detalles de Compras</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Ventas -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentas"
+                   aria-expanded="true" aria-controls="collapseVentas">
+                        <i class="fas fa-cash-register"></i>
+                        <span>Ventas</span>
+                    </a>
+                    <div id="collapseVentas" class="collapse" aria-labelledby="headingVentas" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" asp-area="" asp-controller="Factura" asp-action="Index">Ventas</a>
+                            <a class="collapse-item" asp-area="" asp-controller="DetallesFactura" asp-action="Index">Detalles de Ventas</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Venta" asp-action="Venta">Formulario de Ventas</a>
                         </div>
                     </div>
                 </li>
@@ -127,20 +147,18 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
                    aria-expanded="true" aria-controls="collapseReportes">
-                        <i class="fas fa-clipboard-list"></i>
+                        <i class="fas fa-chart-bar"></i>
                         <span>Reportes</span>
                     </a>
                     <div id="collapseReportes" class="collapse" aria-labelledby="headingReportes" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexPrestamosActivos">Préstamos Activos</a>
-                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexCreditosMora">Créditos en Mora</a>
-                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexCobroProximo">Cobros por Cartera</a>
-                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexCobros">Cobros Detallados</a>
-                            <a class="collapse-item" target="_blank" asp-area="" asp-controller="ResolucionCredito" asp-action="Baucher">Baucher Cheque</a>
-                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="Index_RPGeneral">RP General Caja</a>
+                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexPrestamosActivos">Reporte de Compras</a>
+                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexPrestamosActivos">Reporte de Ventas</a>
+                            <a class="collapse-item" asp-area="" asp-controller="ResolucionCredito" asp-action="IndexPrestamosActivos">Reporte de Ajustes</a>
                         </div>
                     </div>
                 </li>
+
 
 
 
@@ -187,11 +205,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    <div id="currentDate" class="small text-gray-500"></div>
                                     @if (!User.Identity.IsAuthenticated)
                                     {
                                         <span class="font-weight-bold">
-                                            BIENVENIDO A FONDI S.A DE C.V
+                                            BIENVENIDO AL SISTEMA
                                         </span>
 
                                     }
@@ -231,15 +249,7 @@
                         {
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
-                                @*  <a class="dropdown-item" href='@Url.Action("Edit","Usuario")'>
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Perfil
-                            </a>
-                            <a class="dropdown-item" href='@Url.Action("CambiarPassword","Usuario")'>
-                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" ></i>
-                            Cambiar password
-                            </a>*@
-                                <a class="dropdown-item" href='@Url.Action("Login","Usuario")' onclick="cerrarSesion()">
+                             <a class="dropdown-item" href='@Url.Action("Login","Usuario")' onclick="cerrarSesion()">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar session
                                 </a>
@@ -257,16 +267,14 @@
             <!-- End of Topbar -->
             <!-- Main Content -->
             <div id="content">
-               
                    @RenderBody()
-                
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span style="line-height: 70px;">Copyright &copy; 3HCPS @DateTime.Now.Year</span>
+                        <span style="line-height: 70px;">Copyright &copy; La Bendición Del Agricultor @DateTime.Now.Year</span>
                     </div>
                 </div>
             </footer>
@@ -299,19 +307,30 @@
     <script src="~/lib/startbootstrap/vendor/datatables/jquery.dataTables.js"></script>
     <script src="~/lib/startbootstrap/vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="~/js/site.js"></script>
+    
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(function (registration) {
-                        console.log('Service Worker registrado con éxito:', registration);
-                    })
-                    .catch(function (error) {
-                        console.log('Error al registrar el Service Worker:', error);
-                    });
-            });
-        }
+            // Actualizar la fecha actual en tiempo real
+            function updateCurrentDate() {
+                const currentDateElement = document.getElementById('currentDate');
+                if (currentDateElement) {
+                    const currentDate = new Date();
+
+                    // Configurar el idioma a español
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = currentDate.toLocaleDateString('es-ES', options);
+
+                    currentDateElement.textContent = formattedDate;
+                }
+            }
+
+        // Actualizar la fecha al cargar la página
+        window.addEventListener('load', updateCurrentDate);
+
+        // Actualizar la fecha cada segundo (puedes ajustar el intervalo según tus necesidades)
+        setInterval(updateCurrentDate, 1000);
     </script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

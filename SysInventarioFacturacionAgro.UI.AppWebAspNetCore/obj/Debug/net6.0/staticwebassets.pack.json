@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysAgro_LaBENDICION\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\logoagro104xSF.jpg",
+      "PackagePath": "staticwebassets\\IMG\\logoagro104xSF.jpg"
+    },
+    {
+      "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysAgro_LaBENDICION\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\logoagro170x.jpg",
+      "PackagePath": "staticwebassets\\IMG\\logoagro170x.jpg"
+    },
+    {
       "Id": "C:\\Users\\MINEDUCYT\\Desktop\\Agro\\SysAgro_LaBENDICION\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\wwwroot\\IMG\\logoagro200x-removebg.png",
       "PackagePath": "staticwebassets\\IMG\\logoagro200x-removebg.png"
     },

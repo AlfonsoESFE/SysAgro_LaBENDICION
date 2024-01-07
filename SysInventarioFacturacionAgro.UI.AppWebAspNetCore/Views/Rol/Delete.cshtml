@@ -4,33 +4,38 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Eliminar Rol</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h2 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Eliminar Rol</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Delete">
+                    <div>
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control" readonly />
+                        </div>
 
-<h3>¿ Esta seguro que desea eliminar ?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-    </dl>
+                        <div class="form-group" style="margin-top: 10px;">
+                            @using (Html.BeginForm("Delete", "Rol", new { id = Model.Id }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
 
-    @* FUNCTION ELIMINAR ROL*@
-    @using (Html.BeginForm("Delete", "Rol", new { id = Model.Id }, FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?');">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
 
-        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?');" style="margin-left: 10px;">
-            <i class="fas fa-trash"></i> Eliminar
-        </button>
-
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-            <i class="fas fa-times"></i> Cancelar
-        </button>
-        <span class="text-danger">@ViewBag.Error</span>
-    }
-
+                                <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                                <span class="text-danger">@ViewBag.Error</span>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

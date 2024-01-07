@@ -5,103 +5,107 @@
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Rol> roles = ViewBag.Roles as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Rol>;
 }
 
-<h1>Modificar Usuario</h1>
-<hr />
-<form asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" class="form-control" />
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Apellido" class="control-label"></label>
-                <input asp-for="Apellido" class="form-control" />
-                <span asp-validation-for="Apellido" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Estatus" class="control-label"></label>
-                <select asp-for="Estatus" class="form-control">
-                    <option selected value="">SELECCIONAR</option>
-                    @if (Model.Estatus == 1)
-                    {
-                        <option selected value="1">ACTIVO</option>
-                    }
-                    else
-                    {
-                        <option value="1">ACTIVO</option>
-                    }
-                    @if (Model.Estatus == 2)
-                    {
-                        <option selected value="2">INACTIVO</option>
-                    }
-                    else
-                    {
-                        <option value="2">INACTIVO</option>
-                    }
-
-                </select>
-                <span asp-validation-for="Estatus" class="text-danger"></span>
-            </div>
-        </div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Modificar Usuario</h1>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
-                <select asp-for="IdRol" class="form-control">
-                    <option selected value="">SELECCIONAR</option>
-                    @foreach (var item in roles)
-                    {
-                        if (Model.IdRol == item.Id)
-                        {
-                            <option selected value="@item.Id">@item.Nombre</option>
-                        }
-                        else
-                        {
-                            <option value="@item.Id">@item.Nombre</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="IdRol" class="text-danger"></span>
+    <div class="card-body">
+        <form asp-action="Edit" class="container">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" class="form-control" />
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label">Nombre</label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Apellido" class="control-label">Apellido</label>
+                        <input asp-for="Apellido" class="form-control" />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Estatus" class="control-label">Estatus</label>
+                        <select asp-for="Estatus" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @if (Model.Estatus == 1)
+                            {
+                                <option selected value="1">ACTIVO</option>
+                            }
+                            else
+                            {
+                                <option value="1">ACTIVO</option>
+                            }
+                            @if (Model.Estatus == 2)
+                            {
+                                <option selected value="2">INACTIVO</option>
+                            }
+                            else
+                            {
+                                <option value="2">INACTIVO</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Estatus" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Login" class="control-label"></label>
-                <input asp-for="Login" class="form-control" />
-                <span asp-validation-for="Login" class="text-danger"></span>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdRol" class="control-label">Rol</label>
+                        <select asp-for="IdRol" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in roles)
+                            {
+                                if (Model.IdRol == item.Id)
+                                {
+                                    <option selected value="@item.Id">@item.Nombre</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="IdRol" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Login" class="control-label">Login</label>
+                        <input asp-for="Login" class="form-control" />
+                        <span asp-validation-for="Login" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <!-- Botones y mensaje de error -->
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </form>
+
+        <script>
+            $(function () {
+                $("form input[name],form select[name]").trigger("blur");
+            });
+        </script>
     </div>
-
-    @*BOTONES EDITADOS CON ICONOS*@
-
-    <div class="form-group" style="margin-top: 10px;">
-        <button type="submit" class="btn btn-success" style="margin-right: 10px;">
-            <i class="fas fa-save"></i> Guardar
-        </button>
-
-        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-            <i class="fas fa-times"></i> Cancelar
-        </button>
-    </div>
-
-</form>
+</div>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    <script>
-        $(function () {
-            $("form input[name],form select[name]").trigger("blur");
-        });
-    </script>
 }

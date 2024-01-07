@@ -13,14 +13,52 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
         public static async Task<int> CrearAsync(Factura pFactura)
         {
             int result = 0;
+
             using (var bdContexto = new BDContexto())
             {
-                pFactura.FechaFacturacion = DateTime.Now;
-                bdContexto.Add(pFactura);
-                result = await bdContexto.SaveChangesAsync();
+                using (var transaction = bdContexto.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Random random = new Random();
+                        int numeroAleatorio;
+
+                        do
+                        {
+                            // Generar un número aleatorio para la nueva factura
+                            numeroAleatorio = random.Next(10000, 99999); // Ajusta el rango según tus necesidades
+
+                        } while (await bdContexto.Factura.AnyAsync(f => f.NumeroFactura == numeroAleatorio));
+
+                        // Asignar el número aleatorio a la nueva factura
+                        pFactura.NumeroFactura = numeroAleatorio;
+
+                        // Asignar la fecha actual
+                        pFactura.FechaFacturacion = DateTime.Now;
+
+                        // Agregar la factura a la base de datos
+                        bdContexto.Add(pFactura);
+
+                        // Guardar los cambios en la base de datos
+                        result = await bdContexto.SaveChangesAsync();
+
+                        // Confirmar la transacción
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        // Manejar cualquier excepción y revertir la transacción en caso de error
+                        transaction.Rollback();
+                        throw; // Puedes personalizar la lógica de manejo de errores según tus necesidades
+                    }
+                }
             }
+
             return result;
         }
+
+
+
 
         public static async Task<int> ModificarAsync(Factura pFactura)
         {

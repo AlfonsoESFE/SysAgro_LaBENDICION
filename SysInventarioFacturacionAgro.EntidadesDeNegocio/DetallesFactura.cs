@@ -26,8 +26,6 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         public int IdFactura { get; set; }
 
         public Factura? Factura { get; set; }
-
-        [NotMapped]
         public Producto? Producto { get; set; }
 
     }
