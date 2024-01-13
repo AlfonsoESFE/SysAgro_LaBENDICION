@@ -10,8 +10,12 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
 
         public int IdMarca { get; set; }
 
-        [Required(ErrorMessage = "Nombre es obligatorio")]
+        [Required(ErrorMessage = "Nombre de Marca es obligatorio")]
         [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
+
+        [NotMapped]
+        public ICollection<Producto>? Producto { get; set; }
+
     }
 }

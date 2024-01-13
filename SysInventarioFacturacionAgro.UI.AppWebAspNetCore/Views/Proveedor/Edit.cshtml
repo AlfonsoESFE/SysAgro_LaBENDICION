@@ -1,0 +1,76 @@
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Modificar Proveedor</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdProveedor" class="form-control" />
+            <div class="form-group">
+                <label asp-for="Codigo" class="control-label">Código</label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label">Nombre</label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label">Teléfono</label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label">Correo</label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empresa" class="control-label">Empresa</label>
+                <input asp-for="Empresa" class="form-control" />
+                <span asp-validation-for="Empresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DireccionEmpresa" class="control-label">Dirección de la Empresa</label>
+                <input asp-for="DireccionEmpresa" class="form-control" />
+                <span asp-validation-for="DireccionEmpresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelefonoEmpresa" class="control-label">Teléfono de la Empresa</label>
+                <input asp-for="TelefonoEmpresa" class="form-control" />
+                <span asp-validation-for="TelefonoEmpresa" class="text-danger"></span>
+            </div>
+
+            @*BOTONES EDITADOS CON ICONOS*@
+
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function () {
+            $("form input[name]").trigger("blur");
+        });
+    </script>
+}
