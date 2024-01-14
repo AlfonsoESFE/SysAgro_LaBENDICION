@@ -1,0 +1,117 @@
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto
+
+@{
+    ViewData["Title"] = "Details";
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor> proveedores = ViewBag.Proveedor as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Categoria> categorias = ViewBag.Categoria as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Categoria>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Marca> marcas = ViewBag.Marca as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Marca>;
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Ver Producto</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" class="container">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdProducto" class="form-control" />
+
+            <dl class="row">
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Codigo" class="control-label">Código</label>
+                        <input asp-for="Codigo" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label">Nombre Producto</label>
+                        <input asp-for="Nombre" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label">Descripción</label>
+                        <input asp-for="Descripcion" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="PrecioCompra" class="control-label">Precio Compra</label>
+                        <input asp-for="PrecioCompra" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="PrecioUnitario" class="control-label">Precio Unitario</label>
+                        <input asp-for="PrecioUnitario" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="PrecioMayorista" class="control-label">Precio Mayorista</label>
+                        <input asp-for="PrecioMayorista" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="CantidadStock" class="control-label">Cantidad en Stock</label>
+                        <input asp-for="CantidadStock" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FechaIngreso" class="control-label">Fecha Ingreso</label>
+                        <input asp-for="FechaIngreso" type="date" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FechaVencimiento" class="control-label">Fecha Vencimiento</label>
+                        <input asp-for="FechaVencimiento" type="date" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="PaisOrigen" class="control-label">País de Origen</label>
+                        <input asp-for="PaisOrigen" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="UnidadMedida" class="control-label">Unidad de Medida</label>
+                        <input asp-for="UnidadMedida" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdProveedor" class="control-label">Proveedor</label>
+                        <input asp-for="Proveedor.Nombre" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdCategoria" class="control-label">Categoría</label>
+                        <input asp-for="Categoria.Nombre" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdMarca" class="control-label">Marca</label>
+                        <input asp-for="Marca.Nombre" class="form-control" readonly />
+                    </div>
+                </dt>
+            </dl>
+
+            <!-- Botones -->
+            <div class="form-group" style="margin-top: 10px;">
+                <a class="btn btn-success" href="@Url.Action("Edit", new { IdProducto = Model.IdProducto })" style="margin-right: 10px;">
+                    <i class="fas fa-pencil-alt"></i> Editar
+                </a>
+                <a class="btn btn-danger" asp-action="Index" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Regresar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

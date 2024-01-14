@@ -20,9 +20,19 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Column(TypeName = "decimal(18, 1)")]
         public decimal Descuento { get; set; }
 
+
+        [ForeignKey("Compra")]
+        [Display(Name = "Compra")]
         [Required(ErrorMessage = "IdCompra es obligatorio")]
         public int IdCompra { get; set; }
 
-        public Compra Compra { get; set; }
+        [ForeignKey("Producto")]
+        [Display(Name = "Producto")]
+        [Required(ErrorMessage = "IdProducto es obligatorio")]
+        public int IdProducto { get; set; }
+
+        public Compra? Compra { get; set; }
+        public Producto? Producto { get; set; }
+
     }
 }

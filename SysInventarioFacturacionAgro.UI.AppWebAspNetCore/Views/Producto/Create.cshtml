@@ -1,0 +1,142 @@
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto
+
+@{
+    ViewData["Title"] = "Create";
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor> proveedores = ViewBag.Proveedor as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Categoria> categorias = ViewBag.Categoria as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Categoria>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Marca> marcas = ViewBag.Marca as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Marca>;
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Agregar Producto</h1>
+    </div>
+    <div class="card-body">
+        <div class="row ml-4">
+            <div class="col-md-12">
+                <form asp-action="Create">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Código</label>
+                                <input asp-for="Codigo" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Nombre Producto</label>
+                                <input asp-for="Nombre" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Descripción</label>
+                                <input asp-for="Descripcion" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Precio Compra</label>
+                                <input asp-for="PrecioCompra" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Precio Unitario</label>
+                                <input asp-for="PrecioUnitario" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Precio Mayorista</label>
+                                <input asp-for="PrecioMayorista" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Cantidad en Stock</label>
+                                <input asp-for="CantidadStock" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Fecha Ingreso</label>
+                                <input asp-for="FechaIngreso" type="date" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Fecha Vencimiento</label>
+                                <input asp-for="FechaVencimiento" type="date" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">País de Origen</label>
+                                <input asp-for="PaisOrigen" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Unidad de Medida</label>
+                                <input asp-for="UnidadMedida" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Proveedor</label>
+                                <select asp-for="IdProveedor" class="form-control">
+                                    <option selected value="">SELECCIONAR</option>
+                                    @foreach (var proveedor in proveedores)
+                                    {
+                                        <option value="@proveedor.IdProveedor">@proveedor.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Categoría</label>
+                                <select asp-for="IdCategoria" class="form-control">
+                                    <option selected value="">SELECCIONAR</option>
+                                    @foreach (var categoria in categorias)
+                                    {
+                                        <option value="@categoria.IdCategoria">@categoria.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Marca</label>
+                                <select asp-for="IdMarca" class="form-control">
+                                    <option selected value="">SELECCIONAR</option>
+                                    @foreach (var marca in marcas)
+                                    {
+                                        <option value="@marca.IdMarca">@marca.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                        <a class="btn btn-secondary" asp-action="Index">
+                            <i class="fas fa-arrow-left"></i> Volver a la Lista
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

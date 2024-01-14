@@ -38,25 +38,25 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         public decimal? FacturaCambio { get; set; }
 
         [StringLength(50, ErrorMessage = "Máximo 50 caracteres para el campo NombreCliente")]
-        public string NombreCliente { get; set; }
+        public string? NombreCliente { get; set; }
 
         [StringLength(50, ErrorMessage = "Máximo 50 caracteres para el campo DireccionCliente")]
-        public string DireccionCliente { get; set; }
+        public string? DireccionCliente { get; set; }
 
         [StringLength(50, ErrorMessage = "Máximo 50 caracteres para el campo TelefonoCliente")]
-        public string TelefonoCliente { get; set; }
+        public string? TelefonoCliente { get; set; }
 
         [StringLength(50, ErrorMessage = "Máximo 50 caracteres para el campo DUICliente")]
-        public string DUICliente { get; set; }
+        public string? DUICliente { get; set; }
 
         [ForeignKey("Usuario")]
         [Required(ErrorMessage = "El campo IdUsuario es obligatorio")]
         [Display(Name = "Usuario")]
         public int IdUsuario { get; set; }
 
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
 
         [Required(ErrorMessage = "La colección DetallesFactura es obligatoria")]
-        public ICollection<DetallesFactura> DetallesFactura { get; set; }
+        public ICollection<DetallesFactura>? DetallesFactura { get; set; }
     }
 }
