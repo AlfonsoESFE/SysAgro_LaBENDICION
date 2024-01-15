@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\DetallesFactura\" />
     <Folder Include="wwwroot\lib\startbootstrap\" />
   </ItemGroup>
 

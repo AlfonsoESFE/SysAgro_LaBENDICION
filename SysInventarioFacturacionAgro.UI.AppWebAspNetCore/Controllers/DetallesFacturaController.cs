@@ -17,11 +17,11 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     [Authorize(Roles = "Cajero,SuperAdmin,Admin")]
-    public class DetalleFacturaController : Controller
+    public class DetallesFacturaController : Controller
     {
         DetallesFacturaBL detallesFacturaBL = new DetallesFacturaBL();
         FacturaBL facturaBL = new FacturaBL();
-        //ProductoBL productoBL = new ProductoBL();
+        ProductoBL productoBL = new ProductoBL();
         public static int idFac;
 
         // GET: DetalleFactura
@@ -31,19 +31,19 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
                 pDetallesFactura = new DetallesFactura();
             var taskBuscar = detallesFacturaBL.BuscarIncluirFacturasYProductoAsync(pDetallesFactura);
             var taskObtenerTodosFacturas = facturaBL.ObtenerTodosAsync();
-            //var taskObtenerTodosProducto = productoBL.ObtenerTodosAsync();
-            var detallesFacturas = await taskBuscar;
+            var taskObtenerTodosProducto = productoBL.ObtenerTodosAsync();
+            var detallesfacturas = await taskBuscar;
             ViewBag.Facturas = await taskObtenerTodosFacturas;
-            //ViewBag.Producto = await taskObtenerTodosProducto;
-            return View(detallesFacturas);
+            ViewBag.Producto = await taskObtenerTodosProducto;
+            return View(detallesfacturas);
         }
 
         // GET: DetalleFactura/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int IdDetallesFactura)
         {
-            var detalleFactura = await detallesFacturaBL.ObtenerPorIdAsync(new DetallesFactura { IdDetallesFactura = id });
+            var detalleFactura = await detallesFacturaBL.ObtenerPorIdAsync(new DetallesFactura { IdDetallesFactura = IdDetallesFactura });
             detalleFactura.Factura = await facturaBL.ObtenerPorIdAsync(new Factura { IdFactura = detalleFactura.IdFactura });
-            //detalleFactura.Producto = await productoBL.ObtenerPorIdProductoAsync(new Producto { IdProducto = detalleFactura.IdProducto });
+            detalleFactura.Producto = await productoBL.ObtenerPorIdAsync(new Producto { IdProducto = detalleFactura.IdProducto });
             return View(detalleFactura);
         }
 
@@ -51,7 +51,7 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.Facturas = await facturaBL.ObtenerTodosAsync();
-            //ViewBag.Producto = await productoBL.ObtenerTodosAsync();
+            ViewBag.Producto = await productoBL.ObtenerTodosAsync();
             ViewBag.Error = "";
             return View();
         }
@@ -70,28 +70,28 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             {
                 ViewBag.Error = ex.Message;
                 ViewBag.Facturas = await facturaBL.ObtenerTodosAsync();
-                //ViewBag.Producto = await productoBL.ObtenerTodosAsync();
+                ViewBag.Producto = await productoBL.ObtenerTodosAsync();
                 return View(pDetallesFactura);
             }
         }
 
-        // GET: DetalleFactura/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        // GET: ProductoController/Edit/5
+        public async Task<IActionResult> Edit(DetallesFactura pDetallesFactura)
         {
-            var taskObtenerPorId = detallesFacturaBL.ObtenerPorIdAsync(new DetallesFactura { IdDetallesFactura = id });
-            var taskObtenerTodosFacturas = facturaBL.ObtenerTodosAsync();
-            //var taskObtenerTodosProducto = productoBL.ObtenerTodosAsync();
-            var detalleFactura = await taskObtenerPorId;
-            ViewBag.Facturas = await taskObtenerTodosFacturas;
-            //ViewBag.Producto = await taskObtenerTodosProducto;
+            var taskObtenerPorIdDetallesFactura = detallesFacturaBL.ObtenerPorIdAsync(pDetallesFactura);
+            var taskObtenerTodosFactura = facturaBL.ObtenerTodosAsync();
+            var taskObtenerTodosProducto = productoBL.ObtenerTodosAsync();
+            var detallesFactura = await taskObtenerPorIdDetallesFactura;
+            ViewBag.Facturas = await taskObtenerTodosFactura;
+            ViewBag.Producto = await taskObtenerTodosProducto;
             ViewBag.Error = "";
-            return View(detalleFactura);
+            return View(detallesFactura);
         }
 
-        // POST: DetalleFactura/Edit/5
+        // POST: ProductoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, DetallesFactura pDetallesFactura)
+        public async Task<IActionResult> Edit(int IdDetallesFactura, DetallesFactura pDetallesFactura)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             {
                 ViewBag.Error = ex.Message;
                 ViewBag.Facturas = await facturaBL.ObtenerTodosAsync();
-                //ViewBag.Producto = await productoBL.ObtenerTodosAsync();
+                ViewBag.Producto = await productoBL.ObtenerTodosAsync();
                 return View(pDetallesFactura);
             }
         }
@@ -112,8 +112,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
         {
             var detallesFactura = await detallesFacturaBL.ObtenerPorIdAsync(new DetallesFactura { IdDetallesFactura = id });
             detallesFactura.Factura = await facturaBL.ObtenerPorIdAsync(new Factura { IdFactura = detallesFactura.IdFactura });
-            //detallesFactura.Producto = await productoBL.ObtenerPorIdProductoAsync(new Producto { IdProducto = detallesFactura.IdProducto });
-            ViewBag.Error = "";
+
+            ViewBag.Error = "";            detallesFactura.Producto = await productoBL.ObtenerPorIdAsync(new Producto { IdProducto = detallesFactura.IdProducto });
             return View(detallesFactura);
         }
 
@@ -135,8 +135,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
                     detallesFactura = new DetallesFactura();
                 if (detallesFactura.IdDetallesFactura > 0)
                     detallesFactura.Factura = await facturaBL.ObtenerPorIdAsync(new Factura { IdFactura = detallesFactura.IdFactura });
-                //if (detallesFactura.IdDetallesFactura > 0)
-                //    detallesFactura.Producto = await productoBL.ObtenerPorIdProductoAsync(new Producto { IdProducto = detallesFactura.IdProducto });
+                if (detallesFactura.IdDetallesFactura > 0)
+                    detallesFactura.Producto = await productoBL.ObtenerPorIdAsync(new Producto { IdProducto = detallesFactura.IdProducto });
                 return View(detallesFactura);
             }
         }
@@ -179,7 +179,7 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             {
                 ViewBag.Error = ex.Message;
                 ViewBag.Facturas = await facturaBL.ObtenerTodosAsync();
-                //ViewBag.Producto = await productoBL.ObtenerTodosAsync();
+                ViewBag.Producto = await productoBL.ObtenerTodosAsync();
                 return View(pDetallesFactura);
             }
         }
@@ -188,7 +188,7 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
         public async Task<IActionResult> DetalleVenta()
         {
             ViewBag.Facturas = await facturaBL.ObtenerTodosAsync();
-            //ViewBag.Producto = await productoBL.ObtenerTodosAsync();
+            ViewBag.Producto = await productoBL.ObtenerTodosAsync();
             ViewBag.Error = "";
             return View();
         }

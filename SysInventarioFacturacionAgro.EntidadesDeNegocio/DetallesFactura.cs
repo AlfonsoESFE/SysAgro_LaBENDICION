@@ -19,9 +19,15 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Column(TypeName = "decimal(18, 1)")]
         public decimal Total { get; set; }
 
+        // RELACIONES CON OTRAS TABLAS FK
+        [ForeignKey("Producto")]
+        [Display(Name = "Producto")]
         [Required(ErrorMessage = "IdProducto es obligatorio")]
         public int IdProducto { get; set; }
 
+
+        [ForeignKey("Factura")]
+        [Display(Name = "Factura")]
         [Required(ErrorMessage = "IdFactura es obligatorio")]
         public int IdFactura { get; set; }
 

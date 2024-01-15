@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SysInventarioFacturacionAgro.EntidadesDeNegocio;
@@ -19,56 +20,51 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
             }
             return result;
         }
-
         public static async Task<int> ModificarAsync(DetallesFactura pDetallesFactura)
         {
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var detalleFactura = await bdContexto.DetallesFactura.FirstOrDefaultAsync(s => s.IdDetallesFactura == pDetallesFactura.IdDetallesFactura);
-                detalleFactura.IdFactura = pDetallesFactura.IdFactura;
-                detalleFactura.IdProducto = pDetallesFactura.IdProducto;
-                detalleFactura.CodigoDetalles = pDetallesFactura.CodigoDetalles;
-                detalleFactura.Cantidad = pDetallesFactura.Cantidad;
-                detalleFactura.Total = pDetallesFactura.Total;
-                bdContexto.Update(detalleFactura);
+                var detallesfactura = await bdContexto.DetallesFactura.FirstOrDefaultAsync(s => s.IdDetallesFactura == pDetallesFactura.IdDetallesFactura);
+                detallesfactura.IdFactura = pDetallesFactura.IdFactura;
+                detallesfactura.IdProducto = pDetallesFactura.IdProducto;
+                detallesfactura.CodigoDetalles = pDetallesFactura.CodigoDetalles;
+                detallesfactura.Cantidad = pDetallesFactura.Cantidad;
+                detallesfactura.Total = pDetallesFactura.Total;
+                bdContexto.Update(detallesfactura);
                 result = await bdContexto.SaveChangesAsync();
             }
             return result;
         }
-
         public static async Task<int> EliminarAsync(DetallesFactura pDetallesFactura)
         {
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var detalleFactura = await bdContexto.DetallesFactura.FirstOrDefaultAsync(s => s.IdDetallesFactura == pDetallesFactura.IdDetallesFactura);
-                bdContexto.DetallesFactura.Remove(detalleFactura);
+                var detallesfactura = await bdContexto.DetallesFactura.FirstOrDefaultAsync(s => s.IdDetallesFactura == pDetallesFactura.IdDetallesFactura);
+                bdContexto.DetallesFactura.Remove(detallesfactura);
                 result = await bdContexto.SaveChangesAsync();
             }
             return result;
         }
-
         public static async Task<DetallesFactura> ObtenerPorIdAsync(DetallesFactura pDetallesFactura)
         {
-            var detalleFactura = new DetallesFactura();
+            var detallesfactura = new DetallesFactura();
             using (var bdContexto = new BDContexto())
             {
-                detalleFactura = await bdContexto.DetallesFactura.FirstOrDefaultAsync(s => s.IdDetallesFactura == pDetallesFactura.IdDetallesFactura);
+                detallesfactura = await bdContexto.DetallesFactura.FirstOrDefaultAsync(s => s.IdDetallesFactura == pDetallesFactura.IdDetallesFactura);
             }
-            return detalleFactura;
+            return detallesfactura;
         }
-
         public static async Task<List<DetallesFactura>> ObtenerTodosAsync()
         {
-            var DetallesFacturas = new List<DetallesFactura>();
+            var DetalleFacturas = new List<DetallesFactura>();
             using (var bdContexto = new BDContexto())
             {
-                DetallesFacturas = await bdContexto.DetallesFactura.Include(p => p.Producto).ToListAsync();
+                DetalleFacturas = await bdContexto.DetallesFactura.Include(p => p.Producto).ToListAsync();
             }
-            return DetallesFacturas;
+            return DetalleFacturas;
         }
-
         internal static IQueryable<DetallesFactura> QuerySelect(IQueryable<DetallesFactura> pQuery, DetallesFactura pDetallesFactura)
         {
             if (pDetallesFactura.IdDetallesFactura > 0)
@@ -77,40 +73,32 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
                 pQuery = pQuery.Where(s => s.IdFactura == pDetallesFactura.IdFactura);
             if (pDetallesFactura.IdProducto > 0)
                 pQuery = pQuery.Where(s => s.IdProducto == pDetallesFactura.IdProducto);
-            if (pDetallesFactura.CodigoDetalles > 0)
+            if (pDetallesFactura.IdDetallesFactura > 0)
                 pQuery = pQuery.Where(s => s.CodigoDetalles == pDetallesFactura.CodigoDetalles);
-            if (pDetallesFactura.Cantidad > 0)
-                pQuery = pQuery.Where(s => s.Cantidad == pDetallesFactura.Cantidad);
-            if (pDetallesFactura.Total > 0)
-                pQuery = pQuery.Where(s => s.Total == pDetallesFactura.Total);
-
-            pQuery = pQuery.OrderByDescending(s => s.IdDetallesFactura).AsQueryable();
-
             return pQuery;
         }
-
         public static async Task<List<DetallesFactura>> BuscarAsync(DetallesFactura pDetallesFactura)
         {
-            var DetallesFacturas = new List<DetallesFactura>();
+            var DetalleFacturas = new List<DetallesFactura>();
             using (var bdContexto = new BDContexto())
             {
                 var select = bdContexto.DetallesFactura.AsQueryable();
                 select = QuerySelect(select, pDetallesFactura);
-                DetallesFacturas = await select.ToListAsync();
+                DetalleFacturas = await select.ToListAsync();
             }
-            return DetallesFacturas;
+            return DetalleFacturas;
         }
 
         public static async Task<List<DetallesFactura>> BuscarIncluirFacturasYProductoAsync(DetallesFactura pDetallesFactura)
         {
-            var DetallesFacturas = new List<DetallesFactura>();
+            var DetalleFacturas = new List<DetallesFactura>();
             using (var bdContexto = new BDContexto())
             {
                 var select = bdContexto.DetallesFactura.AsQueryable();
                 select = QuerySelect(select, pDetallesFactura).Include(s => s.Factura).Include(s => s.Producto).AsQueryable();
-                DetallesFacturas = await select.ToListAsync();
+                DetalleFacturas = await select.ToListAsync();
             }
-            return DetallesFacturas;
+            return DetalleFacturas;
         }
     }
 }
