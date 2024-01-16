@@ -1,0 +1,72 @@
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta
+
+@{
+    ViewData["Title"] = "Details";
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta> ventas = ViewBag.Ventas as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Modificar Detalles de Ventas</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" class="container" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdDetalleVenta" class="form-control" />
+
+            <dl class="row">
+                <!-- Primer grupo de campos -->
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="CodigoDetalles" class="control-label">Código Detalle de Venta</label>
+                        <input asp-for="CodigoDetalles" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cantidad" class="control-label">Cantidad</label>
+                        <input asp-for="Cantidad" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Total" class="control-label">Total $</label>
+                        <input asp-for="Total" class="form-control" readonly />
+                    </div>
+                </dt>
+
+                <!-- Segundo grupo de campos -->
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdVenta" class="control-label">Venta</label>
+                        <input asp-for="Venta.NumeroFactura" class="form-control" readonly />
+                    </div>
+                </dt>
+
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdProducto" class="control-label">Producto</label>
+                        <input asp-for="Producto.Nombre" class="form-control" readonly />
+                    </div>
+                </dt>
+            </dl>
+
+            <!-- Botones -->
+            <div class="form-group" style="margin-top: 10px;">
+                <a class="btn btn-success" href="@Url.Action("Edit", new { IdDetalleVenta = Model.IdDetalleVenta })" style="margin-right: 10px;">
+                    <i class="fas fa-pencil-alt"></i> Editar
+                </a>
+                <a class="btn btn-danger" asp-action="Index" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Regresar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
