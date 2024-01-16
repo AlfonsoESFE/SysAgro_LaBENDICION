@@ -35,3 +35,8 @@ Para realizar el proyecto es necesario tener los siguientes conocimientos en un 
 🎯 MVC - Patrón de arquitectura de software.
 🎯 Programación en arquitectura N Capas.
 🎯 Adaptabilidad en uso de librerías externas para JavaScript.
+
+ESTILOS ESTANDAR QUE UTILIZARE EN NUESTRO SISTEMA DE VENTAS WEB
+
+![image](https://github.com/AlfonsoESFE/SysAgro_LaBENDICION/assets/139815557/149317f8-3174-48fb-abb4-70d61045862c)
+
