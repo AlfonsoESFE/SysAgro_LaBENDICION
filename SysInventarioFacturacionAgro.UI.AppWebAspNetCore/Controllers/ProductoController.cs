@@ -16,7 +16,7 @@ using SysInventarioFacturacionAgro.AccesoADatos;
 namespace SysInventarioFacturacion.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "SuperAdmin,Admin")]
+
     public class ProductoController : Controller
     {
         ProductoBL ProductoBL = new ProductoBL();

@@ -10,6 +10,8 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
 {
     public class DetalleVentaDAL
     {
+
+        #region CRUD Y METODOS BASICOS PARA UN CRUD
         public static async Task<int> CrearAsync(DetalleVenta pDetalleVenta)
         {
             int result = 0;
@@ -114,3 +116,6 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
         }
     }
 }
+
+#endregion
+

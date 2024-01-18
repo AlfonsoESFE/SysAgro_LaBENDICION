@@ -17,7 +17,7 @@ namespace SysInventarioFacturacion.UI.AppWebAspNetCore.Controllers
 
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class ProveedorController : Controller
     {    
         ProveedorBL ProveedorBL = new ProveedorBL();

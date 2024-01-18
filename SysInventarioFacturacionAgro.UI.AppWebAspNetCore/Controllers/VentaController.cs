@@ -13,7 +13,7 @@ using SysInventarioFacturacionAgro.LogicaDeNegocio;
 namespace SysAgroservicio.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Cajero,SuperAdmin")]
+    //[Authorize(Roles = "Cajero,SuperAdmin")]
 
     public class VentaController : Controller
     {

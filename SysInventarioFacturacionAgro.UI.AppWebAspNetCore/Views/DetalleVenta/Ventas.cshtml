@@ -1,0 +1,691 @@
+﻿@model IEnumerable<SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta>
+
+@{
+    ViewData["Title"] = "Ventas";
+
+    int numPage = 1;
+    int numRegistros = 0;
+    int numRegistrosPorPage = 10;
+    int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
+    int topActual = Convert.ToInt32(ViewBag.Top);
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta> ventas = ViewBag.Ventas as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta> detalleVentas = new List<SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta>();
+    ViewBag.Detalles = detalleVentas;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+    <!-- Custom fonts and styles -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet">
+</head>
+
+<h1>Creación de ventas</h1>
+
+<div class="card border-info">
+    <h6 class="TextLitlle">Informacion del Cliente</h6>
+    <div class="card-body">
+        <div class="row align-items-star">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">DUI</label>
+                    <input type="text" id="DUI" class="form-control" name="DUI" placeholder="DUI del Cliente" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Nombre</label>
+                    <input type="text" id="NombreCliente" class="form-control" name="NombreCliente" placeholder="Nombre del Cliente" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Teléfono</label>
+                    <input type="text" id="Telefono" class="form-control" name="Telefono" placeholder="Telefono del Cliente" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Dirección</label>
+                    <input type="text" id="Direccion" class="form-control" name="Direccion" placeholder="Direccion del Cliente" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+
+    <!-- Cuadro de búsqueda de productos... -->
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <div class="card border-info">
+                <h6 class="TextLitlle">Busqueda de Productos</h6>
+                <div class="card-body p-2 card-venta">
+                    <div class="FormContent">
+                        <div class="row align-items-star">
+                            <div class="col-md-20">
+                                <div class="form-group">
+                                    <input type="text" id="txtBuscar" class="form-control" name="buscar" placeholder="Buscar Producto" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tabla donde aparecen los productos... -->
+        <div class="col-sm-6">
+            <div class="card border-info">
+                <div class="table-container">
+                    <table id="tablaBusqueda" class="tablaBusqueda">
+                        <thead>
+                            <tr>
+                                <th>Cod</th>
+                                <th>Nombre</th>
+                                <th>En Stock</th>
+                                <th>Precio Unitario</th>
+                                <th colspan="1">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in productos)
+                            {
+                                <tr data-page="@numPage">
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Codigo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CantidadStock)
+                                    </td>
+                                    
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PrecioUnitario)
+                                    </td>
+                                    <td class="botonestabla">
+                                        <button class="agregar-producto btn btn-sm btn-success btn-block"
+                                            data-productoid="@item.IdProducto"
+                                            data-codigo="@item.Codigo"
+                                            data-nombre="@item.Nombre"
+                                            data-stock="@item.CantidadStock"
+                                            data-precio="@item.PrecioUnitario">
+                                            <i class="fa fa-plus" aria-hidden="true"></i> Agregar
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                numRegistros++;
+                                if (numRegistros == numRegistrosPorPage)
+                                {
+                                    numPage++;
+                                    numRegistros = 0;
+                                }
+                            }
+                            @{
+                                if (numRegistros == 0)
+                                {
+                                    numPage--;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<hr class="Separation" />
+<form asp-controller="DetalleVenta" asp-action="ProcesarFactura" method="post">
+    <div class="row mt-3">
+        <div class="col-sm-11">
+            <div class="table-responsive-sm">
+
+                <table id="tablaDetalleVenta" class="tablaDetalles">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Cantidad</th>
+                            <th>Producto</th>
+                            <th>Precio Unidad</th>
+                            <th>Total</th>
+                            <th colspan="1">Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in detalleVentas)
+
+                        {
+                            <tr data-page="@numPage">
+                                <td class="PrimeraColumnaBusqueda">
+                                    @Html.DisplayFor(modelItem => item.IdProducto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cantidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)
+                                </td>
+                                <td>
+                                    $ @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+
+                                <td class="botonestabla">
+                                    <button class="eliminar-producto btn btn-danger" data-id="@item.IdDetalleVenta">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                                <input type="hidden" id="detalleVentas" name="detalleVentas" />
+                            </tr>
+                            numRegistros++;
+                            if (numRegistros == numRegistrosPorPage)
+                            {
+                                numPage++;
+                                numRegistros = 0;
+                            }
+                        }
+                        @{
+                            if (numRegistros == 0)
+                            {
+                                numPage--;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="ContentFormCustomer">
+        <div class="card border-info">
+
+
+            <div class="BarraSuperior">
+                <button id="btnTerminarGuardarVenta" type="submit" class="BtnImprimir" onclick="return confirmarTerminarVenta()">
+                    <i class="fa fa-print" aria-hidden="true"></i> Imprimir y Terminar Venta
+                </button>
+
+            </div>
+            <div class="card-body p-2 card-venta">
+
+                <br />
+                <div class="row align-items-star">
+
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <label class="DataCustomer" for="inputGroupSelect01">Monto base</label>
+                            </div>
+                            <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <label class="DataCustomer" for="inputGroupSelect01">IVA.</label>
+                            </div>
+                            <input id="txtiva" name="impuesto" readonly type="text" class="form-control" value="0">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="form-group">
+                                <label class="DataCustomer" for="inputGroupSelect01">Total</label>
+                            </div>
+                            <input id="txtsubtotal" name="totalpagado" readonly type="text" class="form-control" value="0">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <label class="DataCustomer" for="inputGroupSelect01">Pago Con:</label>
+                            </div>
+                            <input id="txtmontopago" type="text" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <label class="DataCustomerFormaP" for="inputGroupSelect01">F. Pago</label>
+                            <select name="FormaPago" class="form-control">
+                                <option selected value="1">EFECTIVO</option>
+                                <option value="2">TARJETA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button id="btncalcular" type="button" class="btnCalcular">
+                            <i class="fas fa-dollar-sign"></i> Calcular
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-sm-12">
+                <div class="BarraInferio">
+                    <div class="card-body p-2">
+                        <div class="row">
+                            <div class="col-sm-10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@*
+PROCESAR FACTURA
+*@
+@*<hr class="Separation" />
+<form asp-controller="DetalleVenta" asp-action="ProcesarFactura" method="post">
+    <div class="row mt-3">
+        <div class="col-sm-11">
+            <div class="table-responsive-sm">
+
+                <table id="tablaDetalleVenta" class="tablaDetalles">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Cantidad</th>
+                            <th>Producto</th>
+                            <th>Descripcion</th>
+                            <th>Precio Unidad</th>
+                            <th>Importe Total</th>
+                            <th colspan="1">Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in detalleVentas)
+
+                        {
+                            <tr data-page="@numPage">
+                                <td class="PrimeraColumnaBusqueda">
+                                    @Html.DisplayFor(modelItem => item.IdProducto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cantidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Producto.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)
+                                </td>
+                                <td>
+                                    $ @Html.DisplayFor(modelItem => item.CodigoDetalles)
+                                </td>
+
+                                <td class="botonestabla">
+                                    <button class="eliminar-producto btn btn-danger" data-id="@item.IdDetalleVenta">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                                <input type="hidden" id="detalleVentas" name="detalleVentas" />
+                            </tr>
+                            numRegistros++;
+                            if (numRegistros == numRegistrosPorPage)
+                            {
+                                numPage++;
+                                numRegistros = 0;
+                            }
+                        }
+                        @{
+                            if (numRegistros == 0)
+                            {
+                                numPage--;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+*@
+@*<br />
+    <div class="ContentFormCustomer">
+        <div class="card border-info">
+
+
+            <div class="BarraSuperior">
+                <button id="btnTerminarGuardarVenta" type="submit" class="BtnImprimir" onclick="return confirmarTerminarVenta()">
+                    <i class="fa fa-print" aria-hidden="true"></i> Imprimir y Terminar Venta
+                </button>
+
+            </div>
+            <div class="card-body p-2 card-venta">
+
+                <br />
+                <div class="row align-items-star">
+
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <label class="DataCustomer" for="inputGroupSelect01">IGV.</label>
+                            </div>
+                            <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <label class="DataCustomer" for="inputGroupSelect01">IVA.</label>
+                            </div>
+                            <input id="txtiva" name="impuesto" readonly type="text" class="form-control" value="0">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="form-group">
+                                <label class="DataCustomer" for="inputGroupSelect01">Total</label>
+                            </div>
+                            <input id="txtsubtotal" name="totalpagado" readonly type="text" class="form-control" value="0">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <label class="DataCustomer" for="inputGroupSelect01">Pago Con:</label>
+                            </div>
+                            <input id="txtmontopago" type="text" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <label class="DataCustomerFormaP" for="inputGroupSelect01">F. Pago</label>
+                            <select name="FormaPago" class="form-control">
+                                <option selected value="1">EFECTIVO</option>
+                                <option value="2">TARJETA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button id="btncalcular" type="button" class="btnCalcular">
+                            <i class="fas fa-dollar-sign"></i> Calcular
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-sm-12">
+                <div class="BarraInferio">
+                    <div class="card-body p-2">
+                        <div class="row">
+                            <div class="col-sm-10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>*@
+@*</form>
+*@
+
+</html>
+<script>
+
+    //Funcion de agregar al carrito y calcular
+    document.addEventListener("DOMContentLoaded", function () {
+        const agregarProductoButtons = document.querySelectorAll(".agregar-producto");
+        const eliminarProductoButtons = document.querySelectorAll(".eliminar-producto");
+        const txtsubtotal = document.getElementById("txtsubtotal");
+        const txtigv = document.getElementById("txtigv");
+        const txtiva = document.getElementById("txtiva");
+        const txttotal = document.getElementById("txttotal");
+        const txtmontopago = document.getElementById("txtmontopago");
+        const btncalcular = document.getElementById("btncalcular");
+
+        const detalleVentas = [];
+
+        agregarProductoButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const productoid = button.getAttribute("data-productoid");
+                const codigo = button.getAttribute("data-codigo");
+                const nombre = button.getAttribute("data-nombre");
+                const descripcion = button.getAttribute("data-descripcion");
+                const stock = parseFloat(button.getAttribute("data-stock"));
+                const precio = parseFloat(button.getAttribute("data-precio"));
+
+                const cantidad = prompt(`Ingrese la cantidad para "${nombre}"`);
+                const descuento = prompt(`Ingrese el descuento para "${nombre}"`);
+
+                // Verifica si el campo de descuento está vacío y asigna 0 en ese caso
+                const descuentoValue = descuento !== null && descuento !== "" ? parseFloat(descuento) : 0;
+
+                if (cantidad !== null && !isNaN(cantidad) && !isNaN(descuentoValue)) {
+                    let cantidadValue = parseFloat(cantidad);
+
+                    if (cantidadValue > 0 && cantidadValue <= stock) {
+                        let precioConDescuento = precio - (precio * (descuentoValue / 100));
+                        agregarProducto(productoid, codigo, nombre, descripcion, cantidadValue, precioConDescuento);
+                    } else {
+                        alert("La cantidad deseada no se encuentra en stock");
+                    }
+                }
+
+            });
+        });
+
+        function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
+            const importeTotal = parseFloat(cantidad) * precio;
+            detalleVentas.push({
+                productoid: productoid,
+                codigo: codigo,
+                nombre: nombre,
+                descripcion: descripcion,
+                cantidad: parseFloat(cantidad),
+                precio: precio,
+                importeTotal: importeTotal,
+            });
+            updateDetalleVentaTable();
+            calculateTotal();
+        }
+
+
+
+        eliminarProductoButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const id = parseInt(button.getAttribute("data-id"));
+                const index = detalleVentas.findIndex((detalle) => detalle.id === id);
+                if (index !== -1) {
+                    detalleVentas.splice(index, 1);
+                    updateDetalleVentaTable();
+                    calculateTotal();
+                }
+            });
+        });
+        // Modificar la función updateDetalleFacturaTable para agregar un botón de eliminar
+        function updateDetalleVentaTable() {
+            let indeceFila = -1;
+            const tbody = document.querySelector("#tablaDetalleVenta tbody");
+            while (tbody.firstChild) {
+                tbody.removeChild(tbody.firstChild);
+            }
+
+            detalleVentas.forEach(function (detalle, index) {
+                indeceFila++;
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                                    <td><input name='detalleVentas[${indeceFila}].IdProducto' value='${detalle.productoid}'  readonly="readonly" class="PrimeraColumna"/></td>
+                                    <td><input name='detalleVentas[${indeceFila}].Cantidad' value='${detalle.cantidad}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                                    <td><input name='detalleVentas[${indeceFila}].Nombre' value='${detalle.nombre}'  readonly="readonly" class="SiguientesColumnas"/></td>
+                                    <td><input name='detalleVentas[${indeceFila}].Descripcion' value='${detalle.descripcion}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                                    <td><input name='detalleVentas[${indeceFila}].Precio' value='${detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
+                                    <td><input name='detalleVentas[${indeceFila}].ValorTotal' value='${detalle.importeTotal}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                                    <td>
+                                        <button class="eliminar-producto btn btn-danger" data-index="${index}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                `;
+                tbody.appendChild(row);
+            });
+
+            // Agrega un event listener para los botones de eliminar
+            const eliminarProductoButtons = document.querySelectorAll(".eliminar-producto");
+            eliminarProductoButtons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    const index = button.getAttribute("data-index");
+                    removeProduct(index);
+                });
+            });
+        }
+
+        // Función para eliminar un producto
+        function removeProduct(index) {
+            if (index >= 0 && index < detalleVentas.length) {
+                detalleVentas.splice(index, 1);
+                updateDetalleVentaTable();
+                calculateTotal();
+            }
+        }
+
+        function calculateTotal() {
+            let subtotal = 0;
+            detalleVentas.forEach(function (detalle) {
+                subtotal += detalle.importeTotal;
+            });
+
+            const igv = subtotal / 1.13 // IGV del 13%
+            const iva = subtotal - igv
+
+            txtigv.value = igv.toFixed(2);
+            txtiva.value = iva.toFixed(2);
+            txttotal.value = total.toFixed(2);
+        }
+
+        btncalcular.addEventListener("click", function () {
+            const montoPago = parseFloat(txtmontopago.value);
+            if (isNaN(montoPago) || montoPago < 0) {
+                alert("Ingrese un monto de pago válido.");
+                return;
+            }
+
+            const subtotal = parseFloat(txtsubtotal.value);
+            if (montoPago < subtotal) {
+                alert("El monto de pago debe ser igual o mayor que el total.");
+            } else {
+                const cambio = montoPago - subtotal;
+                alert(`Cambio: S/. ${cambio.toFixed(2)}`);
+            }
+        });
+    });
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const txtBuscar = document.getElementById("txtBuscar");
+        const tablaBusqueda = document.querySelector("#tablaBusqueda tbody");
+
+        txtBuscar.addEventListener("input", filterProductos);
+
+        function filterProductos() {
+            const buscarText = txtBuscar.value.trim().toLowerCase();
+
+            const rows = tablaBusqueda.querySelectorAll("tr");
+            rows.forEach((row) => {
+                const codigoCell = row.querySelector("td:nth-child(1)");
+                const nombreCell = row.querySelector("td:nth-child(2)");
+                if (codigoCell && nombreCell) {
+                    const codigoText = codigoCell.textContent.toLowerCase();
+                    const nombreText = nombreCell.textContent.toLowerCase();
+
+                    if (codigoText.includes(buscarText) || nombreText.includes(buscarText)) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                }
+            });
+        }
+    });
+
+    //funcion de filtar
+
+
+    $(document).ready(function () {
+        // Maneja el evento de entrada de texto
+        $("#inputProducto").keyup(function () {
+            var textoBusqueda = $(this).val().toLowerCase();
+
+            // Filtra los productos que coinciden con el texto de búsqueda
+            var productosFiltrados = productos.filter(function (producto) {
+
+                return producto.toLowerCase().includes(textoBusqueda);
+            });
+
+            // Actualiza la lista desplegable con los resultados de la búsqueda
+            var selectProducto = $("#selectProducto");
+            selectProducto.empty();
+            console.log("filtrando...");
+            // Agrega las opciones de productos encontrados
+            productosFiltrados.forEach(function (producto) {
+                selectProducto.append(new Option(producto, producto));
+            });
+
+            // Muestra u oculta la lista desplegable según si hay resultados
+            if (productosFiltrados.length > 0) {
+                selectProducto.show();
+            } else {
+                selectProducto.hide();
+            }
+            console.log(productosFiltrados);
+        });
+
+        // Maneja el evento de selección en la lista desplegable
+        $("#selectProducto").change(function () {
+            var seleccionado = $(this).val();
+            // Puedes hacer algo con el producto seleccionado, como asignarlo a un campo oculto o procesarlo de alguna manera.
+            console.log("Producto seleccionado:", seleccionado);
+        });
+    });
+
+    function confirmarTerminarVenta() {
+        var respuesta = confirm("¿Seguro que desea terminar la venta y guardarla?");
+
+        return respuesta;
+    }
+
+
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

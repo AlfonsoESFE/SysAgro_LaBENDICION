@@ -29,88 +29,81 @@
                             <span asp-validation-for="FechaFacturacion" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group col-md-4">
-                            <label asp-for="FormaPago" class="control-label">Forma de Pago</label>
-                            <select asp-for="FormaPago" class="form-control" disabled>
-                                <option value="1">EFECTIVO</option>
-                            </select>
-                            <span asp-validation-for="FormaPago" class="text-danger"></span>
-                        </div>
-                    </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label asp-for="Descuento" class="control-label">Descuento</label>
+                                <input asp-for="Descuento" class="form-control" disabled />
+                                <span asp-validation-for="Descuento" class="text-danger"></span>
+                            </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label asp-for="Descuento" class="control-label">Descuento</label>
-                            <input asp-for="Descuento" class="form-control" disabled />
-                            <span asp-validation-for="Descuento" class="text-danger"></span>
-                        </div>
+                            <div class="form-group col-md-4">
+                                <label asp-for="Impuesto" class="control-label">Impuesto</label>
+                                <input asp-for="Impuesto" class="form-control" disabled />
+                                <span asp-validation-for="Impuesto" class="text-danger"></span>
+                            </div>
 
-                        <div class="form-group col-md-4">
-                            <label asp-for="Impuesto" class="control-label">Impuesto</label>
-                            <input asp-for="Impuesto" class="form-control" disabled />
-                            <span asp-validation-for="Impuesto" class="text-danger"></span>
-                        </div>
+                            <div class="form-group col-md-4">
+                                <label asp-for="SubTotal" class="control-label">SubTotal $</label>
+                                <input asp-for="SubTotal" class="form-control" disabled />
+                                <span asp-validation-for="SubTotal" class="text-danger"></span>
+                            </div>
 
-                        <div class="form-group col-md-4">
-                            <label asp-for="FacturaTotal" class="control-label">Total de la Factura</label>
-                            <input asp-for="FacturaTotal" class="form-control" disabled />
-                            <span asp-validation-for="FacturaTotal" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label asp-for="FacturaPagado" class="control-label">Total Pagado</label>
-                            <input asp-for="FacturaPagado" class="form-control" disabled />
-                            <span asp-validation-for="FacturaPagado" class="text-danger"></span>
+                            <div class="form-group col-md-4">
+                                <label asp-for="Total" class="control-label">Total $</label>
+                                <input asp-for="Total" class="form-control" disabled />
+                                <span asp-validation-for="Total" class="text-danger"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group col-md-4">
-                            <label asp-for="FacturaCambio" class="control-label">Cambio de la Factura</label>
-                            <input asp-for="FacturaCambio" class="form-control" disabled />
-                            <span asp-validation-for="FacturaCambio" class="text-danger"></span>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label asp-for="NombreCliente" class="control-label">Nombre del Cliente</label>
+                                <input asp-for="NombreCliente" class="form-control" disabled />
+                                <span asp-validation-for="NombreCliente" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="DireccionCliente" class="control-label">Dirección del Cliente</label>
+                                <input asp-for="DireccionCliente" class="form-control" disabled />
+                                <span asp-validation-for="DireccionCliente" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="TelefonoCliente" class="control-label">Teléfono del Cliente</label>
+                                <input asp-for="TelefonoCliente" class="form-control" disabled />
+                                <span asp-validation-for="TelefonoCliente" class="text-danger"></span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label asp-for="NombreCliente" class="control-label">Nombre del Cliente</label>
-                            <input asp-for="NombreCliente" class="form-control" disabled />
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label asp-for="DUICliente" class="control-label">DUI del Cliente</label>
+                                <input asp-for="DUICliente" class="form-control" disabled />
+                                <span asp-validation-for="DUICliente" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="IdUsuario" class="control-label">Usuario</label>
+                                <input asp-for="IdUsuario" class="form-control" disabled />
+                                <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group col-md-4">
-                            <label asp-for="DireccionCliente" class="control-label">Dirección del Cliente</label>
-                            <input asp-for="DireccionCliente" class="form-control" disabled />
+                        <div class="form-group" style="margin-top: 10px;">
+                            @* FUNCIÓN ELIMINAR FACTURA*@
+                            @using (Html.BeginForm("Delete", "Venta", new { IdVenta = Model.IdVenta }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?');" style="margin-left: 10px;">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+
+                                <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                            }
                         </div>
-
-                        <div class="form-group col-md-4">
-                            <label asp-for="TelefonoCliente" class="control-label">Teléfono del Cliente</label>
-                            <input asp-for="TelefonoCliente" class="form-control" disabled />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label asp-for="DUICliente" class="control-label">DUI del Cliente</label>
-                            <input asp-for="DUICliente" class="form-control" disabled />
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="margin-top: 10px;">
-                        @* FUNCIÓN ELIMINAR FACTURA*@
-                        @using (Html.BeginForm("Delete", "Venta", new { IdVenta = Model.IdVenta }, FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?');" style="margin-left: 10px;">
-                                <i class="fas fa-trash"></i> Eliminar
-                            </button>
-
-                            <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-                                <i class="fas fa-times"></i> Cancelar
-                            </button>
-                        }
-                    </div>
                 </form>
             </div>
         </div>

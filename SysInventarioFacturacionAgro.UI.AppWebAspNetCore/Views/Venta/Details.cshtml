@@ -6,37 +6,15 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Editar Factura</h1>
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles de la Factura</h1>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-8">
-                <form asp-action="Edit" class="needs-validation" novalidate>
+                <form asp-action="Details" class="needs-validation" novalidate>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <input type="hidden" asp-for="IdVenta" class="form-control" />
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label asp-for="NumeroFactura" class="control-label">Número de Factura</label>
-                            <input asp-for="NumeroFactura" class="form-control" disabled />
-                            <span asp-validation-for="NumeroFactura" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label asp-for="FechaFacturacion" class="control-label">Fecha de Facturación</label>
-                            <input asp-for="FechaFacturacion" class="form-control" disabled />
-                            <span asp-validation-for="FechaFacturacion" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label asp-for="FormaPago" class="control-label">Forma de Pago</label>
-                            <select asp-for="FormaPago" class="form-control" disabled >
-                                <option value="1">EFECTIVO</option>
-                            </select>
-                            <span asp-validation-for="FormaPago" class="text-danger"></span>
-                        </div>
-                        </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -52,23 +30,15 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label asp-for="FacturaTotal" class="control-label">Total de la Factura</label>
-                            <input asp-for="FacturaTotal" class="form-control" disabled />
-                            <span asp-validation-for="FacturaTotal" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label asp-for="FacturaPagado" class="control-label">Total Pagado</label>
-                            <input asp-for="FacturaPagado" class="form-control" disabled />
-                            <span asp-validation-for="FacturaPagado" class="text-danger"></span>
+                            <label asp-for="SubTotal" class="control-label">SubTotal $</label>
+                            <input asp-for="SubTotal" class="form-control" disabled />
+                            <span asp-validation-for="SubTotal" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label asp-for="FacturaCambio" class="control-label">Cambio de la Factura</label>
-                            <input asp-for="FacturaCambio" class="form-control" disabled />
-                            <span asp-validation-for="FacturaCambio" class="text-danger"></span>
+                            <label asp-for="Total" class="control-label">Total $</label>
+                            <input asp-for="Total" class="form-control" disabled />
+                            <span asp-validation-for="Total" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -97,6 +67,12 @@
                             <label asp-for="DUICliente" class="control-label">DUI del Cliente</label>
                             <input asp-for="DUICliente" class="form-control" disabled />
                             <span asp-validation-for="DUICliente" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label asp-for="IdUsuario" class="control-label">Usuario</label>
+                            <input asp-for="IdUsuario" class="form-control" disabled />
+                            <span asp-validation-for="IdUsuario" class="text-danger"></span>
                         </div>
                     </div>
 

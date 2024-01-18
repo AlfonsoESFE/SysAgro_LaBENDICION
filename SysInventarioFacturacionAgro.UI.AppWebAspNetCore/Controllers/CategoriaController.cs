@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 namespace SysInventarioFacturacion.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class CategoriaController : Controller
     {
         CategoriaBL CategoriaBL = new CategoriaBL();

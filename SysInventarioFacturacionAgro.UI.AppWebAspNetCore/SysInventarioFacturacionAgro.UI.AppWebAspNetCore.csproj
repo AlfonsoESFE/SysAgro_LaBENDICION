@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Venta\" />
     <Folder Include="wwwroot\lib\startbootstrap\" />
   </ItemGroup>
 

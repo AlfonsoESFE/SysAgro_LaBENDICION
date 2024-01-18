@@ -32,9 +32,13 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer(@"workstation id=SysInventarioFacturacion503.mssql.somee.com;packet size=4096;user id=romerooscar_SQLLogin_1;pwd=awaosafn8m;data source=SysInventarioFacturacion503.mssql.somee.com;persist security info=False;initial catalog=SysInventarioFacturacion503;Encrypt=False;TrustServerCertificate=False;");
+
+            //optionsBuilder.UseSqlServer(@"workstation id=AgroservicioBD24.mssql.somee.com;packet size=4096;user id=Alphonse53_SQLLogin_1;pwd=cwffkweftj;data source=AgroservicioBD24.mssql.somee.com;persist security info=False;initial catalog=AgroservicioBD24;Encrypt=False;TrustServerCertificate=False;");
+
             optionsBuilder.UseSqlServer(@"workstation id=AgroservicioBD24.mssql.somee.com;packet size=4096;user id=Alphonse53_SQLLogin_1;pwd=cwffkweftj;data source=AgroservicioBD24.mssql.somee.com;persist security info=False;initial catalog=AgroservicioBD24;Encrypt=False;TrustServerCertificate=False;");
 
-            //optionsBuilder.UseSqlServer(@"Data Source=OSCARROMERO\SQLEXPRESS;Initial Catalog=SysInventarioFacturacion;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            //optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-EMGKJOF\SQLEXPRESS01;Initial Catalog=AgroservicioBD2324;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

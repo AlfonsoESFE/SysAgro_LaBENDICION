@@ -18,24 +18,19 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Display(Name = "Fecha de Facturación")]
         public DateTime FechaFacturacion { get; set; }
 
-        [Required(ErrorMessage = "El campo FormaPago es obligatorio")]
-        public byte FormaPago { get; set; }
-
         [Column(TypeName = "decimal(18, 1)")]
         public decimal? Descuento { get; set; }
 
         [Column(TypeName = "decimal(18, 1)")]
         public decimal? Impuesto { get; set; }
 
-        [Required(ErrorMessage = "El campo FacturaTotal es obligatorio")]
+        [Required(ErrorMessage = "El campo SubTotal es obligatorio")]
         [Column(TypeName = "decimal(18, 1)")]
-        public decimal FacturaTotal { get; set; }
+        public decimal SubTotal { get; set; }
 
+        [Required(ErrorMessage = " El campo Total es obligatorio")]
         [Column(TypeName = "decimal(18, 1)")]
-        public decimal? FacturaPagado { get; set; }
-
-        [Column(TypeName = "decimal(18, 1)")]
-        public decimal? FacturaCambio { get; set; }
+        public decimal? Total { get; set; }
 
         [StringLength(50, ErrorMessage = "Máximo 50 caracteres para el campo NombreCliente")]
         public string? NombreCliente { get; set; }

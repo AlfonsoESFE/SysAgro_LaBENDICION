@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "SuperAdmin,Admin")]
+    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class AjusteInventarioController : Controller
     {
         AjusteInventarioBL AjusteInventarioBL = new AjusteInventarioBL();

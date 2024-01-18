@@ -52,12 +52,10 @@
                     <tr>
                         <th>@Html.DisplayNameFor(model => model.NumeroFactura)</th>
                         <th>@Html.DisplayNameFor(model => model.FechaFacturacion)</th>
-                        <th>@Html.DisplayNameFor(model => model.FormaPago)</th>
                         <th>@Html.DisplayNameFor(model => model.Descuento)</th>
                         <th>@Html.DisplayNameFor(model => model.Impuesto)</th>
-                        <th>@Html.DisplayNameFor(model => model.FacturaTotal)</th>
-                        <th>@Html.DisplayNameFor(model => model.FacturaPagado)</th>
-                        <th>@Html.DisplayNameFor(model => model.FacturaCambio)</th>
+                        <th>@Html.DisplayNameFor(model => model.SubTotal)</th>
+                        <th>@Html.DisplayNameFor(model => model.Total)</th>
                         <th>@Html.DisplayNameFor(model => model.NombreCliente)</th>
                         <th>@Html.DisplayNameFor(model => model.DireccionCliente)</th>
                         <th>@Html.DisplayNameFor(model => model.TelefonoCliente)</th>
@@ -72,29 +70,10 @@
                         <tr data-page="@numPage">
                             <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
                             <td>@Html.DisplayFor(modelItem => item.FechaFacturacion)</td>
-                            @*<td>@Html.DisplayFor(modelItem => item.FormaPago)</td>*@
-                            <td>
-                                @{
-                                    string formaPagoText = "";
-                                    switch (item.FormaPago)
-                                    {
-                                        case 1:
-                                            formaPagoText = "EFECTIVO";
-                                            break;
-                                        // Agrega otros casos según sea necesario
-
-                                        default:
-                                            formaPagoText = "Desconocido";
-                                            break;
-                                    }
-                                }
-                                @formaPagoText
-                            </td>
                             <td>@Html.DisplayFor(modelItem => item.Descuento)</td>
                             <td>@Html.DisplayFor(modelItem => item.Impuesto)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FacturaTotal)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FacturaPagado)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FacturaCambio)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SubTotal)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Total)</td>
                             <td>@Html.DisplayFor(modelItem => item.NombreCliente)</td>
                             <td>@Html.DisplayFor(modelItem => item.DireccionCliente)</td>
                             <td>@Html.DisplayFor(modelItem => item.TelefonoCliente)</td>

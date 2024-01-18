@@ -65,12 +65,10 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
                 var venta = await bdContexto.Venta.FirstOrDefaultAsync(v => v.IdVenta == pVenta.IdVenta);
                 venta.IdUsuario = pVenta.IdUsuario;
                 venta.NumeroFactura = pVenta.NumeroFactura;
-                venta.FormaPago = pVenta.FormaPago;
                 venta.Descuento = pVenta.Descuento;
                 venta.Impuesto = pVenta.Impuesto;
-                venta.FacturaTotal = pVenta.FacturaTotal;
-                venta.FacturaPagado = pVenta.FacturaPagado;
-                venta.FacturaCambio = pVenta.FacturaCambio;
+                venta.SubTotal = pVenta.SubTotal;
+                venta.Total = pVenta.Total;
                 venta.NombreCliente = pVenta.NombreCliente;
                 venta.DireccionCliente = pVenta.DireccionCliente;
                 venta.TelefonoCliente = pVenta.TelefonoCliente;
