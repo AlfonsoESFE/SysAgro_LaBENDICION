@@ -16,7 +16,7 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -31,8 +31,6 @@
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <link href="vendor/select2/select2.min.css" rel="stylesheet">
 </head>
-
-<h1>Creación de ventas</h1>
 
 <div class="card border-info">
     <h6 class="TextLitlle">Informacion del Cliente</h6>
@@ -165,7 +163,8 @@
                 <table id="tablaDetalleVenta" class="tablaDetalles">
                     <thead>
                         <tr>
-                            <th></th>
+
+                            
                             <th>Cantidad</th>
                             <th>Producto</th>
                             <th>Precio Unidad</th>
@@ -179,9 +178,9 @@
 
                         {
                             <tr data-page="@numPage">
-                                <td class="PrimeraColumnaBusqueda">
+                               @* <td class="PrimeraColumnaBusqueda">
                                     @Html.DisplayFor(modelItem => item.IdProducto)
-                                </td>
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Cantidad)
                                 </td>
@@ -240,7 +239,7 @@
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm mb-2">
                             <div class="input-group-prepend">
-                                <label class="DataCustomer" for="inputGroupSelect01">Monto base</label>
+                                <label class="DataCustomer" for="inputGroupSelect01">Sub Total</label>
                             </div>
                             <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
                         </div>
@@ -248,7 +247,7 @@
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm mb-2">
                             <div class="input-group-prepend">
-                                <label class="DataCustomer" for="inputGroupSelect01">IVA.</label>
+                                <label class="DataCustomer" for="inputGroupSelect01">IVA</label>
                             </div>
                             <input id="txtiva" name="impuesto" readonly type="text" class="form-control" value="0">
                         </div>
@@ -268,15 +267,6 @@
                                 <label class="DataCustomer" for="inputGroupSelect01">Pago Con:</label>
                             </div>
                             <input id="txtmontopago" type="text" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-sm mb-2">
-                            <label class="DataCustomerFormaP" for="inputGroupSelect01">F. Pago</label>
-                            <select name="FormaPago" class="form-control">
-                                <option selected value="1">EFECTIVO</option>
-                                <option value="2">TARJETA</option>
-                            </select>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -303,160 +293,6 @@
     </div>
 </form>
 
-@*
-PROCESAR FACTURA
-*@
-@*<hr class="Separation" />
-<form asp-controller="DetalleVenta" asp-action="ProcesarFactura" method="post">
-    <div class="row mt-3">
-        <div class="col-sm-11">
-            <div class="table-responsive-sm">
-
-                <table id="tablaDetalleVenta" class="tablaDetalles">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Cantidad</th>
-                            <th>Producto</th>
-                            <th>Descripcion</th>
-                            <th>Precio Unidad</th>
-                            <th>Importe Total</th>
-                            <th colspan="1">Borrar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var item in detalleVentas)
-
-                        {
-                            <tr data-page="@numPage">
-                                <td class="PrimeraColumnaBusqueda">
-                                    @Html.DisplayFor(modelItem => item.IdProducto)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Cantidad)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Producto.Descripcion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)
-                                </td>
-                                <td>
-                                    $ @Html.DisplayFor(modelItem => item.CodigoDetalles)
-                                </td>
-
-                                <td class="botonestabla">
-                                    <button class="eliminar-producto btn btn-danger" data-id="@item.IdDetalleVenta">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                                <input type="hidden" id="detalleVentas" name="detalleVentas" />
-                            </tr>
-                            numRegistros++;
-                            if (numRegistros == numRegistrosPorPage)
-                            {
-                                numPage++;
-                                numRegistros = 0;
-                            }
-                        }
-                        @{
-                            if (numRegistros == 0)
-                            {
-                                numPage--;
-                            }
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-*@
-@*<br />
-    <div class="ContentFormCustomer">
-        <div class="card border-info">
-
-
-            <div class="BarraSuperior">
-                <button id="btnTerminarGuardarVenta" type="submit" class="BtnImprimir" onclick="return confirmarTerminarVenta()">
-                    <i class="fa fa-print" aria-hidden="true"></i> Imprimir y Terminar Venta
-                </button>
-
-            </div>
-            <div class="card-body p-2 card-venta">
-
-                <br />
-                <div class="row align-items-star">
-
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-sm mb-2">
-                            <div class="input-group-prepend">
-                                <label class="DataCustomer" for="inputGroupSelect01">IGV.</label>
-                            </div>
-                            <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-sm mb-2">
-                            <div class="input-group-prepend">
-                                <label class="DataCustomer" for="inputGroupSelect01">IVA.</label>
-                            </div>
-                            <input id="txtiva" name="impuesto" readonly type="text" class="form-control" value="0">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-sm mb-2">
-                            <div class="form-group">
-                                <label class="DataCustomer" for="inputGroupSelect01">Total</label>
-                            </div>
-                            <input id="txtsubtotal" name="totalpagado" readonly type="text" class="form-control" value="0">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-sm mb-2">
-                            <div class="input-group-prepend">
-                                <label class="DataCustomer" for="inputGroupSelect01">Pago Con:</label>
-                            </div>
-                            <input id="txtmontopago" type="text" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-sm mb-2">
-                            <label class="DataCustomerFormaP" for="inputGroupSelect01">F. Pago</label>
-                            <select name="FormaPago" class="form-control">
-                                <option selected value="1">EFECTIVO</option>
-                                <option value="2">TARJETA</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <button id="btncalcular" type="button" class="btnCalcular">
-                            <i class="fas fa-dollar-sign"></i> Calcular
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <br />
-
-            <div class="col-sm-12">
-                <div class="BarraInferio">
-                    <div class="card-body p-2">
-                        <div class="row">
-                            <div class="col-sm-10">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>*@
-@*</form>
-*@
 
 </html>
 <script>
@@ -479,7 +315,6 @@ PROCESAR FACTURA
                 const productoid = button.getAttribute("data-productoid");
                 const codigo = button.getAttribute("data-codigo");
                 const nombre = button.getAttribute("data-nombre");
-                const descripcion = button.getAttribute("data-descripcion");
                 const stock = parseFloat(button.getAttribute("data-stock"));
                 const precio = parseFloat(button.getAttribute("data-precio"));
 
@@ -494,7 +329,7 @@ PROCESAR FACTURA
 
                     if (cantidadValue > 0 && cantidadValue <= stock) {
                         let precioConDescuento = precio - (precio * (descuentoValue / 100));
-                        agregarProducto(productoid, codigo, nombre, descripcion, cantidadValue, precioConDescuento);
+                        agregarProducto(productoid, codigo, nombre, cantidadValue, precioConDescuento);
                     } else {
                         alert("La cantidad deseada no se encuentra en stock");
                     }
@@ -503,13 +338,12 @@ PROCESAR FACTURA
             });
         });
 
-        function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
+        function agregarProducto(productoid, codigo, nombre, cantidad, precio) {
             const importeTotal = parseFloat(cantidad) * precio;
             detalleVentas.push({
                 productoid: productoid,
                 codigo: codigo,
                 nombre: nombre,
-                descripcion: descripcion,
                 cantidad: parseFloat(cantidad),
                 precio: precio,
                 importeTotal: importeTotal,
@@ -546,8 +380,7 @@ PROCESAR FACTURA
                                     <td><input name='detalleVentas[${indeceFila}].IdProducto' value='${detalle.productoid}'  readonly="readonly" class="PrimeraColumna"/></td>
                                     <td><input name='detalleVentas[${indeceFila}].Cantidad' value='${detalle.cantidad}'  readonly="readonly" class="SiguientesColumnas" /></td>
                                     <td><input name='detalleVentas[${indeceFila}].Nombre' value='${detalle.nombre}'  readonly="readonly" class="SiguientesColumnas"/></td>
-                                    <td><input name='detalleVentas[${indeceFila}].Descripcion' value='${detalle.descripcion}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                                    <td><input name='detalleVentas[${indeceFila}].Precio' value='${detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
+                                    <td><input name='detalleVentas[${indeceFila}].PrecioUnitario' value='${detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
                                     <td><input name='detalleVentas[${indeceFila}].ValorTotal' value='${detalle.importeTotal}'  readonly="readonly" class="SiguientesColumnas" /></td>
                                     <td>
                                         <button class="eliminar-producto btn btn-danger" data-index="${index}">
@@ -579,16 +412,26 @@ PROCESAR FACTURA
 
         function calculateTotal() {
             let subtotal = 0;
-            detalleVentas.forEach(function (detalle) {
-                subtotal += detalle.importeTotal;
+            let iva = 0;
+
+            // Recorre todas las filas de la tablaDetalleVenta
+            const filasDetalleVenta = document.querySelectorAll("#tablaDetalleVenta tbody tr");
+
+            filasDetalleVenta.forEach(function (fila) {
+                const cantidad = parseFloat(fila.querySelector("td:nth-child(2) input").value);
+                const precio = parseFloat(fila.querySelector("td:nth-child(4) input").value);
+                const importeTotal = parseFloat(fila.querySelector("td:nth-child(5) input").value);
+
+                subtotal += importeTotal;
             });
 
-            const igv = subtotal / 1.13 // IGV del 13%
-            const iva = subtotal - igv
+            iva = subtotal * 0.13; // Porcentaje de IVA (13%)
+            const total = subtotal + iva;
+            const subTotal = subtotal - iva;
 
-            txtigv.value = igv.toFixed(2);
-            txtiva.value = iva.toFixed(2);
-            txttotal.value = total.toFixed(2);
+            txtigv.value = iva.toFixed(2);
+            txtiva.value = subTotal.toFixed(2);
+            txtsubtotal.value = total.toFixed(2);
         }
 
         btncalcular.addEventListener("click", function () {
