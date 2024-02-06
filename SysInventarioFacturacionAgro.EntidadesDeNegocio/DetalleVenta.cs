@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
 {
@@ -9,30 +14,34 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdDetalleVenta { get; set; }
 
-        [Required(ErrorMessage = "CodigoDetalles es obligatorio")]
-        public int CodigoDetalles { get; set; }
-
-        [Required(ErrorMessage = "Cantidad es obligatoria")]
-        public int Cantidad { get; set; }
-
-        [Required(ErrorMessage = "Total es obligatorio")]
-        [Column(TypeName = "decimal(18, 1)")]
-        public decimal Total { get; set; }
-
-        // RELACIONES CON OTRAS TABLAS FK
-        [ForeignKey("Producto")]
-        [Display(Name = "Producto")]
-        [Required(ErrorMessage = "IdProducto es obligatorio")]
-        public int IdProducto { get; set; }
-
-
         [ForeignKey("Venta")]
+        [Required(ErrorMessage = "Venta es obligatorio")]
         [Display(Name = "Venta")]
-        [Required(ErrorMessage = "IdVenta es obligatorio")]
         public int IdVenta { get; set; }
 
+        [ForeignKey("Producto")]
+        [Required(ErrorMessage = "Producto es obligatorio")]
+        [Display(Name = "Producto")]
+        public int IdProducto { get; set; }
+
+        
+
+        [Required(ErrorMessage = "la Cantidad es obligatorio")]
+        public int Cantidad { get; set; }
+
+        [Required(ErrorMessage = "El descuento es obligatorio")]
+        public decimal? Descuento { get; set; }
+
+
+        [Required(ErrorMessage = "el valor total es obligatorio")]
+        public decimal ValorTotal { get; set; }
+
         public Venta? Venta { get; set; }
+
+
         public Producto? Producto { get; set; }
 
+        [NotMapped]
+        public int Top_Aux { get; set; }
     }
 }

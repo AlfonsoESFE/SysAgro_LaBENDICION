@@ -1,56 +1,65 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 using SysInventarioFacturacionAgro.EntidadesDeNegocio;
 using SysInventarioFacturacionAgro.LogicaDeNegocio;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using SysInventarioFacturacionAgro.AccesoADatos;
+using SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Models;
+using System.Security.Claims;
 
 namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
 {
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "Cajero,SuperAdmin,Admin")]
+    
     public class DetalleVentaController : Controller
     {
         DetalleVentaBL DetalleVentaBL = new DetalleVentaBL();
-        VentaBL VentaBL = new VentaBL();
         ProductoBL ProductoBL = new ProductoBL();
-        public static int idFac;
+        VentaBL VentaBL = new VentaBL();
+        public static int idVen;
 
-        #region CRUD Y METODOS PARA INCLUIR FACTURAS Y LO RELACIONADO A LA FUNCIONALIDAD DE UN CRUD
+        #region METODOS CRUD PRINCIPALES
 
+        // GET: DetallePedidoController
         public async Task<IActionResult> Index(DetalleVenta pDetalleVenta = null)
         {
             if (pDetalleVenta == null)
                 pDetalleVenta = new DetalleVenta();
-            var taskBuscar = DetalleVentaBL.BuscarIncluirVentasYProductoAsync(pDetalleVenta);
+            if (pDetalleVenta.Top_Aux == 0)
+                pDetalleVenta.Top_Aux = 10;
+            else if (pDetalleVenta.Top_Aux == -1)
+                pDetalleVenta.Top_Aux = 0;
+            var taskBuscar = DetalleVentaBL.BuscarIncluirVentaProductoAsync(pDetalleVenta);
             var taskObtenerTodosVentas = VentaBL.ObtenerTodosAsync();
             var taskObtenerTodosProducto = ProductoBL.ObtenerTodosAsync();
-            var detallesVentas = await taskBuscar;
-            ViewBag.Ventas = await taskObtenerTodosVentas;
+            var DetalleVenta = await taskBuscar;
+            ViewBag.Top = pDetalleVenta.Top_Aux;
+            ViewBag.Venta = await taskObtenerTodosVentas;
             ViewBag.Producto = await taskObtenerTodosProducto;
-            return View(detallesVentas);
+            return View(DetalleVenta);
         }
 
+        // GET: DetallePedidoController/Details/5
         public async Task<IActionResult> Details(int IdDetalleVenta)
         {
-            var detalleVenta = await DetalleVentaBL.ObtenerPorIdAsync(new DetalleVenta { IdDetalleVenta = IdDetalleVenta });
-            detalleVenta.Venta = await VentaBL.ObtenerPorIdAsync(new Venta { IdVenta = detalleVenta.IdVenta });
-            detalleVenta.Producto = await ProductoBL.ObtenerPorIdAsync(new Producto { IdProducto = detalleVenta.IdProducto });
-            return View(detalleVenta);
+            var DetalleVenta = await DetalleVentaBL.ObtenerPorIdAsync(new DetalleVenta{ IdDetalleVenta = IdDetalleVenta });
+            DetalleVenta.Venta = await VentaBL.ObtenerPorIdAsync(new Venta { IdVenta = DetalleVenta.IdVenta});
+            DetalleVenta.Producto = await ProductoBL.ObtenerPorIdAsync(new Producto { IdProducto = DetalleVenta.IdProducto });
+
+            return View(DetalleVenta);
         }
+
+        // GET: DetallePedidoController/Create
 
         public async Task<IActionResult> Create()
         {
-            ViewBag.Ventas = await VentaBL.ObtenerTodosAsync();
+            ViewBag.Venta = await VentaBL.ObtenerTodosAsync();
             ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
             ViewBag.Error = "";
             return View();
         }
 
+        // POST: DetallePedidoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DetalleVenta pDetalleVenta)
@@ -63,24 +72,26 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                ViewBag.Ventas = await VentaBL.ObtenerTodosAsync();
+                ViewBag.Venta = await VentaBL.ObtenerTodosAsync();
                 ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
                 return View(pDetalleVenta);
             }
         }
 
+        // GET: DetallePedidoController/Edit/5
         public async Task<IActionResult> Edit(DetalleVenta pDetalleVenta)
         {
-            var taskObtenerPorIdDetalleVenta = DetalleVentaBL.ObtenerPorIdAsync(pDetalleVenta);
+            var taskObtenerPorId = DetalleVentaBL.ObtenerPorIdAsync(pDetalleVenta);
             var taskObtenerTodosVentas = VentaBL.ObtenerTodosAsync();
             var taskObtenerTodosProducto = ProductoBL.ObtenerTodosAsync();
-            var detalleVenta = await taskObtenerPorIdDetalleVenta;
-            ViewBag.Ventas = await taskObtenerTodosVentas;
+            var DetalleVenta = await taskObtenerPorId;
+            ViewBag.Venta = await taskObtenerTodosVentas;
             ViewBag.Producto = await taskObtenerTodosProducto;
             ViewBag.Error = "";
-            return View(detalleVenta);
+            return View(DetalleVenta);
         }
 
+        // POST: DetallePedidoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int IdDetalleVenta, DetalleVenta pDetalleVenta)
@@ -93,21 +104,24 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                ViewBag.Ventas = await VentaBL.ObtenerTodosAsync();
+                ViewBag.Venta = await VentaBL.ObtenerTodosAsync();
                 ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
                 return View(pDetalleVenta);
             }
         }
 
-        public async Task<IActionResult> Delete(int IdDetalleVenta)
+        // GET: DetallePedidoController/Delete/5
+        public async Task<IActionResult> Delete(DetalleVenta pDetalleVenta)
         {
-            var detalleVenta = await DetalleVentaBL.ObtenerPorIdAsync(new DetalleVenta { IdDetalleVenta = IdDetalleVenta });
-            detalleVenta.Venta = await VentaBL.ObtenerPorIdAsync(new Venta { IdVenta = detalleVenta.IdVenta });
-            detalleVenta.Producto = await ProductoBL.ObtenerPorIdAsync(new Producto { IdProducto = detalleVenta.IdProducto });
+            var DetalleVenta = await DetalleVentaBL.ObtenerPorIdAsync(pDetalleVenta);
+            DetalleVenta.Venta = await VentaBL.ObtenerPorIdAsync(new Venta { IdVenta = DetalleVenta.IdVenta });
+            DetalleVenta.Producto = await ProductoBL.ObtenerPorIdAsync(new Producto { IdProducto = DetalleVenta.IdProducto });
             ViewBag.Error = "";
-            return View(detalleVenta);
+
+            return View(DetalleVenta);
         }
 
+        // POST: DetallePedidoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int IdDetalleVenta, DetalleVenta pDetalleVenta)
@@ -120,35 +134,36 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                var detalleVenta = await DetalleVentaBL.ObtenerPorIdAsync(pDetalleVenta);
-                if (detalleVenta == null)
-                    detalleVenta = new DetalleVenta();
-                if (detalleVenta.IdDetalleVenta > 0)
-                    detalleVenta.Venta = await VentaBL.ObtenerPorIdAsync(new Venta { IdVenta = detalleVenta.IdVenta });
-                if (detalleVenta.IdDetalleVenta > 0)
-                    detalleVenta.Producto = await ProductoBL.ObtenerPorIdAsync(new Producto { IdProducto = detalleVenta.IdProducto });
-                return View(detalleVenta);
+                var DetalleVenta = await DetalleVentaBL.ObtenerPorIdAsync(pDetalleVenta);
+                if (DetalleVenta == null)
+                    DetalleVenta = new DetalleVenta();
+                if (DetalleVenta.IdDetalleVenta> 0)
+                    DetalleVenta.Venta = await VentaBL.ObtenerPorIdAsync(new Venta { IdVenta = DetalleVenta.IdVenta });
+                if (DetalleVenta.IdDetalleVenta > 0)
+                    DetalleVenta.Producto = await ProductoBL.ObtenerPorIdAsync(new Producto { IdProducto = DetalleVenta.IdProducto });
+                return View(DetalleVenta);
             }
         }
 
         #endregion
 
-        #region METODOS PARA PROCESOS DE FACTURACION - VENTAS Y DETALLES DE VENTAS
 
-        //METODO PARA VISTA DE VENTAS
+        #region METODOS DE PARA QUE SIRVA LA VISTA DE VENTA
 
-     
-
-        List<DetalleVenta> DetalleVentas;
-
-        public async Task<IActionResult> Ventas(int campo, DetalleVenta pDetalleVenta = null)
+        List<DetalleVenta>? DetalleVentas;
+        public async Task<IActionResult> Venta(int campo, DetalleVenta pDetalleVenta = null)
         {
             if (pDetalleVenta == null)
                 pDetalleVenta = new DetalleVenta();
-            var taskBuscar = DetalleVentaBL.BuscarIncluirVentasYProductoAsync(pDetalleVenta);
+            if (pDetalleVenta.Top_Aux == 0)
+                pDetalleVenta.Top_Aux = 10;
+            else if (pDetalleVenta.Top_Aux == -1)
+                pDetalleVenta.Top_Aux = 0;
+            var taskBuscar = DetalleVentaBL.BuscarIncluirVentaProductoAsync(pDetalleVenta);
             var taskObtenerTodosVentas = VentaBL.ObtenerTodosAsync();
             var taskObtenerTodosProducto = ProductoBL.ObtenerTodosAsync();
             DetalleVentas = await taskBuscar;
+            ViewBag.Top = pDetalleVenta.Top_Aux;
             ViewBag.Ventas = await taskObtenerTodosVentas;
 
             if (campo > 0)
@@ -165,6 +180,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             return View(DetalleVentas);
         }
 
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DetalleVenta(DetalleVenta pDetalleVenta)
@@ -178,150 +195,102 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             {
                 ViewBag.Error = ex.Message;
                 ViewBag.Ventas = await VentaBL.ObtenerTodosAsync();
-                // Reutiliza la lista de productos que ya obtuviste en el método Venta
-                ViewBag.Producto = ViewBag.Producto;
-                return View("Venta", DetalleVentas); // Retorna a la vista Venta con el modelo DetalleVentas
+                ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
+                return View(pDetalleVenta);
             }
         }
 
-        //List<DetalleVenta>? DetalleVentas;
-        //public async Task<IActionResult> Venta(int campo, DetalleVenta pDetalleVenta = null)
-        //{
-        //    if (pDetalleVenta == null)
-        //        pDetalleVenta = new DetalleVenta();
+        #endregion
 
-        //    var taskBuscar = DetalleVentaBL.BuscarIncluirVentasYProductoAsync(pDetalleVenta);
-        //    var taskObtenerTodosVentas = VentaBL.ObtenerTodosAsync();
-        //    var taskObtenerTodosProducto = ProductoBL.ObtenerTodosAsync();
-        //    DetalleVentas = await taskBuscar;
-        //    ViewBag.Ventas = await taskObtenerTodosVentas;
+        #region METODO DE PROCESAR FACTURA - VENTA, OBTENE FACTURA - VENTA Y REPORTES
 
-        //    if (campo > 0)
-        //    {
-        //        Producto producto = new Producto();
-        //        producto.Codigo = campo.ToString();
-        //        List<Producto> ProductoBuscado = await ProductoBL.BuscarAsync(producto);
-        //        ViewBag.Producto = ProductoBuscado;
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Producto = await taskObtenerTodosProducto;
-        //    }
-        //    return View(DetalleVentas);
-        //}
+        
 
+        [HttpPost("ProcesarFactura")]
+        public async Task<IActionResult> ProcesarFactura( string NombreCliente, string DUICliente, string DireccionCliente, string TelefonoCliente, decimal Total, decimal Descuento, decimal Impuesto, decimal TotalPagado, DateTime FechaVenta, byte FormaPago, int Cantidad, int Codigo, decimal ValorTotal, List<DetalleVenta> detalleVentas)
+        {
+            Random random = new Random();
 
+            Venta objVenta = new();
+            objVenta.IdUsuario = global.idu;
+            objVenta.NumeroVenta = random.Next(100000, 999999);
+            objVenta.NombreCliente = NombreCliente ?? "N/A";
+            objVenta.DireccionCliente = DireccionCliente ?? "N/A";
+            objVenta.TelefonoCliente = TelefonoCliente ?? "N/A";
+            objVenta.DUICliente = DUICliente ?? "N/A";
+            objVenta.Total = Total;
+            objVenta.Descuento = Descuento;
+            objVenta.Impuesto = Impuesto;
+            objVenta.TotalPagado = TotalPagado;
+            objVenta.FormaPago = 1;
+            objVenta.FechaVenta = DateTime.Now;
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DetalleVenta(DetalleVenta pDetalleVenta)
-        //{
-        //    try
-        //    {
-        //        int result = await DetalleVentaBL.CrearAsync(pDetalleVenta);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Error = ex.Message;
-        //        ViewBag.Ventas = await VentaBL.ObtenerTodosAsync();
-        //        ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
-        //        return View(pDetalleVenta);
-        //    }
-        //}
+            //FacturaBL.CrearAsync(objFactura);
+            await VentaBL.CrearAsync(objVenta);
+
+            foreach (var detalle in detalleVentas)
+            {
+                Producto objProducto = new Producto();
+                objProducto.IdProducto = detalle.IdProducto;
+                objProducto = await ProductoBL.ObtenerPorIdAsync(objProducto);
 
 
-        //[HttpPost("ProcesarFactura")]
-        //public async Task<IActionResult> ProcesarFactura(string Descripcion, string Direccion, string Correo, string Telefono, decimal total, decimal descuento, decimal impuesto, decimal totalpagado, int cantidad, int codigo, byte FormadaDePago, DateTime FechaEmision, decimal ValorTotal, List<DetalleFactura> detalleFacturas)
-        //{
-        //    Random random = new Random();
-
-        //    Factura objFactura = new();
-        //    objFactura.IdUsuario = global.idu;
-        //    objFactura.NumeroFactura = random.Next(100000, 999999);
-        //    objFactura.Descripcion = Descripcion ?? "N/A";
-        //    objFactura.Direccion = Direccion ?? "N/A";
-        //    objFactura.Correo = Correo ?? "N/A";
-        //    objFactura.Total = total;
-        //    objFactura.Descuento = descuento;
-        //    objFactura.Impuesto = impuesto;
-        //    objFactura.TotalPagado = totalpagado;
-        //    objFactura.Telefono = Telefono ?? "N/A";
-        //    objFactura.FechaFacturacion = DateTime.Now;
-
-        //    //FacturaBL.CrearAsync(objFactura);
-        //    await FacturaBL.CrearAsync(objFactura);
+                objProducto.CantidadStock = objProducto.CantidadStock - detalle.Cantidad;
+                await ProductoBL.ModificarAsync(objProducto);
 
 
-        //    DetalleFactura DetalleFacturas = new();
-        //    DetalleFacturas.Codigo = random.Next(100000, 999999);
-        //    DetalleFacturas.FechaEmision = DateTime.Now;
-        //    DetalleFacturas.FormaDePago = 1;
+                idVen = objVenta.IdVenta;
+                detalle.IdVenta = objVenta.IdVenta;
+                await DetalleVentaBL.CrearAsync(detalle);
+            }
 
-        //    foreach (var detalle in detalleFacturas)
-        //    {
-        //        Producto objProducto = new Producto();
-        //        objProducto.IdProducto = detalle.IdProducto;
-        //        objProducto = await ProductoBL.ObtenerPorIdProductoAsync(objProducto);
+            var venta = new Ventas
+            {
+                ObjVenta = objVenta,
+                DetalleVentas = detalleVentas
+            };
 
+            return RedirectToAction("ObtenerFactura");
+        }
 
-        //        objProducto.Cantidad = objProducto.Cantidad - detalle.Cantidad;
-        //        await ProductoBL.ModificarAsync(objProducto);
+        [HttpGet("ObtenerFactura")]
 
+        public async Task<IActionResult> ObtenerFactura()
+        {
 
-        //        idFac = objFactura.IdFactura;
-        //        detalle.IdFactura = objFactura.IdFactura;
-        //        await detalle_facturaBL.CrearAsync(detalle);
-        //    }
+            DetalleVenta objdetalle = new DetalleVenta();
+            objdetalle.IdVenta = idVen;
+            List<DetalleVenta> ListaDetalle = await DetalleVentaBL.BuscarIncluirVentaProductoAsync(objdetalle);
+            ViewBag.Ventas = ListaDetalle.FirstOrDefault().Venta;
+            ViewBag.ListaDetalle = ListaDetalle;
+            return View();
+        }
 
-        //    var venta = new Venta
-        //    {
-        //        ObjFactura = objFactura,
-        //        DetalleFacturas = detalleFacturas
-        //    };
+        public async Task<IActionResult> Reportes(DetalleVenta pDetalleFactura, DateTime fInicio, DateTime fFinal, int NumeroVenta)
+        {
+            List<Venta> ventas = await VentaBL.ObtenerTodosAsync();
+            List<DetalleVenta> detalleVentas = await DetalleVentaBL.ObtenerTodosAsync();
 
-        //    return RedirectToAction("ObtenerFactura");
-        //}
+            if (NumeroVenta != 0)
+            {
+                ViewBag.Ventas = ventas.Where(r => r.IdVenta == NumeroVenta).ToList();
+            }
+            else if (fInicio.Year != 1 && fFinal.Year != 1)
+            {
+                ViewBag.Ventas = ventas.Where(r => r.FechaVenta.Date >= fInicio.Date && r.FechaVenta.Date <= fFinal.Date).ToList();
+            }
+            else
+            {
+                ViewBag.Ventas = ventas;
+            }
 
-        //[HttpGet("ObtenerFactura")]
+            ViewBag.Detalles = detalleVentas;
 
-        //public async Task<IActionResult> ObtenerFactura()
-        //{
-
-        //    DetalleFactura objdetalle = new DetalleFactura();
-        //    objdetalle.IdFactura = idFac;
-        //    List<DetalleFactura> ListaDetalle = await detalle_facturaBL.BuscarIncluirFacturasYProductoAsync(objdetalle);
-        //    ViewBag.Facturas = ListaDetalle.FirstOrDefault().Factura;
-        //    ViewBag.ListaDetalle = ListaDetalle;
-        //    return View();
-        //}
-
-        //public async Task<IActionResult> Reportes(DetalleFactura pDetalleFactura, DateTime fInicio, DateTime fFinal, int NumeroFactura)
-        //{
-        //    List<Factura> facturas = await FacturaBL.ObtenerTodosAsync();
-        //    List<DetalleFactura> detalleFacturas = await detalle_facturaBL.ObtenerTodosAsync();
-
-        //    if (NumeroFactura != 0)
-        //    {
-        //        ViewBag.Facturas = facturas.Where(r => r.NumeroFactura == NumeroFactura).ToList();
-        //    }
-        //    else if (fInicio.Year != 1 && fFinal.Year != 1)
-        //    {
-        //        ViewBag.Facturas = facturas.Where(r => r.FechaFacturacion.Date >= fInicio.Date && r.FechaFacturacion.Date <= fFinal.Date).ToList();
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Facturas = facturas;
-        //    }
-
-        //    ViewBag.Detalles = detalleFacturas;
-
-        //    return View();
-        //}
-
-
+            return View();
+        }
 
         #endregion
 
     }
+
 }

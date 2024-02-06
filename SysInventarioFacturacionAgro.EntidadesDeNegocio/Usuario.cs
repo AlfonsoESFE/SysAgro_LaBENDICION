@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SysInventarioFacturacionAgro.EntidadesDeNegocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,6 +12,8 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
     public class Usuario
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int Id { get; set; }
         [ForeignKey("Rol")]
         [Required(ErrorMessage = "Rol es obligatorio")]
@@ -25,7 +28,7 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Required(ErrorMessage = "Login es obligatorio")]
         [StringLength(25, ErrorMessage = "Maximo 25 caracteres")]
         public string Login { get; set; }
-        [Required(ErrorMessage = "Password es obligatorio")]
+
         [DataType(DataType.Password)]
         [StringLength(32, ErrorMessage = "Password debe estar entre 5 a 32 caracteres", MinimumLength = 5)]
         public string Password { get; set; }
@@ -34,25 +37,26 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Display(Name = "Fecha registro")]
         public DateTime FechaRegistro { get; set; }
         public ICollection<Venta>? Venta { get; set; }
-        public ICollection<AjusteInventario>? AjusteInventario { get; set; }
-        public ICollection<Reporte>? Reporte { get; set; }
         public ICollection<Compra>? Compra { get; set; }
+        public ICollection<AjusteInventario>? AjusteInventario { get; set; }
+
+        public ICollection<Reporte>? Reporte { get; set; }
 
         public Rol Rol { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
+
         [NotMapped]
-        [Required(ErrorMessage = "Confirmar el password")]
         [StringLength(32, ErrorMessage = "Password debe estar entre 5 a 32 caracteres", MinimumLength = 5)]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password y confirmar password deben de ser iguales")]
         [Display(Name = "Confirmar password")]
         public string ConfirmPassword_aux { get; set; }
-
     }
     public enum Estatus_Usuario
     {
         ACTIVO = 1,
         INACTIVO = 2
     }
+
 }

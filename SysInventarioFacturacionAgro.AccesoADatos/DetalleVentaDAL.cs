@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using SysInventarioFacturacionAgro.AccesoADatos;
+using SysInventarioFacturacionAgro.EntidadesDeNegocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using SysInventarioFacturacionAgro.EntidadesDeNegocio;
 
 namespace SysInventarioFacturacionAgro.AccesoADatos
 {
     public class DetalleVentaDAL
     {
-
-        #region CRUD Y METODOS BASICOS PARA UN CRUD
         public static async Task<int> CrearAsync(DetalleVenta pDetalleVenta)
         {
             int result = 0;
@@ -22,62 +21,51 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
             }
             return result;
         }
-
         public static async Task<int> ModificarAsync(DetalleVenta pDetalleVenta)
         {
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var detalleVenta = await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
-                if (detalleVenta != null)
-                {
-                    detalleVenta.IdVenta = pDetalleVenta.IdVenta;
-                    detalleVenta.IdProducto = pDetalleVenta.IdProducto;
-                    detalleVenta.CodigoDetalles = pDetalleVenta.CodigoDetalles;
-                    detalleVenta.Cantidad = pDetalleVenta.Cantidad;
-                    detalleVenta.Total = pDetalleVenta.Total;
-                    bdContexto.Update(detalleVenta);
-                    result = await bdContexto.SaveChangesAsync();
-                }
+                var detalleventa = await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
+                detalleventa.IdProducto = pDetalleVenta.IdProducto;
+                detalleventa.IdVenta = pDetalleVenta.IdVenta;
+                detalleventa.Cantidad = pDetalleVenta.Cantidad;
+                detalleventa.ValorTotal = pDetalleVenta.ValorTotal;
+                detalleventa.Descuento = pDetalleVenta.Descuento;
+                bdContexto.Update(detalleventa);
+                result = await bdContexto.SaveChangesAsync();
             }
             return result;
         }
-
         public static async Task<int> EliminarAsync(DetalleVenta pDetalleVenta)
         {
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var detalleVenta = await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
-                if (detalleVenta != null)
-                {
-                    bdContexto.DetalleVenta.Remove(detalleVenta);
-                    result = await bdContexto.SaveChangesAsync();
-                }
+                var detalleventa = await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
+                bdContexto.DetalleVenta.Remove(detalleventa);
+                result = await bdContexto.SaveChangesAsync();
             }
             return result;
         }
-
         public static async Task<DetalleVenta> ObtenerPorIdAsync(DetalleVenta pDetalleVenta)
         {
-            var detalleVenta = new DetalleVenta();
+            var detalleventa = new DetalleVenta();
             using (var bdContexto = new BDContexto())
             {
-                detalleVenta = await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
+                detalleventa = await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
             }
-            return detalleVenta;
+            return detalleventa;
         }
-
         public static async Task<List<DetalleVenta>> ObtenerTodosAsync()
         {
-            var detallesVenta = new List<DetalleVenta>();
+            var DetalleVenta = new List<DetalleVenta>();
             using (var bdContexto = new BDContexto())
             {
-                detallesVenta = await bdContexto.DetalleVenta.Include(p => p.Producto).ToListAsync();
+                DetalleVenta = await bdContexto.DetalleVenta.Include(p => p.Producto).ToListAsync();
             }
-            return detallesVenta;
+            return DetalleVenta;
         }
-
         internal static IQueryable<DetalleVenta> QuerySelect(IQueryable<DetalleVenta> pQuery, DetalleVenta pDetalleVenta)
         {
             if (pDetalleVenta.IdDetalleVenta > 0)
@@ -86,36 +74,37 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
                 pQuery = pQuery.Where(s => s.IdVenta == pDetalleVenta.IdVenta);
             if (pDetalleVenta.IdProducto > 0)
                 pQuery = pQuery.Where(s => s.IdProducto == pDetalleVenta.IdProducto);
-            if (pDetalleVenta.IdDetalleVenta > 0)
-                pQuery = pQuery.Where(s => s.CodigoDetalles == pDetalleVenta.CodigoDetalles);
+
+          
+
+            pQuery = pQuery.OrderByDescending(s => s.IdDetalleVenta).AsQueryable();
+            if (pDetalleVenta.Top_Aux > 0)
+                pQuery = pQuery.Take(pDetalleVenta.Top_Aux).AsQueryable();
             return pQuery;
         }
-
         public static async Task<List<DetalleVenta>> BuscarAsync(DetalleVenta pDetalleVenta)
         {
-            var detallesVenta = new List<DetalleVenta>();
+            var DetalleVentas = new List<DetalleVenta>();
             using (var bdContexto = new BDContexto())
             {
                 var select = bdContexto.DetalleVenta.AsQueryable();
                 select = QuerySelect(select, pDetalleVenta);
-                detallesVenta = await select.ToListAsync();
+                DetalleVentas = await select.ToListAsync();
             }
-            return detallesVenta;
+            return DetalleVentas;
         }
 
-        public static async Task<List<DetalleVenta>> BuscarIncluirVentasYProductoAsync(DetalleVenta pDetalleVenta)
+        public static async Task<List<DetalleVenta>> BuscarIncluirVentaProductoAsync(DetalleVenta pDetalleVenta)
         {
-            var detallesVenta = new List<DetalleVenta>();
+            var DetalleVentas = new List<DetalleVenta>();
             using (var bdContexto = new BDContexto())
             {
                 var select = bdContexto.DetalleVenta.AsQueryable();
                 select = QuerySelect(select, pDetalleVenta).Include(s => s.Venta).Include(s => s.Producto).AsQueryable();
-                detallesVenta = await select.ToListAsync();
+                DetalleVentas = await select.ToListAsync();
             }
-            return detallesVenta;
+            return DetalleVentas;
         }
     }
+
 }
-
-#endregion
-

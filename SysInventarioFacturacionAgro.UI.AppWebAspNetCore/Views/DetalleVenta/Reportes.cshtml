@@ -1,0 +1,224 @@
+﻿@model IEnumerable<SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta>
+@{
+    ViewData["Title"] = "Reporte de Ventas";
+    int numPage = 1;
+    int numRegistros = 0;
+    int numRegistrosPorPage = 10;
+    int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
+    int topActual = Convert.ToInt32(ViewBag.Top);
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta> ventas = ViewBag.Ventas as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta> listaVentas = ViewBag.ListaVentas as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta>;
+
+    ViewBag.listaventas = listaVentas;
+
+}
+
+<style>
+
+
+    h1 {
+        color: #333;
+        text-align: center;
+    }
+
+
+    .customer-card {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .customer-details {
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .customer-name {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    .product-list {
+        padding: 20px;
+    }
+
+    .product-item {
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="row">
+    <form method="post" asp-action="Reportes">
+        <div class="row">
+            <div class="mb-3 col-md-3">
+                <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                <input type="date" id="fInicio" name="fInicio" class="form-control" />
+            </div>
+
+            <div class="mb-3 col-md-3">
+                <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                <input type="date" id="fFinal" name="fFinal" class="form-control" />
+            </div>
+
+            <div class="mb-3 col-md-3">
+                <label for="NumeroVenta" class="form-label">N Venta</label>
+                <input type="number" id="NumeroVenta" name="NumeroVenta" class="form-control" />
+            </div>
+
+            <div class="mb-3 col-md-3 align-self-end">
+                <button type="submit" class="btn btn-primary w-100">Buscar</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="card-container">
+    @if (ventas != null)
+    {
+        <!-- Agrega las referencias y los estilos de los calendarios -->
+        @foreach (var Listaventas in ventas)
+        {
+            <div>
+                <div class="customer-card">
+                    <div class="customer-details">
+                        <div class="customer-name">Fecha Venta: @Listaventas.FechaVenta</div>
+                        <div class="customer-name">NFactura: @Listaventas.IdVenta</div>
+                        <div class="customer-name">Cliente: @Listaventas.NombreCliente</div>
+                        <div>Total: $@Listaventas.TotalPagado</div>
+                    </div>
+                    <div id="contentToExport">
+                        @foreach (var detalle in Listaventas.DetalleVenta)
+                        {
+                            <div class="product-list">
+                                <div class="product-item">
+                                    <div class="product-name">Producto: @detalle.Producto.Nombre</div>
+                                    <div>Cantidad: @detalle.Cantidad</div>
+                                    <div>Precio Unitario: $@detalle.Producto.PrecioUnitario</div>
+                                    <div>Descuento: @detalle.Descuento %</div>
+                                    <div>Valor Total: $@detalle.ValorTotal</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Aquí puedes agregar lógica JavaScript para manejar la búsqueda y filtrado
+    function buscar() {
+        // Implementa la lógica de búsqueda aquí
+    }
+</script>
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll('.customer-card');
+        const cardContainer = document.getElementById('card-container');
+        const cardsPerPage = 5;
+        const totalCards = cards.length;
+        const totalPages = Math.ceil(totalCards / cardsPerPage);
+
+        function showPage(pageNumber) {
+            cards.forEach(card => card.style.display = 'none');
+            const startIndex = (pageNumber - 1) * cardsPerPage;
+            const endIndex = startIndex + cardsPerPage;
+            for (let i = startIndex; i < endIndex && i < totalCards; i++) {
+                cards[i].style.display = 'block';
+            }
+        }
+
+        // Mostrar solo las primeras 5 tarjetas inicialmente
+        showPage(1);
+
+        function initPagination() {
+            const nav = document.createElement('nav');
+            nav.setAttribute('aria-label', 'Page navigation example');
+
+            const ul = document.createElement('ul');
+            ul.classList.add('pagination', 'justify-content-center');
+
+            const prevLi = document.createElement('li');
+            prevLi.classList.add('page-item', 'disabled');
+
+            const prevLink = document.createElement('a');
+            prevLink.classList.add('page-link');
+            prevLink.href = '#';
+            prevLink.tabIndex = -1;
+            prevLink.textContent = 'Previous';
+
+            prevLi.appendChild(prevLink);
+            ul.appendChild(prevLi);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+
+                const link = document.createElement('a');
+                link.classList.add('page-link');
+                link.href = '#';
+                link.textContent = i;
+
+                link.addEventListener('click', function () {
+                    showPage(i);
+                });
+
+                li.appendChild(link);
+                ul.appendChild(li);
+            }
+
+            const nextLi = document.createElement('li');
+            nextLi.classList.add('page-item');
+
+            const nextLink = document.createElement('a');
+            nextLink.classList.add('page-link');
+            nextLink.href = '#';
+            nextLink.textContent = 'Next';
+
+            nextLi.appendChild(nextLink);
+            ul.appendChild(nextLi);
+
+            nav.appendChild(ul);
+            document.body.appendChild(nav);
+
+            // Agregar el evento click para los botones "Previous" y "Next"
+            const prevButton = document.querySelector('.pagination .page-item.disabled .page-link');
+            const nextButton = document.querySelector('.pagination .page-item:not(.disabled) .page-link');
+
+            prevButton.addEventListener('click', function () {
+                const currentPage = parseInt(document.querySelector('.pagination .page-item.active .page-link').textContent);
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                }
+            });
+
+            nextButton.addEventListener('click', function () {
+                const currentPage = parseInt(document.querySelector('.pagination .page-item.active .page-link').textContent);
+                if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
+            });
+        }
+
+        initPagination();
+    });
+</script>
+
+

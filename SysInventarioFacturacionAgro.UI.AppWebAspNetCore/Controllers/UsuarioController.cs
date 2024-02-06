@@ -11,14 +11,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Models;
 using SysInventarioFacturacionAgro.EntidadesDeNegocio;
 using SysInventarioFacturacionAgro.LogicaDeNegocio;
-using SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Models;
 
 namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "Administrador,Cajero")]
     public class UsuarioController : Controller
     {
         UsuarioBL usuarioBL = new UsuarioBL();

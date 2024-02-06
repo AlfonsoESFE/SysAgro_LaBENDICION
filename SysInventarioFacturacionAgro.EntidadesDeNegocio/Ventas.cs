@@ -8,11 +8,7 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
 {
     public class Ventas
     {
-
-
-        //public Factura ObjFactura { get; set; }
-        //public List<DetalleFactura> DetalleFacturas { get; set; }
+        public Venta ObjVenta { get; set; }
+        public List<DetalleVenta> DetalleVentas { get; set; }
     }
-
-
 }

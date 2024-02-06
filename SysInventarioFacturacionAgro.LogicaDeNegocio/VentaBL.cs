@@ -10,7 +10,6 @@ namespace SysInventarioFacturacionAgro.LogicaDeNegocio
 {
     public class VentaBL
     {
-
         public async Task<int> CrearAsync(Venta pVenta)
         {
             return await VentaDAL.CrearAsync(pVenta);
@@ -36,9 +35,9 @@ namespace SysInventarioFacturacionAgro.LogicaDeNegocio
             return await VentaDAL.BuscarAsync(pVenta);
         }
 
-        public async Task<List<Venta>> BuscarIncluirUsuarioAsync(Venta pFactura)
+        public async Task<List<Venta>> BuscarIncluirUsuarioAsync(Venta pVenta)
         {
-            return await VentaDAL.BuscarIncluirUsuarioAsync(pFactura);
+            return await VentaDAL.BuscarIncluirUsuarioAsync(pVenta);
         }
 
     }

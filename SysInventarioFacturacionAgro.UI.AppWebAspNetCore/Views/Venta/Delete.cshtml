@@ -4,108 +4,121 @@
     ViewData["Title"] = "Delete";
 }
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Eliminar Venta</h1>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-8">
-                <form asp-action="Delete" class="needs-validation" novalidate>
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<h1>Eliminar Venta</h1>
 
-                    <input type="hidden" asp-for="IdVenta" class="form-control" />
+<h3>¿ Esta seguro que desea eliminar ?</h3>
+<div>
+    <h4>Factura</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdVenta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdVenta)
+        </dd>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label asp-for="NumeroFactura" class="control-label">Número de Factura</label>
-                            <input asp-for="NumeroFactura" class="form-control" disabled />
-                            <span asp-validation-for="NumeroFactura" class="text-danger"></span>
-                        </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroVenta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumeroVenta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaVenta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaVenta)
+        </dd>
 
-                        <div class="form-group col-md-4">
-                            <label asp-for="FechaFacturacion" class="control-label">Fecha de Facturación</label>
-                            <input asp-for="FechaFacturacion" class="form-control" disabled />
-                            <span asp-validation-for="FechaFacturacion" class="text-danger"></span>
-                        </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreCliente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NombreCliente)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DireccionCliente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DireccionCliente)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TelefonoCliente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TelefonoCliente)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DUICliente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DUICliente)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FormaPago)
+        </dt>
+        @if (Model.FormaPago == 1)
+        {
+            <dd class="col-sm-10">
+                EFECTIVO
+            </dd>
+        }
+        else if (Model.FormaPago == 2)
+        {
+            <dd class="col-sm-10">
+                TARJETA
+            </dd>
+        }
+        else
+        {
+            <dd class="col-sm-10"> </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descuento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descuento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Impuesto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Impuesto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalPagado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalPagado)
+        </dd>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label asp-for="Descuento" class="control-label">Descuento</label>
-                                <input asp-for="Descuento" class="form-control" disabled />
-                                <span asp-validation-for="Descuento" class="text-danger"></span>
-                            </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdUsuario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Usuario.Nombre)
+        </dd>
+    </dl>
 
-                            <div class="form-group col-md-4">
-                                <label asp-for="Impuesto" class="control-label">Impuesto</label>
-                                <input asp-for="Impuesto" class="form-control" disabled />
-                                <span asp-validation-for="Impuesto" class="text-danger"></span>
-                            </div>
+    @* FUNCTION ELIMINAR PRODUCTO*@
+    @using (Html.BeginForm("Delete", "Factura", new { IdVenta = Model.IdVenta }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-                            <div class="form-group col-md-4">
-                                <label asp-for="SubTotal" class="control-label">SubTotal $</label>
-                                <input asp-for="SubTotal" class="form-control" disabled />
-                                <span asp-validation-for="SubTotal" class="text-danger"></span>
-                            </div>
+        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?');" style="margin-left: 10px;">
+            <i class="fas fa-trash"></i> Eliminar
+        </button>
 
-                            <div class="form-group col-md-4">
-                                <label asp-for="Total" class="control-label">Total $</label>
-                                <input asp-for="Total" class="form-control" disabled />
-                                <span asp-validation-for="Total" class="text-danger"></span>
-                            </div>
-                        </div>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
+    }
 
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label asp-for="NombreCliente" class="control-label">Nombre del Cliente</label>
-                                <input asp-for="NombreCliente" class="form-control" disabled />
-                                <span asp-validation-for="NombreCliente" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label asp-for="DireccionCliente" class="control-label">Dirección del Cliente</label>
-                                <input asp-for="DireccionCliente" class="form-control" disabled />
-                                <span asp-validation-for="DireccionCliente" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label asp-for="TelefonoCliente" class="control-label">Teléfono del Cliente</label>
-                                <input asp-for="TelefonoCliente" class="form-control" disabled />
-                                <span asp-validation-for="TelefonoCliente" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label asp-for="DUICliente" class="control-label">DUI del Cliente</label>
-                                <input asp-for="DUICliente" class="form-control" disabled />
-                                <span asp-validation-for="DUICliente" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label asp-for="IdUsuario" class="control-label">Usuario</label>
-                                <input asp-for="IdUsuario" class="form-control" disabled />
-                                <span asp-validation-for="IdUsuario" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-top: 10px;">
-                            @* FUNCIÓN ELIMINAR FACTURA*@
-                            @using (Html.BeginForm("Delete", "Venta", new { IdVenta = Model.IdVenta }, FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?');" style="margin-left: 10px;">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </button>
-
-                                <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-                                    <i class="fas fa-times"></i> Cancelar
-                                </button>
-                            }
-                        </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
