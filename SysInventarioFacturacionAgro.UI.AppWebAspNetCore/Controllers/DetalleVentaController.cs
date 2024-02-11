@@ -219,6 +219,7 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             objVenta.TelefonoCliente = TelefonoCliente ?? "N/A";
             objVenta.DUICliente = DUICliente ?? "N/A";
             objVenta.Total = Total;
+            
             objVenta.Descuento = Descuento;
             objVenta.Impuesto = Impuesto;
             objVenta.TotalPagado = TotalPagado;
@@ -269,7 +270,6 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
         public async Task<IActionResult> Reportes(DetalleVenta pDetalleFactura, DateTime fInicio, DateTime fFinal, int NumeroVenta)
         {
             List<Venta> ventas = await VentaBL.ObtenerTodosAsync();
-            List<DetalleVenta> detalleVentas = await DetalleVentaBL.ObtenerTodosAsync();
 
             if (NumeroVenta != 0)
             {
@@ -284,10 +284,9 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
                 ViewBag.Ventas = ventas;
             }
 
-            ViewBag.Detalles = detalleVentas;
-
             return View();
         }
+
 
         #endregion
 

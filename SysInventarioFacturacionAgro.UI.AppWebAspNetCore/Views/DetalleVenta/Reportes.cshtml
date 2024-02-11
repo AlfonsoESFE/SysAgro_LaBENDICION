@@ -85,33 +85,29 @@
     </form>
 </div>
 <div id="card-container">
-    @if (ventas != null)
+    @if (ViewBag.Ventas != null)
     {
-        <!-- Agrega las referencias y los estilos de los calendarios -->
-        @foreach (var Listaventas in ventas)
+        @foreach (var venta in ViewBag.Ventas)
         {
-            <div>
-                <div class="customer-card">
-                    <div class="customer-details">
-                        <div class="customer-name">Fecha Venta: @Listaventas.FechaVenta</div>
-                        <div class="customer-name">NFactura: @Listaventas.IdVenta</div>
-                        <div class="customer-name">Cliente: @Listaventas.NombreCliente</div>
-                        <div>Total: $@Listaventas.TotalPagado</div>
-                    </div>
-                    <div id="contentToExport">
-                        @foreach (var detalle in Listaventas.DetalleVenta)
-                        {
-                            <div class="product-list">
-                                <div class="product-item">
-                                    <div class="product-name">Producto: @detalle.Producto.Nombre</div>
-                                    <div>Cantidad: @detalle.Cantidad</div>
-                                    <div>Precio Unitario: $@detalle.Producto.PrecioUnitario</div>
-                                    <div>Descuento: @detalle.Descuento %</div>
-                                    <div>Valor Total: $@detalle.ValorTotal</div>
-                                </div>
-                            </div>
-                        }
-                    </div>
+            <div class="customer-card">
+                <div class="customer-details">
+                    <div class="customer-name">Fecha Venta: @venta.FechaVenta</div>
+                    <div class="customer-name">NFactura: @venta.IdVenta</div>
+                    <div class="customer-name">Cliente: @venta.NombreCliente</div>
+                    <div>Total: $@venta.TotalPagado</div>
+                </div>
+
+                <div class="product-list">
+                    @foreach (var detalle in venta)
+                    {
+                        <div class="product-item">
+                            <div class="product-name">Producto: @detalle.Producto.Nombre</div>
+                            <div>Cantidad: @detalle.Cantidad</div>
+                            <div>Precio Unitario: $@detalle.Producto.PrecioUnitario</div>
+                            <div>Descuento: @detalle.Descuento %</div>
+                            <div>Valor Total: $@detalle.ValorTotal</div>
+                        </div>
+                    }
                 </div>
             </div>
         }
