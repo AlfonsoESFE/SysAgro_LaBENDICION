@@ -11,28 +11,41 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdCompra { get; set; }
 
-        [Required(ErrorMessage = "NumeroCompra es obligatorio")]
+        [Required(ErrorMessage = "Numero de Compra es obligatorio")]
         public int NumeroCompra { get; set; }
 
-        [Required(ErrorMessage = "FechaCompra es obligatoria")]
-        [Display(Name = "Fecha de Compra")]
+        [Display(Name = "Fecha Compra")]
         public DateTime FechaCompra { get; set; }
 
-        [Required(ErrorMessage = "FormaPago es obligatorio")]
+        [Required(ErrorMessage = "Forma de Pago es obligatorio")]
         public byte FormaPago { get; set; }
 
+        [Required(ErrorMessage = "Total de pago es obligatorio")]
+        public decimal TotalPago { get; set; }
+
+        [Required(ErrorMessage = "Total es obligatorio")]
+        public decimal Total { get; set; }
+
         [Required(ErrorMessage = "Observaciones es obligatorio")]
-        [MaxLength]
-        public string Observaciones { get; set; }
+        public string? Observaciones { get; set; }
 
-        [Required(ErrorMessage = "IdProveedor es obligatorio")]
-        public int IdProveedor { get; set; }
-
-        [Required(ErrorMessage = "IdUsuario es obligatorio")]
+        [ForeignKey("Usuario")]
+        [Required(ErrorMessage = "Usuario es obligatorio")]
+        [Display(Name = "Usuario")]
         public int IdUsuario { get; set; }
 
-        public Proveedor Proveedor { get; set; }
-        public Usuario Usuario { get; set; }
-        public ICollection<DetallesCompra> DetallesCompra { get; set; }
+        [ForeignKey("Proveedor")]
+        [Required(ErrorMessage = "Proveedor es obligatorio")]
+        [Display(Name = "Proveedor")]
+        public int IdProveedor { get; set; }
+
+        public Usuario? Usuario { get; set; }
+
+        public Proveedor? Proveedor { get; set; }
+
+        public List<DetallesCompra>? DetallesCompra { get; set; }
+
+        [NotMapped]
+        public int Top_Aux { get; set; }
     }
 }

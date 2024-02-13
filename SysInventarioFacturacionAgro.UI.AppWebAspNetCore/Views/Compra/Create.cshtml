@@ -1,0 +1,97 @@
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Compra
+
+@{
+    ViewData["Title"] = "Create";
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor> proveedores = ViewBag.Proveedor as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario> usuarios = ViewBag.Usuarios as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario>;
+}
+
+<h1>Create</h1>
+
+<h4>Compra</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumeroCompra" class="control-label"></label>
+                <input asp-for="NumeroCompra" class="form-control" />
+                <span asp-validation-for="NumeroCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaCompra" class="control-label"></label>
+                <input asp-for="FechaCompra" class="form-control" />
+                <span asp-validation-for="FechaCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago" class="control-label"></label>
+                <input asp-for="FormaPago" class="form-control" />
+                <span asp-validation-for="FormaPago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalPago" class="control-label"></label>
+                <input asp-for="TotalPago" class="form-control" />
+                <span asp-validation-for="TotalPago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" />
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observaciones" class="control-label"></label>
+                <input asp-for="Observaciones" class="form-control" />
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="IdUsuario" class="control-label"></label>
+                        <select asp-for="IdUsuario" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in usuarios)
+                            {
+                                <option value="@item.Id">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="IdProveedor" class="control-label"></label>
+                        <select asp-for="IdProveedor" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in proveedores)
+                            {
+                                <option value="@item.IdProveedor">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdProveedor" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

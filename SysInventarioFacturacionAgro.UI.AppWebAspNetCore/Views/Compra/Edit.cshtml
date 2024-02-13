@@ -1,0 +1,83 @@
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Compra
+
+@{
+    ViewData["Title"] = "Edit";
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario> usuarios = ViewBag.Usuarios as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario>;
+}
+
+<h4>Modificar Pedido</h4>
+<hr />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="IdCompra" class="form-control" />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="NumeroCompra" class="control-label"></label>
+                <input asp-for="NumeroCompra" class="form-control" />
+                <span asp-validation-for="NumeroCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaCompra" class="control-label"></label>
+                <input asp-for="FechaCompra" class="form-control" />
+                <span asp-validation-for="FechaCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago" class="control-label"></label>
+                <input asp-for="FormaPago" class="form-control" />
+                <span asp-validation-for="FormaPago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observaciones" class="control-label"></label>
+                <input asp-for="Observaciones" class="form-control" />
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdProveedor" class="control-label"></label>
+                <select asp-for="IdProveedor" class="form-control" asp-items="ViewBag.IdProveedor"></select>
+                <span asp-validation-for="IdProveedor" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdUsuario" class="control-label"></label>
+                        <select asp-for="IdUsuario" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in usuarios)
+                            {
+                                if (Model.IdUsuario == item.Id)
+                                {
+                                    <option selected value="@item.Id">@item.Nombre</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            @*BOTONES EDITADOS CON ICONOS*@
+
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function () {
+            $("form input[name],form select[name]").trigger("blur");
+        });
+    </script>
+}

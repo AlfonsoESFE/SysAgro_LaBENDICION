@@ -1,0 +1,188 @@
+﻿@model IEnumerable<SysInventarioFacturacionAgro.EntidadesDeNegocio.Inventario>
+
+@{
+    ViewData["Title"] = "Index";
+    int numPage = 1;
+    int numRegistros = 0;
+    int numRegistrosPorPage = 10;
+    int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
+    int topActual = Convert.ToInt32(ViewBag.Top);
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario> usuario = ViewBag.Usuario as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
+}
+<h1>Buscar Ajustes de Inventario</h1>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Index">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Producto</label>
+                        <select name="IdProducto" class="form-control">
+                            <option selected value="0">SELECCIONAR</option>
+                            @foreach (var item in productos)
+                            {
+                                <option value="@item.IdProducto">@item.Nombre</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            @* BOTONES DE BUSCAR Y CREAR INVENTARIO*@
+
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-primary" style="background-color: #0074D9; color: white;">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">
+                    Agregar Ajuste
+                </button>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diferencia)
+            </th>
+            <th colspan="3">Acciones</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.CantidadStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detalles)
+                </td>
+                @if (item.Diferencia == 1)
+                {
+                    <td>AUMENTAR</td>
+                }
+                else if (item.Diferencia == 2)
+                {
+                    <td>DISMINUIR</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @*BOTONES CRUD EDITAR - LEER - ELIMINAR DETALLE PEDIDO*@
+
+
+                <td class="botonestabla">
+                    <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("Details", new { IdInventario = item.IdInventario })'">
+                        <i class="fas fa-eye"></i> Detalles
+                    </button>
+                </td>
+                <td class="botonestabla">
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdInventario = item.IdInventario })'">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </td>
+            </tr>
+
+            numRegistros++;
+            if (numRegistros == numRegistrosPorPage)
+            {
+                numPage++;
+                numRegistros = 0;
+            }
+        }
+        @{
+            if (numRegistros == 0)
+            {
+                numPage--;
+            }
+        }
+    </tbody>
+</table>
+@if (numPage > 1)
+{
+    <div class="row" style="overflow:auto">
+        <div class="col-md-12">
+            <ul class="pagination paginationjs" data-numpage="@numPage" data-pageactive="1">
+                <li class="page-item" data-typepage="Previous"><a class="page-link" href="#">Previous</a></li>
+                @for (var i = 1; i <= numPage; i++)
+                {
+                    <li class="page-item" data-page="@i" data-typepage="Item"><a class="page-link" href="#">@i</a></li>
+                }
+                <li class="page-item" data-typepage="Next"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <!-- Puedes cambiar 'modal-lg' por 'modal-sm' o personalizar el tamaño según tus necesidades -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Título del Modal
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido del cuerpo del modal -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"> Cerrar </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var exampleModal = document.getElementById('exampleModal');
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var recipient = button.getAttribute('data-bs-whatever');
+
+        $.get('/Inventario/Ajuste', function (data) {
+            var modalTitle = exampleModal.querySelector('.modal-title');
+            modalTitle.textContent = 'Inventario' + recipient;
+
+            var modalBody = exampleModal.querySelector('.modal-body');
+            modalBody.innerHTML = data;
+        });
+    });
+
+</script>

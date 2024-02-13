@@ -12,6 +12,9 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Required(ErrorMessage = "Cantidad es obligatoria")]
         public int Cantidad { get; set; }
 
+        [Required(ErrorMessage = "Valor Total es obligatorio")]
+        public decimal ValorTotal { get; set; }
+
         [Required(ErrorMessage = "PrecioUnitario es obligatorio")]
         [Column(TypeName = "decimal(18, 1)")]
         public decimal PrecioUnitario { get; set; }

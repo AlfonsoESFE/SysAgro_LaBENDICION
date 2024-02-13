@@ -1,0 +1,158 @@
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Inventario
+
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Ajuste";
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario> usuarios = ViewBag.Usuario as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
+}
+
+<div class="Ajuste-container">
+
+    <div class="Ajuste">
+        <h1 class="text-center my-2" style="font-family: 'YourDesiredFont', sans-serif; font-size: 34px; font-weight: bold; margin-bottom: 0;">
+            Crear
+        </h1>
+        <h4 class="text-center my-2" style="font-family: 'YourDesiredFont', sans-serif; font-size: 30px; font-weight: bold; margin-top: 0;">
+             Ajuste de Inventario
+        </h4>
+
+        <hr />
+        <form asp-action="Ajuste">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group text-center">
+                        <label asp-for="Cantidad" class="control-label"></label>
+                        <input asp-for="Cantidad" class="form-control text-center" oninput="validarInput(this)" />
+                        <span asp-validation-for="Cantidad" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group text-center">
+                            <label asp-for="Diferencia" class="control-label"></label>
+                            <select asp-for="Diferencia" class="form-control text-center">
+                                <option value="">SELECCIONAR</option>
+                                <option selected value="1">AUMENTAR</option>
+                                <option value="2">DISMINUIR</option>
+                            </select>
+                            <span asp-validation-for="Diferencia" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group text-center">
+                        <label asp-for="Detalles" class="control-label"></label>
+                        <input asp-for="Detalles" class="form-control text-center" />
+                        <span asp-validation-for="Detalles" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group text-center">
+                        <label asp-for="IdProducto" class="control-label"></label>
+                        <select asp-for="IdProducto" class="form-control text-center">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in productos)
+                            {
+                                    <option value="@item.IdProducto">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdProducto" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Resto de tus campos -->
+            @*BOTONES EDITADOS CON ICONOS*@
+            <div class="form-group" style="margin-top: 10px; text-align: center;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+            <span class="text-danger">@ViewBag.Error</span>
+        </form>
+
+
+    </div>
+</div>
+
+
+<style>
+    .Ajuste-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh; /* Reduje la altura del contenedor */
+        background: #CFCDEA; /* Cambié el color a #2060D6 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px; /* Reduje el radio del borde */
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .Ajuste {
+        width: 100%; /* Hace que el contenedor interno tenga el 100% de ancho */
+    }
+
+    /* Estilos adicionales si es necesario */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+    .form-group.text-center {
+        text-align: center;
+    }
+
+    .control-label {
+        display: block;
+        text-align: center;
+    }
+    /* Centrar los inputs horizontalmente */
+    .form-control.text-center {
+        margin: 0 auto;
+        width: 70%; /* Ajusta el ancho según tus necesidades */
+    }
+
+     .my-h1 {
+        font-family: 'YourDesiredFont', sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 5px; /* Ajusta este valor según sea necesario */
+        margin-bottom: 2px; /* Ajusta este valor según sea necesario */
+    }
+
+    .my-h4 {
+        margin-bottom: 20px; /* Ajusta este valor según sea necesario */
+    }
+</style>
+
+<script>
+    function validarInput(input) {
+        // Obtener el valor actual del campo de entrada
+        var valor = input.value;
+
+        // Eliminar los caracteres no deseados (por ejemplo, < y >)
+        valor = valor.replace(/[<>]/g, '');
+
+        // Asignar el valor modificado de vuelta al campo de entrada
+        input.value = valor;
+    }
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

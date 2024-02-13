@@ -60,71 +60,81 @@
 
 </style>
 
-<div class="row">
-    <form method="post" asp-action="Reportes">
-        <div class="row">
-            <div class="mb-3 col-md-3">
-                <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
-                <input type="date" id="fInicio" name="fInicio" class="form-control" />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Reportes de Ventas Realizadas</h1>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <!-- Cuadro de búsqueda de productos... -->
+            <div class="row mt-2 mb-4" style="margin-right: 15px;">
+                <form method="post" asp-action="Reportes">
+                    <div class="row">
+                        <div class="mb-3 col-md-3">
+                            <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                            <input type="date" id="fInicio" name="fInicio" class="form-control" />
+                        </div>
+
+                        <div class="mb-3 col-md-3">
+                            <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                            <input type="date" id="fFinal" name="fFinal" class="form-control" />
+                        </div>
+
+                        <div class="mb-3 col-md-3">
+                            <label for="NumeroVenta" class="form-label">Número de Venta</label>
+                            <input type="number" id="NumeroVenta" name="NumeroVenta" class="form-control" />
+                        </div>
+
+                        <div class="mb-3 col-md-3 align-self-end">
+                            <button type="submit" class="btn btn-success w-100">Buscar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
 
-            <div class="mb-3 col-md-3">
-                <label for="fechaFin" class="form-label">Fecha de Fin</label>
-                <input type="date" id="fFinal" name="fFinal" class="form-control" />
-            </div>
-
-            <div class="mb-3 col-md-3">
-                <label for="NumeroVenta" class="form-label">N Venta</label>
-                <input type="number" id="NumeroVenta" name="NumeroVenta" class="form-control" />
-            </div>
-
-            <div class="mb-3 col-md-3 align-self-end">
-                <button type="submit" class="btn btn-primary w-100">Buscar</button>
-            </div>
-        </div>
-    </form>
-</div>
-<div id="card-container">
-    @if (ViewBag.Ventas != null)
-    {
-        @foreach (var venta in ViewBag.Ventas)
-        {
-            <div class="customer-card">
-                <div class="customer-details">
-                    <div class="customer-name">Fecha Venta: @venta.FechaVenta</div>
-                    <div class="customer-name">NFactura: @venta.IdVenta</div>
-                    <div class="customer-name">Cliente: @venta.NombreCliente</div>
-                    <div>Total: $@venta.TotalPagado</div>
-                </div>
-
-                <div class="product-list">
-                    @foreach (var detalle in venta)
+            <div id="card-container">
+                @if (ventas != null)
+                {
+                    @foreach (var venta in ventas)
                     {
-                        <div class="product-item">
-                            <div class="product-name">Producto: @detalle.Producto.Nombre</div>
-                            <div>Cantidad: @detalle.Cantidad</div>
-                            <div>Precio Unitario: $@detalle.Producto.PrecioUnitario</div>
-                            <div>Descuento: @detalle.Descuento %</div>
-                            <div>Valor Total: $@detalle.ValorTotal</div>
+                        <div class="customer-card">
+                            <div class="customer-details">
+                                <div class="customer-name">Fecha Venta: @venta.FechaVenta</div>
+                                <div class="customer-name">Número de Factura: @venta.IdVenta</div>
+                                <div class="customer-name">Cliente: @venta.NombreCliente</div>
+                                @*<div>Descuento: @venta.Descuento %</div>
+                        <div>Total: $@venta.TotalPagado</div>*@
+                            </div>
+
+                            <div class="product-list">
+                                @foreach (var detalle in venta.DetalleVenta)
+                                {
+                                    <div class="product-item">
+                                        <div class="product-name">Producto: @detalle.Producto.Nombre</div>
+                                        <div class="product-name">Descripción: @detalle.Producto.Descripcion</div>
+                                        <div class="product-name">Codigo: @detalle.Producto.Codigo</div>
+                                        <div>Cantidad: @detalle.Cantidad</div>
+                                        <div>Precio Unitario: $@detalle.Producto.PrecioUnitario</div>
+                                        <div>Valor Total: $@detalle.ValorTotal</div>
+
+                                        <!-- Mostrar información del cliente, descuento y total -->
+                                        <div class="product-name">Cliente: @venta.NombreCliente</div>
+                                        <div>Descuento: @venta.Descuento %</div>
+                                        <div>Total: $@venta.TotalPagado</div>
+                                    </div>
+                                }
+                            </div>
                         </div>
                     }
-                </div>
+                }
+
             </div>
-        }
-    }
+        </div>
+    </div>
+
 </div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-    // Aquí puedes agregar lógica JavaScript para manejar la búsqueda y filtrado
-    function buscar() {
-        // Implementa la lógica de búsqueda aquí
-    }
-</script>
-
- <script>
     document.addEventListener("DOMContentLoaded", function () {
         const cards = document.querySelectorAll('.customer-card');
         const cardContainer = document.getElementById('card-container');
@@ -218,3 +228,4 @@
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

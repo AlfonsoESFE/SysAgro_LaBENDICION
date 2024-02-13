@@ -26,6 +26,7 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
         public DbSet<Proveedor> Proveedor { get; set; }
         public DbSet<Reporte> Reporte { get; set; }
 
+        public DbSet<Inventario> Inventario { get; set; }
 
 
 

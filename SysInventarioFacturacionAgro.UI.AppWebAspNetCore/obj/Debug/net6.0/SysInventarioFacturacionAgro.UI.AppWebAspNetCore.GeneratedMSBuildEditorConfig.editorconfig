@@ -40,6 +40,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmlhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Compra/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Compra/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Compra/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Compra/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Compra/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/DetalleVenta/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWxsZVZlbnRhXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -82,6 +102,30 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Inventario/Ajuste.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xBanVzdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Inventario/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Inventario/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Inventario/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Inventario/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Inventario/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/MINEDUCYT/Desktop/Agro/SysAgro_LaBENDICION/SysInventarioFacturacionAgro.UI.AppWebAspNetCore/Views/Marca/Create.cshtml]
