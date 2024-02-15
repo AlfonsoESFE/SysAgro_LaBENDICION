@@ -9,14 +9,14 @@
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
 }
 
-<div class="Ajuste-container">
+<div class="Ajuste-container" style="background-color: #d3f7cd; padding: 20px;">
 
     <div class="Ajuste">
         <h1 class="text-center my-2" style="font-family: 'YourDesiredFont', sans-serif; font-size: 34px; font-weight: bold; margin-bottom: 0;">
             Crear
         </h1>
         <h4 class="text-center my-2" style="font-family: 'YourDesiredFont', sans-serif; font-size: 30px; font-weight: bold; margin-top: 0;">
-             Ajuste de Inventario
+            Ajuste de Inventario
         </h4>
 
         <hr />
@@ -58,7 +58,7 @@
                             <option selected value="">SELECCIONAR</option>
                             @foreach (var item in productos)
                             {
-                                    <option value="@item.IdProducto">@item.Nombre</option>
+                                <option value="@item.IdProducto">@item.Nombre</option>
                             }
                         </select>
                         <span asp-validation-for="IdProducto" class="text-danger"></span>
@@ -68,12 +68,12 @@
             </div>
 
             <!-- Resto de tus campos -->
-            @*BOTONES EDITADOS CON ICONOS*@
+            @*@BOTONES EDITADOS CON ICONOS Y COLORES PERSONALIZADOS@*@
             <div class="form-group" style="margin-top: 10px; text-align: center;">
-                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px; background-color: #a4f99c; border-color: #a4f99c;">
                     <i class="fas fa-save"></i> Guardar
                 </button>
-                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px; background-color: #ff6b6b; border-color: #ff6b6b;">
                     <i class="fas fa-times"></i> Cancelar
                 </button>
             </div>
@@ -91,7 +91,7 @@
         justify-content: center;
         align-items: center;
         height: 80vh; /* Reduje la altura del contenedor */
-        background: #CFCDEA; /* Cambié el color a #2060D6 */
+        background: #d3f7cd; /* Cambié el color a verde clarito */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 8px; /* Reduje el radio del borde */
         padding: 20px;
@@ -125,7 +125,7 @@
         width: 70%; /* Ajusta el ancho según tus necesidades */
     }
 
-     .my-h1 {
+    .my-h1 {
         font-family: 'YourDesiredFont', sans-serif;
         font-size: 24px;
         font-weight: bold;
@@ -155,4 +155,3 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-

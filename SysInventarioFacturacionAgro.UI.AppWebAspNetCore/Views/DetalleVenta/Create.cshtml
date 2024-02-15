@@ -4,30 +4,30 @@
     ViewData["Title"] = "Create";
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta> ventas = ViewBag.Venta as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta>;
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
-
 }
 
-<h1>Crear</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Crear Detalle Venta</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4>Detalle Venta</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ValorTotal" class="control-label"></label>
-                <input asp-for="ValorTotal" class="form-control" />
-                <span asp-validation-for="ValorTotal" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Cantidad" class="control-label"></label>
+                        <input asp-for="Cantidad" class="form-control" />
+                        <span asp-validation-for="Cantidad" class="text-danger"></span>
+                    </div>
 
-            <div class="row">
-                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="ValorTotal" class="control-label"></label>
+                        <input asp-for="ValorTotal" class="form-control" />
+                        <span asp-validation-for="ValorTotal" class="text-danger"></span>
+                    </div>
+
                     <div class="form-group">
                         <label asp-for="IdVenta" class="control-label"></label>
                         <select asp-for="IdVenta" class="form-control">
@@ -39,10 +39,7 @@
                         </select>
                         <span asp-validation-for="IdVenta" class="text-danger"></span>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+
                     <div class="form-group">
                         <label asp-for="IdProducto" class="control-label"></label>
                         <select asp-for="IdProducto" class="form-control">
@@ -54,25 +51,19 @@
                         </select>
                         <span asp-validation-for="IdProducto" class="text-danger"></span>
                     </div>
-                </div>
+
+                    <div class="form-group" style="margin-top: 10px;">
+                        <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                    </div>
+                    <span class="text-danger">@ViewBag.Error</span>
+                </form>
             </div>
-
-
-            @*BOTONES EDITADOS CON ICONOS*@
-
-            <div class="form-group" style="margin-top: 10px;">
-                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
-                    <i class="fas fa-save"></i> Guardar
-                </button>
-
-                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-                    <i class="fas fa-times"></i> Cancelar
-                </button>
-            </div>
-
-            <span class="text-danger">@ViewBag.Error</span>
-
-        </form>
+        </div>
     </div>
 </div>
 
@@ -81,4 +72,3 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
