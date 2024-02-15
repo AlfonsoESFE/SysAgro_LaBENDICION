@@ -15,15 +15,6 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [Required(ErrorMessage = "Valor Total es obligatorio")]
         public decimal ValorTotal { get; set; }
 
-        [Required(ErrorMessage = "PrecioUnitario es obligatorio")]
-        [Column(TypeName = "decimal(18, 1)")]
-        public decimal PrecioUnitario { get; set; }
-
-        [Required(ErrorMessage = "Descuento es obligatorio")]
-        [Column(TypeName = "decimal(18, 1)")]
-        public decimal Descuento { get; set; }
-
-
         [ForeignKey("Compra")]
         [Display(Name = "Compra")]
         [Required(ErrorMessage = "IdCompra es obligatorio")]
@@ -36,6 +27,9 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
 
         public Compra? Compra { get; set; }
         public Producto? Producto { get; set; }
+
+        [NotMapped]
+        public int Top_Aux { get; set; }
 
     }
 }

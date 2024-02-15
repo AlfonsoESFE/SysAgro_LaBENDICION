@@ -10,7 +10,6 @@ namespace SysInventarioFacturacionAgro.LogicaDeNegocio
 {
     public class CompraBL
     {
-
         public async Task<int> CrearAsync(Compra pCompra)
         {
             return await CompraDAL.CrearAsync(pCompra);
@@ -36,9 +35,9 @@ namespace SysInventarioFacturacionAgro.LogicaDeNegocio
             return await CompraDAL.BuscarAsync(pCompra);
         }
 
-        public async Task<List<Compra>> BuscarIncluirUsuarioyProveedorAsync(Compra pCompra)
+        public async Task<List<Compra>> BuscarIncluirProveedoryUsuarioAsync(Compra pCompra)
         {
-            return await CompraDAL.BuscarIncluirUsuarioyProveedorAsync(pCompra);
+            return await CompraDAL.BuscarIncluirProveedoryUsuarioAsync(pCompra);
         }
 
     }

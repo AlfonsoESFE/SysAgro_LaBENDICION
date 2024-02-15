@@ -27,14 +27,8 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
             {
                 var Compra = await bdContexto.Compra.FirstOrDefaultAsync(s => s.IdCompra == pCompra.IdCompra);
                 Compra.IdUsuario = pCompra.IdUsuario;
-                Compra.IdProveedor = pCompra.IdProveedor;
-
                 Compra.FormaPago = pCompra.FormaPago;
                 Compra.NumeroCompra = pCompra.NumeroCompra;
-                Compra.TotalPago = pCompra.TotalPago;
-                Compra.Total = pCompra.Total;
-                Compra.Observaciones = pCompra.Observaciones;
-
                 bdContexto.Update(Compra);
                 result = await bdContexto.SaveChangesAsync();
             }
@@ -66,7 +60,7 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
             var Compra = new List<Compra>();
             using (var bdContexto = new BDContexto())
             {
-                Compra = await bdContexto.Compra.Include(c => c.DetallesCompra).ThenInclude(p => p.Producto).Include(v => v.Proveedor).ToListAsync();
+                Compra = await bdContexto.Compra.Include(c => c.DetallesCompra).ThenInclude(p => p.Producto).ToListAsync();
             }
             return Compra;
         }
@@ -77,9 +71,6 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
                 pQuery = pQuery.Where(s => s.IdCompra == pCompra.IdCompra);
             if (pCompra.IdUsuario > 0)
                 pQuery = pQuery.Where(s => s.IdUsuario == pCompra.IdUsuario);
-            pQuery = pQuery.OrderByDescending(s => s.IdCompra).AsQueryable();
-            if (pCompra.IdProveedor > 0)
-                pQuery = pQuery.Where(s => s.IdProveedor == pCompra.IdProveedor);
             pQuery = pQuery.OrderByDescending(s => s.IdCompra).AsQueryable();
             if (pCompra.Top_Aux > 0)
                 pQuery = pQuery.Take(pCompra.Top_Aux).AsQueryable();
@@ -97,7 +88,7 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
             return Compra;
         }
 
-        public static async Task<List<Compra>> BuscarIncluirUsuarioyProveedorAsync(Compra pCompra)
+        public static async Task<List<Compra>> BuscarIncluirProveedoryUsuarioAsync(Compra pCompra)
         {
             var Compra = new List<Compra>();
             using (var bdContexto = new BDContexto())

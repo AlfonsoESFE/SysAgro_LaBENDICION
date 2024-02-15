@@ -4,74 +4,69 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalles Del Proveedor</h1>
-<hr />
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Codigo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Codigo)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Correo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Correo)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Empresa)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Empresa)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DireccionEmpresa)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DireccionEmpresa)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TelefonoEmpresa)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TelefonoEmpresa)
-        </dd>
-    </dl>
-</div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles del Proveedor</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Codigo" class="control-label">Código</label>
+                        <input asp-for="Codigo" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label">Nombre</label>
+                        <input asp-for="Nombre" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="control-label">Teléfono</label>
+                        <input asp-for="Telefono" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Correo" class="control-label">Correo</label>
+                        <input asp-for="Correo" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Empresa" class="control-label">Empresa</label>
+                        <input asp-for="Empresa" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="DireccionEmpresa" class="control-label">Dirección Empresa</label>
+                        <input asp-for="DireccionEmpresa" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="TelefonoEmpresa" class="control-label">Teléfono Empresa</label>
+                        <input asp-for="TelefonoEmpresa" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
 
-@*BOTONES EDITADOS CON ICONOS*@
+            <!-- Puedes agregar más campos según sea necesario -->
 
-<div class="form-group" style="margin-top: 10px;">
-    <button type="button" class="btn btn-success" style="background-color: #264DA0; color: white; margin-right: 10px;" onclick="window.location.href='@Url.Action("Edit", new { IdProveedor = Model.IdProveedor })'">
-        <i class="fas fa-pencil-alt"></i> Ir a Modificar
-    </button>
-    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-        <i class="fas fa-times"></i> Cancelar
-    </button>
-</div>
+        <div class="form-group">
+            <a class="btn btn-success" style="background-color: #264DA0; color: white; margin-right: 10px;" href="@Url.Action("Edit", new { IdProveedor = Model.IdProveedor })">
+                <i class="fas fa-pencil-alt"></i> Modificar
+            </a>
+            <a class="btn btn-danger" href="@Url.Action("Index")">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
+        </div>
+        </div>
+    </div>

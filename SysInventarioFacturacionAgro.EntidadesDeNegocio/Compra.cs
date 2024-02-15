@@ -11,37 +11,29 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdCompra { get; set; }
 
-        [Required(ErrorMessage = "Numero de Compra es obligatorio")]
+        [Required(ErrorMessage = "NumeroCompra es obligatorio")]
         public int NumeroCompra { get; set; }
 
-        [Display(Name = "Fecha Compra")]
+        [Required(ErrorMessage = "FechaCompra es obligatoria")]
+        [Display(Name = "Fecha de Compra")]
         public DateTime FechaCompra { get; set; }
 
-        [Required(ErrorMessage = "Forma de Pago es obligatorio")]
+        [Required(ErrorMessage = "FormaPago es obligatorio")]
         public byte FormaPago { get; set; }
-
-        [Required(ErrorMessage = "Total de pago es obligatorio")]
+        [Required(ErrorMessage = "Tota de pago es obligatorio")]
         public decimal TotalPago { get; set; }
 
-        [Required(ErrorMessage = "Total es obligatorio")]
-        public decimal Total { get; set; }
-
-        [Required(ErrorMessage = "Observaciones es obligatorio")]
-        public string? Observaciones { get; set; }
+        [ForeignKey("Proveedor")]
+        [Display(Name = "Proveedor")]
+        [Required(ErrorMessage = "El proveedor es obligatorio")]
+        public int IdProveedor { get; set; }
+        public Proveedor Proveedor { get; set; }
 
         [ForeignKey("Usuario")]
-        [Required(ErrorMessage = "Usuario es obligatorio")]
         [Display(Name = "Usuario")]
+        [Required(ErrorMessage = "El usuario es obligatorio")]
         public int IdUsuario { get; set; }
-
-        [ForeignKey("Proveedor")]
-        [Required(ErrorMessage = "Proveedor es obligatorio")]
-        [Display(Name = "Proveedor")]
-        public int IdProveedor { get; set; }
-
-        public Usuario? Usuario { get; set; }
-
-        public Proveedor? Proveedor { get; set; }
+        public Usuario Usuario { get; set; }
 
         public List<DetallesCompra>? DetallesCompra { get; set; }
 

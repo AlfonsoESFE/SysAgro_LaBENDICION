@@ -10,7 +10,7 @@ using System.Data;
 namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
- 
+
     public class CompraController : Controller
     {
         ProveedorBL ProveedorBL = new ProveedorBL();
@@ -25,25 +25,22 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
                 pCompra.Top_Aux = 10;
             else if (pCompra.Top_Aux == -1)
                 pCompra.Top_Aux = 0;
-            var taskBuscar = CompraBL.BuscarIncluirUsuarioyProveedorAsync(pCompra);
+            var taskBuscar = CompraBL.BuscarIncluirProveedoryUsuarioAsync(pCompra);
+            var taskObtenerTodosProveedor = ProveedorBL.ObtenerTodosAsync();
             var taskObtenerTodosUsuarios = UsuarioBL.ObtenerTodosAsync();
-            var taskObtenerTodosProveedores = ProveedorBL.ObtenerTodosAsync();
-
-            var Compra = await taskBuscar;
+            var listaCompras = await taskBuscar;
             ViewBag.Top = pCompra.Top_Aux;
+            ViewBag.Proveedores = await taskObtenerTodosProveedor;
             ViewBag.Usuarios = await taskObtenerTodosUsuarios;
-            ViewBag.Proveedores = await taskObtenerTodosProveedores;
-
-            return View(Compra);
+            return View(listaCompras);
         }
 
         // GET: FacturaController/Details/5
         public async Task<IActionResult> Details(int IdCompra)
         {
             var Compra = await CompraBL.ObtenerPorIdAsync(new Compra { IdCompra = IdCompra });
-            Compra.Usuario = await UsuarioBL.ObtenerPorIdAsync(new Usuario { Id = Compra.IdUsuario });
             Compra.Proveedor = await ProveedorBL.ObtenerPorIdAsync(new Proveedor { IdProveedor = Compra.IdProveedor });
-
+            Compra.Usuario = await UsuarioBL.ObtenerPorIdAsync(new Usuario { Id = Compra.IdUsuario });
             return View(Compra);
         }
 
@@ -51,11 +48,19 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
 
         public async Task<IActionResult> Create()
         {
-            ViewBag.Usuarios = await UsuarioBL.ObtenerTodosAsync();
-            ViewBag.Proveedores = await ProveedorBL.ObtenerTodosAsync();
-
-            ViewBag.Error = "";
-            return View();
+            try
+            {
+                ViewBag.Proveedor = await ProveedorBL.ObtenerTodosAsync();
+                ViewBag.Usuarios = await UsuarioBL.ObtenerTodosAsync();
+                ViewBag.Error = "";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejar el error de alguna manera apropiada, como registrar el error
+                // o redirigir a una página de error
+                return RedirectToAction("Error");
+            }
         }
 
         // POST: FacturaController/Create
@@ -71,9 +76,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Usuarios = await UsuarioBL.ObtenerTodosAsync();
                 ViewBag.Proveedores = await ProveedorBL.ObtenerTodosAsync();
-
+                ViewBag.Usuarios = await UsuarioBL.ObtenerTodosAsync();
                 ViewBag.Error = ex.Message;
                 return View(pCompra);
             }
@@ -83,13 +87,11 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
         public async Task<IActionResult> Edit(Compra pCompra)
         {
             var taskObtenerPorId = CompraBL.ObtenerPorIdAsync(pCompra);
+            var taskObtenerTodosProveedor = ProveedorBL.ObtenerTodosAsync();
             var taskObtenerTodosUsuarios = UsuarioBL.ObtenerTodosAsync();
-            var taskObtenerTodosProveedores = ProveedorBL.ObtenerTodosAsync();
-
             var Compra = await taskObtenerPorId;
+            ViewBag.Proveedor = await taskObtenerTodosProveedor;
             ViewBag.Usuarios = await taskObtenerTodosUsuarios;
-            ViewBag.Proveedores = await taskObtenerTodosProveedores;
-
             ViewBag.Error = "";
             return View(Compra);
         }
@@ -107,9 +109,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
+                ViewBag.Proveedor = await ProveedorBL.ObtenerTodosAsync();
                 ViewBag.Usuarios = await UsuarioBL.ObtenerTodosAsync();
-                ViewBag.Proveedores = await ProveedorBL.ObtenerTodosAsync();
-
                 return View(pCompra);
             }
         }
@@ -118,9 +119,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
         public async Task<IActionResult> Delete(Compra pCompra)
         {
             var Compra = await CompraBL.ObtenerPorIdAsync(pCompra);
-            Compra.Usuario = await UsuarioBL.ObtenerPorIdAsync(new Usuario { Id = Compra.IdUsuario });
             Compra.Proveedor = await ProveedorBL.ObtenerPorIdAsync(new Proveedor { IdProveedor = Compra.IdProveedor });
-
+            Compra.Usuario = await UsuarioBL.ObtenerPorIdAsync(new Usuario { Id = Compra.IdUsuario });
             ViewBag.Error = "";
 
             return View(Compra);
@@ -143,11 +143,12 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
                 if (Compra == null)
                     Compra = new Compra();
                 if (Compra.IdCompra > 0)
-                    Compra.Usuario = await UsuarioBL.ObtenerPorIdAsync(new Usuario { Id = Compra.IdUsuario });
-                if (Compra.IdCompra > 0)
                     Compra.Proveedor = await ProveedorBL.ObtenerPorIdAsync(new Proveedor { IdProveedor = Compra.IdProveedor });
+                if (Compra.IdCompra > 0)
+                    Compra.Usuario = await UsuarioBL.ObtenerPorIdAsync(new Usuario { Id = Compra.IdUsuario });
                 return View(Compra);
             }
         }
+
     }
 }

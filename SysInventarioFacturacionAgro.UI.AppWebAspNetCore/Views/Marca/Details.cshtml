@@ -4,29 +4,29 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalles Marca</h1>
-<hr />
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-    </dl>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles de Marca</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="Details">
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label">Nombre</label>
+                        <input asp-for="Nombre" class="form-control" disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <a class="btn btn-success" style="background-color: #264DA0; color: white; margin-right: 10px;" href="@Url.Action("Edit", new { IdMarca = Model.IdMarca })">
+                            <i class="fas fa-pencil-alt"></i> Modificar
+                        </a>
+                        <a class="btn btn-danger" href="@Url.Action("Index")">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
-@*BOTONES DE DETALLE DE CATEGORIA*@
-
-<td class="botonestabla">
-    <button type="button" class="btn btn-success" style="background-color: #264DA0; color: white; margin-right: 10px;" onclick="window.location.href='@Url.Action("Edit", new { IdMarca = Model.IdMarca })'">
-        <i class="fas fa-pencil-alt"></i> Ir a Modificar
-    </button>
-</td>
-
-<td class="botonestabla">
-    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-        <i class="fas fa-times"></i> Cancelar
-    </button>
-</td>

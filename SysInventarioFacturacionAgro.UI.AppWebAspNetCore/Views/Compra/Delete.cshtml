@@ -4,50 +4,59 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Compra</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroCompra)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumeroCompra)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaCompra)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaCompra)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FormaPago)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FormaPago)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Observaciones)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Observaciones)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Proveedor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Proveedor.Correo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Usuario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Usuario.Apellido)
-        </dd>
-    </dl>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles Compra</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCompra" class="form-control" disabled />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="NumeroCompra" class="control-label">Número de Compra</label>
+                        <input asp-for="NumeroCompra" class="form-control" disabled />
+                        <span asp-validation-for="NumeroCompra" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FechaCompra" class="control-label">Fecha de Compra</label>
+                        <input asp-for="FechaCompra" class="form-control" disabled />
+                        <span asp-validation-for="FechaCompra" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FormaPago" class="control-label">Forma de Pago</label>
+                        <select asp-for="FormaPago" class="form-control" disabled>
+                            <option value="1">EFECTIVO</option>
+                            <option value="2">TARJETA</option>
+                            <!-- Agrega más opciones según tus necesidades -->
+                        </select>
+                        <span asp-validation-for="FormaPago" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdProveedor" class="control-label">Proveedor</label>
+                        <input asp-for="Proveedor.Nombre" class="form-control" disabled />
+                        <span asp-validation-for="IdProveedor" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdUsuario" class="control-label">Usuario</label>
+                        <input asp-for="Usuario.Nombre" class="form-control" disabled />
+                        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
     @using (Html.BeginForm("Delete", "Compra", new { IdCompra = Model.IdCompra }, FormMethod.Post))
     {
