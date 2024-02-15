@@ -4,119 +4,96 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Ver Venta</h1>
-<hr />
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroVenta)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumeroVenta)
-        </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaVenta)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FechaVenta)
-        </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCliente)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NombreCliente)
-        </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DireccionCliente)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DireccionCliente)
-        </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TelefonoCliente)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TelefonoCliente)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DUICliente)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DUICliente)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FormaPago)
-        </dt>
-        @if (Model.FormaPago == 1)
-        {
-            <dd class="col-sm-10">
-                EFECTIVO
-            </dd>
-        }
-        else if (Model.FormaPago == 2)
-        {
-            <dd class="col-sm-10">
-                TARJETA
-            </dd>
-        }
-        else
-        {
-            <dd class="col-sm-10"> </dd>
-        }
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Total)
-        </dd>
-
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Descuento)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Descuento)
-        </dd>
-
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Impuesto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Impuesto)
-        </dd>
-
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalPagado)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TotalPagado)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IdUsuario)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Usuario.Nombre)
-        </dd>
-    </dl>
-
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles de Venta</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" class="container">
+            <dl class="row">
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="NumeroVenta" class="control-label">Número de Venta</label>
+                        <input asp-for="NumeroVenta" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FechaVenta" class="control-label">Fecha de Venta</label>
+                        <input asp-for="FechaVenta" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="NombreCliente" class="control-label">Nombre del Cliente</label>
+                        <input asp-for="NombreCliente" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="DireccionCliente" class="control-label">Dirección del Cliente</label>
+                        <input asp-for="DireccionCliente" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="TelefonoCliente" class="control-label">Teléfono del Cliente</label>
+                        <input asp-for="TelefonoCliente" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="DUICliente" class="control-label">DUI del Cliente</label>
+                        <input asp-for="DUICliente" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FormaPago" class="control-label">Forma de Pago</label>
+                        <input asp-for="FormaPago" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Total" class="control-label">Total</label>
+                        <input asp-for="Total" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Descuento" class="control-label">Descuento</label>
+                        <input asp-for="Descuento" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Impuesto" class="control-label">Impuesto</label>
+                        <input asp-for="Impuesto" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="TotalPagado" class="control-label">Total Pagado</label>
+                        <input asp-for="TotalPagado" class="form-control" readonly />
+                    </div>
+                </dt>
+                <dt class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdUsuario" class="control-label">Nombre de Usuario</label>
+                        <input asp-for="Usuario.Nombre" class="form-control" readonly />
+                    </div>
+                </dt>
+                <!-- Agrega más campos aquí siguiendo el mismo patrón -->
+            </dl>
+            <!-- Botones -->
+            <div class="form-group" style="margin-top: 10px;">
+                <a class="btn btn-success" href="@Url.Action("Edit", new { IdVenta = Model.IdVenta })" style="margin-right: 10px;">
+                    <i class="fas fa-pencil-alt"></i> Editar
+                </a>
+                <a class="btn btn-danger" asp-action="Index" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
 </div>
-
-@*BOTONES EDITADOS CON ICONOS*@
-
-<td class="botonestabla">
-    <button type="button" class="btn btn-success" style="background-color: #264DA0; color: white; margin-right: 10px;" onclick="window.location.href='@Url.Action("Edit", new { IdVenta = Model.IdVenta })'">
-        <i class="fas fa-pencil-alt"></i> Ir a Modificar
-    </button>
-</td>
-
-<td class="botonestabla">
-    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-        <i class="fas fa-times"></i> Cancelar
-    </button>
-</td>

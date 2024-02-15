@@ -17,12 +17,12 @@ namespace SysInventarioFacturacionAgro.EntidadesDeNegocio
 
         [ForeignKey("Compra")]
         [Display(Name = "Compra")]
-        [Required(ErrorMessage = "IdCompra es obligatorio")]
+        [Required(ErrorMessage = "Compra es obligatorio")]
         public int IdCompra { get; set; }
 
         [ForeignKey("Producto")]
         [Display(Name = "Producto")]
-        [Required(ErrorMessage = "IdProducto es obligatorio")]
+        [Required(ErrorMessage = "Producto es obligatorio")]
         public int IdProducto { get; set; }
 
         public Compra? Compra { get; set; }

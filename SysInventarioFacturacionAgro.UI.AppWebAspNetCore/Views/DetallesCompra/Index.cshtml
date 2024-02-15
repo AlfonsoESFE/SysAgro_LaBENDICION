@@ -5,132 +5,123 @@
     int numPage = 1;
     int numRegistros = 0;
     int numRegistrosPorPage = 10;
-    int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
-    int topActual = Convert.ToInt32(ViewBag.Top);
+
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Compra> compras = ViewBag.Compra as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Compra>;
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
 }
 
-
-<h1>Buscar</h1>
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Index">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Producto</label>
-                        <select name="IdProducto" class="form-control">
-                            <option selected value="0">SELECCIONAR</option>
-                            @foreach (var item in productos)
-                            {
-                                <option value="@item.IdProducto">@item.Nombre</option>
-                            }
-                        </select>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles de Compra</h1>
+    </div>
+    <div class="card-body">
+        <div class="row ml-4">
+            <div class="col-md-12">
+                <form asp-action="Index">
+                    <div class="row">
+                        <!-- Agregar más campos de búsqueda según sea necesario -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Producto</label>
+                                <select name="IdProducto" class="form-control">
+                                    <option selected value="0">SELECCIONAR</option>
+                                    @foreach (var item in productos)
+                                    {
+                                        <option value="@item.IdProducto">@item.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="form-group" style="margin-top: 10px;">
+                        <button type="submit" class="btn btn-primary" style="background-color: #0074D9; color: white;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Create")'">
+                            <i class="fas fa-plus"></i> Crear
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Resto del código para mostrar la tabla -->
+        <table class="table table-bordered" width="100%" cellspacing="0">
+            <!-- Encabezados de la tabla -->
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Cantidad)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdProducto)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdCompra)</th>
+                    <th>@Html.DisplayNameFor(model => model.ValorTotal)</th>
+                    <th colspan="3">Acciones</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas de la tabla -->
+                @foreach (var item in Model)
+                {
+                    <tr data-page="@numPage">
+                        <!-- Celdas con datos del modelo -->
+                        <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Producto.Nombre)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Compra.NumeroCompra)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ValorTotal)</td>
+
+                        <!-- Botones CRUD -->
+                        <td class="botonestabla">
+                            <button type="button" class="btn btn-primary" style="background-color: #264DA0; color: white" onclick="window.location.href='@Url.Action("Edit", new { IdDetalleCompra = item.IdDetallesCompra })'">
+                                <i class="fas fa-pencil-alt"></i> Modificar
+                            </button>
+                        </td>
+
+                        <td class="botonestabla">
+                            <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("Details", new { IdDetallesCompra = item.IdDetallesCompra })'">
+                                <i class="fas fa-eye"></i> Detalles
+                            </button>
+                        </td>
+
+                        <td class="botonestabla">
+                            <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdDetallesCompra = item.IdDetallesCompra })'">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Lógica de paginación -->
+                    numRegistros++;
+                    if (numRegistros == numRegistrosPorPage)
+                    {
+                        numPage++;
+                        numRegistros = 0;
+                    }
+                }
+                @{
+                    if (numRegistros == 0)
+                    {
+                        numPage--;
+                    }
+                }
+            </tbody>
+        </table>
+
+        <!-- Paginación -->
+        @if (numPage > 1)
+        {
+            <div class="row mt-3" style="overflow:auto">
+                <div class="col-md-12">
+                    <ul class="pagination paginationjs" data-numpage="@numPage" data-pageactive="1">
+                        <li class="page-item" data-typepage="Previous"><a class="page-link" href="#">Previous</a></li>
+                        @for (var i = 1; i <= numPage; i++)
+                        {
+                            <li class="page-item" data-page="@i" data-typepage="Item"><a class="page-link" href="#">@i</a></li>
+                        }
+                        <li class="page-item" data-typepage="Next"><a class="page-link" href="#">Next</a></li>
+                    </ul>
                 </div>
             </div>
-
-            @* BOTONES DE BUSCAR Y CREAR DETALLE PEDIDO*@
-
-            <div class="form-group" style="margin-top: 10px;">
-                <button type="submit" class="btn btn-primary" style="background-color: #0074D9; color: white;">
-                    <i class="fas fa-search"></i> Buscar
-                </button>
-
-
-                <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Create")'">
-                    <i class="fas fa-plus"></i> Agregar
-                </button>
-            </div>
-
-        </form>
+        }
     </div>
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cantidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProducto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCompra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorTotal)
-            </th>
-            <th colspan="3">Acciones</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Compra.NumeroCompra)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValorTotal)
-                </td>
-                @*BOTONES CRUD EDITAR - LEER - ELIMINAR DETALLE PEDIDO*@
-
-
-                <td class="botonestabla">
-                    <button type="button" class="btn btn-primary" style="background-color: #264DA0; color: white" onclick="window.location.href='@Url.Action("Edit", new { IdDetalleCompra = item.IdDetallesCompra })'">
-                        <i class="fas fa-pencil-alt"></i> Modificar
-                    </button>
-                </td>
-
-
-                <td class="botonestabla">
-                    <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("Details", new { IdDetallesCompra = item.IdDetallesCompra })'">
-                        <i class="fas fa-eye"></i> Detalles
-                    </button>
-                </td>
-                <td class="botonestabla">
-                    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdDetallesCompra = item.IdDetallesCompra })'">
-                        <i class="fas fa-trash"></i> Eliminar
-                    </button>
-                </td>
-            </tr>
-
-            numRegistros++;
-            if (numRegistros == numRegistrosPorPage)
-            {
-                numPage++;
-                numRegistros = 0;
-            }
-        }
-        @{
-            if (numRegistros == 0)
-            {
-                numPage--;
-            }
-        }
-    </tbody>
-</table>
-@if (numPage > 1)
-{
-    <div class="row" style="overflow:auto">
-        <div class="col-md-12">
-            <ul class="pagination paginationjs" data-numpage="@numPage" data-pageactive="1">
-                <li class="page-item" data-typepage="Previous"><a class="page-link" href="#">Previous</a></li>
-                @for (var i = 1; i <= numPage; i++)
-                {
-                    <li class="page-item" data-page="@i" data-typepage="Item"><a class="page-link" href="#">@i</a></li>
-                }
-                <li class="page-item" data-typepage="Next"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </div>
-    </div>
-}

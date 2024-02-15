@@ -6,43 +6,46 @@
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
 }
 
-
-<h1>Modificar</h1>
-
-<h4>Detalle Pedido</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Modificar Detalle de Compra</h1>
+    </div>
+    <div class="card-body">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdDetallesCompra" class="form-control" />
-            <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ValorTotal" class="control-label"></label>
-                <input asp-for="ValorTotal" class="form-control" />
-                <span asp-validation-for="ValorTotal" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cantidad" class="control-label">Cantidad</label>
+                        <input asp-for="Cantidad" class="form-control" />
+                        <span asp-validation-for="Cantidad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="ValorTotal" class="control-label">Valor Total</label>
+                        <input asp-for="ValorTotal" class="form-control" />
+                        <span asp-validation-for="ValorTotal" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
-
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="IdProducto" class="control-label"></label>
+                        <label asp-for="IdProducto" class="control-label">Producto</label>
                         <select asp-for="IdProducto" class="form-control">
                             <option selected value="">SELECCIONAR</option>
                             @foreach (var item in productos)
                             {
                                 if (Model.IdProducto == item.IdProducto)
                                 {
-                                            <option selected value="@item.IdProducto">@item.Nombre</option>
+                                    <option selected value="@item.IdProducto">@item.Nombre</option>
                                 }
                                 else
                                 {
-                                            <option value="@item.IdProducto">@item.Nombre</option>
+                                    <option value="@item.IdProducto">@item.Nombre</option>
                                 }
                             }
                         </select>
@@ -50,22 +53,22 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
 
+            <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="IdCompra" class="control-label"></label>
+                        <label asp-for="IdCompra" class="control-label">Compra</label>
                         <select asp-for="IdCompra" class="form-control">
                             <option selected value="">SELECCIONAR</option>
                             @foreach (var item in compras)
                             {
                                 if (Model.IdCompra == item.IdCompra)
                                 {
-                                            <option selected value="@item.IdCompra">@item.NumeroCompra</option>
+                                    <option selected value="@item.IdCompra">@item.NumeroCompra</option>
                                 }
                                 else
                                 {
-                                            <option value="@item.IdCompra">@item.NumeroCompra</option>
+                                    <option value="@item.IdCompra">@item.NumeroCompra</option>
                                 }
                             }
                         </select>
@@ -74,8 +77,7 @@
                 </div>
             </div>
 
-
-            @*BOTONES EDITADOS CON ICONOS*@
+            <!-- BOTONES EDITADOS CON ICONOS -->
 
             <div class="form-group" style="margin-top: 10px;">
                 <button type="submit" class="btn btn-success" style="margin-right: 10px;">
@@ -89,7 +91,6 @@
         </form>
     </div>
 </div>
-
 
 @section Scripts {
     @{

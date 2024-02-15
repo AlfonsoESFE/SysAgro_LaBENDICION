@@ -1,52 +1,56 @@
 ﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.DetallesCompra
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar";
 }
 
-<h1>Delete</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Eliminar DetallesCompra</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="Delete" method="post">
+            @Html.HiddenFor(model => model.IdDetallesCompra)
 
-<div>
-    <h4>DetallesCompra</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ValorTotal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ValorTotal)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Compra)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Compra.NumeroCompra)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Producto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Producto.Nombre)
-        </dd>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cantidad" class="control-label">Cantidad</label>
+                        <input asp-for="Cantidad" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="ValorTotal" class="control-label">Valor Total</label>
+                        <input asp-for="ValorTotal" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
 
-    </dl>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Compra" class="control-label">Compra</label>
+                        <input asp-for="Compra.NumeroCompra" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Producto" class="control-label">Producto</label>
+                        <input asp-for="Producto.Nombre" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
 
-    @using (Html.BeginForm("Delete", "DetalleCompra", new { IdDetalleCompra = Model.IdDetallesCompra }, FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar?');" style="margin-left: 10px;">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
 
-        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar?');" style="margin-left: 10px;">
-            <i class="fas fa-trash"></i> Eliminar
-        </button>
-
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-            <i class="fas fa-times"></i> Cancelar
-        </button>
-    }
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
