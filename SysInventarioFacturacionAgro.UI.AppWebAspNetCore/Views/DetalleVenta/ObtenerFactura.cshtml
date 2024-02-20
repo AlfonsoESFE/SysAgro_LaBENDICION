@@ -4,101 +4,102 @@
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta> ListaDetalle = ViewBag.ListaDetalle as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.DetalleVenta>;
 }
-<div class="row">
-    <div id="miDiv" style=" text-align: justify;">
-        <div class="container">
-            <p class="ticket-header">Agroservicio La Bendición del Agricultor</p>
-            <img src="~/IMG/logoagro200x-removebg.png" class="ImagenTicket" />
-            <p class="ticket-info">
-                Dirección: 4ta Calle Poniente, Bo.Veracruz, casa 4, Sonsonate<br>
-                Teléfono: +503 2451-5522 <br>
-                
-            </p>
-            <hr />
 
-            <p class="ticket-info">
-                Fecha: @venta.FechaVenta<br>
-                Número de Factura: @venta.NumeroVenta<br>
-            </p>
-            <hr />
+<style>
+    .factura-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-            <p class="ticket-info">
-                Cliente: @venta.NombreCliente<br>
-                Direcion: @venta.DireccionCliente<br>
-                Telefono: @venta.TelefonoCliente<br>
-                Documento Unico de Identidad: @venta.DUICliente<br>
-            </p>
-        </div>
+        .factura-table th, .factura-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
 
-        <div>
-            <table class="table">
-                <thead>
-                    <tr>
+        .factura-table th {
+            background-color: #f2f2f2;
+        }
 
+    .ticket-info {
+        margin-bottom: 10px;
+    }
+</style>
 
-                        <th>
-                            Producto
-                        </th>
-                        <th>
-                            Descripción
-                        </th>
-                        <th>
-                            Cantidad
-                        </th>
-                        <th>
-                            Precio Unidad
-                        </th>
-                        <th>
-                            Descuento
-                        </th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in ListaDetalle)
-                    {
-                        <tr>
-
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Producto.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Producto.Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Cantidad)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Descuento)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ValorTotal)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td colspan="1">Total</td>
-                        <td>
-                            <b>  $ @venta.TotalPagado</b>
-                        </td>
-                    </tr>
-
-                </tfoot>
-            </table>
-
-        </div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Obtener Factura de la Venta</h1>
     </div>
-    <div class="col-sm-4">
-        <button class="btn btn-primary" onclick="imprimirDiv()"><i class="fa-solid fa-print" style="color: #ffffff;"></i> Imprimir</button>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="miDiv" style="text-align: justify;">
+                    <div class="container">
+                        <p class="ticket-header">Agroservicio La Bendición del Agricultor</p>
+                        <img src="~/IMG/logoagro200x-removebg.png" class="ImagenTicket" />
+                        <p class="ticket-info">
+                            Dirección: 4ta Calle Poniente, Bo.Veracruz, casa 4, Sonsonate<br>
+                            Teléfono: +503 2451-5522 <br>
+                        </p>
+                        <hr />
+
+                        <p class="ticket-info">
+                            Fecha: @venta.FechaVenta<br>
+                            Número de Factura: @venta.NumeroVenta<br>
+                        </p>
+                        <hr />
+
+                        <p class="ticket-info">
+                            Cliente: @venta.NombreCliente<br>
+                            Direcion: @venta.DireccionCliente<br>
+                            Telefono: @venta.TelefonoCliente<br>
+                            Documento Unico de Identidad: @venta.DUICliente<br>
+                        </p>
+                    </div>
+
+                    <div>
+                        <table class="table factura-table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Descripción</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unidad</th>
+                                    <th>Descuento</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ListaDetalle)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Producto.Nombre)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Producto.Descripcion)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Descuento)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ValorTotal)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td colspan="1">Total</td>
+                                    <td><b>$ @venta.TotalPagado</b></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-primary" onclick="imprimirDiv()"><i class="fa-solid fa-print" style="color: #ffffff;"></i> Imprimir</button>
+            </div>
+        </div>
     </div>
 </div>
+
 <script>
     function imprimirDiv() {
         var contenidoDiv = document.getElementById('miDiv').innerHTML;

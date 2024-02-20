@@ -14,16 +14,26 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
         public static async Task<int> CrearAsync(DetalleVenta pDetalleVenta)
         {
             int result = 0;
+
+            // Asigna 0 al descuento si es nulo
+            pDetalleVenta.Descuento ??= 0;
+
             using (var bdContexto = new BDContexto())
             {
                 bdContexto.Add(pDetalleVenta);
                 result = await bdContexto.SaveChangesAsync();
             }
+
             return result;
         }
+
         public static async Task<int> ModificarAsync(DetalleVenta pDetalleVenta)
         {
             int result = 0;
+
+            // Asigna 0 al descuento si es nulo
+            pDetalleVenta.Descuento ??= 0;
+
             using (var bdContexto = new BDContexto())
             {
                 var detalleventa = await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
@@ -35,8 +45,10 @@ namespace SysInventarioFacturacionAgro.AccesoADatos
                 bdContexto.Update(detalleventa);
                 result = await bdContexto.SaveChangesAsync();
             }
+
             return result;
         }
+
         public static async Task<int> EliminarAsync(DetalleVenta pDetalleVenta)
         {
             int result = 0;

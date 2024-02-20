@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/jhJ32D9YrW7T/fdJqz9yCJZfNpRZ2Q75+UwTBu/hGL7pBPqCPoXfJsnK9Tq6hTBqAiKUksmUPfeATSlpJ0n3Q==",
+  "dgSpecHash": "rujiDqHjshuvsaEloDwmyFtSclJlyBuge5zf0ENCm+6lpOX6grB/0b2tkhBeqX7afJCLJ6LK+8lJz5BrdVzfrQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MINEDUCYT\\Desktop\\AgroservicioZA\\Agroservicio\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore.csproj",
+  "projectFilePath": "C:\\Users\\MINEDUCYT\\Desktop\\FINAL PROYECTO\\SysAgro_LaBENDICION\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore\\SysInventarioFacturacionAgro.UI.AppWebAspNetCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MINEDUCYT\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\MINEDUCYT\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

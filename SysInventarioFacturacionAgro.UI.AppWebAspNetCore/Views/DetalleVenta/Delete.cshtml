@@ -2,51 +2,53 @@
 
 @{
     ViewData["Title"] = "Delete";
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta> ventas = ViewBag.Venta as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta>;
+    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
 }
 
-<h1>Delete</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles de la Venta</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="Delete">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="IdDetalleVenta" class="form-control" />
 
-<div>
-    <h4>Detalle Ventas</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ValorTotal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ValorTotal)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Venta)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Venta.NumeroVenta)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Producto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Producto.Nombre)
-        </dd>
+                    <div class="form-group">
+                        <label asp-for="Cantidad" class="control-label"></label>
+                        <input asp-for="Cantidad" class="form-control" disabled />
+                    </div>
 
-    </dl>
+                    <div class="form-group">
+                        <label asp-for="ValorTotal" class="control-label"></label>
+                        <input asp-for="ValorTotal" class="form-control" disabled />
+                    </div>
 
-    @using (Html.BeginForm("Delete", "DetalleVenta", new { IdDetalleVenta = Model.IdDetalleVenta }, FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label asp-for="IdProducto" class="control-label"></label>
+                        <input asp-for="Producto.Nombre" class="form-control" disabled />
+                    </div>
 
-        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar?');" style="margin-left: 10px;">
-            <i class="fas fa-trash"></i> Eliminar
-        </button>
+                    <div class="form-group">
+                        <label asp-for="IdVenta" class="control-label"></label>
+                        <input asp-for="Venta.NumeroVenta" class="form-control" disabled />
+                    </div>
 
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-            <i class="fas fa-times"></i> Cancelar
-        </button>
-    }
+                    <!-- Botones -->
+                    <div class="form-group" style="margin-top: 10px;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?');" style="margin-right: 10px;">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                        <a class="btn btn-secondary" asp-action="Index" style="margin-left: 10px;">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                        <span class="text-danger">@ViewBag.Error</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

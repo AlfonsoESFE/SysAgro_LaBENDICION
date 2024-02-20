@@ -60,81 +60,317 @@
 
 </style>
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Reportes de Ventas Realizadas</h1>
-    </div>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <!-- Cuadro de búsqueda de productos... -->
-            <div class="row mt-2 mb-4" style="margin-right: 15px;">
-                <form method="post" asp-action="Reportes">
-                    <div class="row">
-                        <div class="mb-3 col-md-3">
-                            <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
-                            <input type="date" id="fInicio" name="fInicio" class="form-control" />
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.css">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 bg-second-success">
+                            <h6 class="m-0 font-weight-bold text-white">Reporte de Ventas</h6>
                         </div>
 
-                        <div class="mb-3 col-md-3">
-                            <label for="fechaFin" class="form-label">Fecha de Fin</label>
-                            <input type="date" id="fFinal" name="fFinal" class="form-control" />
-                        </div>
 
-                        <div class="mb-3 col-md-3">
-                            <label for="NumeroVenta" class="form-label">Número de Venta</label>
-                            <input type="number" id="NumeroVenta" name="NumeroVenta" class="form-control" />
-                        </div>
+                        <div class="card-body">
+                            <!-- Cuadro de búsqueda de productos... -->
+                            <div class="row mt-2 mb-4" style="margin-right: 15px;">
+                                <form method="post" asp-action="Reportes">
+                                    <div class="row">
+                                        <div class="mb-3 col-md-3">
+                                            <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                                            <input type="date" id="fInicio" name="fInicio" class="form-control" />
+                                        </div>
 
-                        <div class="mb-3 col-md-3 align-self-end">
-                            <button type="submit" class="btn btn-success w-100">Buscar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                                        <div class="mb-3 col-md-3">
+                                            <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                                            <input type="date" id="fFinal" name="fFinal" class="form-control" />
+                                        </div>
 
-            <div id="card-container">
-                @if (ventas != null)
-                {
-                    @foreach (var venta in ventas)
-                    {
-                        <div class="customer-card">
-                            <div class="customer-details">
-                                <div class="customer-name">Fecha Venta: @venta.FechaVenta</div>
-                                <div class="customer-name">Número de Factura: @venta.IdVenta</div>
-                                <div class="customer-name">Cliente: @venta.NombreCliente</div>
-                                @*<div>Descuento: @venta.Descuento %</div>
-                        <div>Total: $@venta.TotalPagado</div>*@
-                            </div>
+                                        <div class="mb-3 col-md-3">
+                                            <label for="NumeroVenta" class="form-label">Número de Venta</label>
+                                            <input type="number" id="NumeroVenta" name="NumeroVenta" class="form-control" />
+                                        </div>
 
-                            <div class="product-list">
-                                @foreach (var detalle in venta.DetalleVenta)
-                                {
-                                    <div class="product-item">
-                                        <div class="product-name">Producto: @detalle.Producto.Nombre</div>
-                                        <div class="product-name">Descripción: @detalle.Producto.Descripcion</div>
-                                        <div class="product-name">Codigo: @detalle.Producto.Codigo</div>
-                                        <div>Cantidad: @detalle.Cantidad</div>
-                                        <div>Precio Unitario: $@detalle.Producto.PrecioUnitario</div>
-                                        <div>Valor Total: $@detalle.ValorTotal</div>
-
-                                        <!-- Mostrar información del cliente, descuento y total -->
-                                        <div class="product-name">Cliente: @venta.NombreCliente</div>
-                                        <div>Descuento: @venta.Descuento %</div>
-                                        <div>Total: $@venta.TotalPagado</div>
+                                        <div class="mb-3 col-md-3 align-self-end">
+                                            <button type="submit" class="btn btn-success w-100">Buscar</button>
+                                        </div>
                                     </div>
-                                }
+                                </form>
                             </div>
+                         
+                            <!--Tabla de Informacion de Reportes... -->
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm table-striped" id="card-container">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha Venta</th>
+                                                <th>Numero Venta</th>
+                                                <th>Nombre Cliente</th>
+                                                <th>Total Pagado</th>
+                                                <th>Cantidad</th>
+                                                <th>Nombre Producto</th>
+                                                <th>Precio Unidad</th>
+                                                
+                                                <th>Descuento (%)</th>
+                                                <th>Valor Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (ventas != null)
+                                            {
+                                                @foreach (var Listaventas in ventas)
+                                                {
+                                                    <tr>
+                                                        <td>@Listaventas.FechaVenta</td>
+                                                        <td>@Listaventas.NumeroVenta</td>
+                                                        <td>@Listaventas.NombreCliente</td>
+                                                        <td>$@Listaventas.TotalPagado</td>
+                                                        
+                                                        @if (Listaventas.DetalleVenta.Any())
+                                                        {
+                                                            foreach (var detalle in Listaventas.DetalleVenta)
+                                                            {
+                                                                <td>@detalle.Cantidad</td>
+                                                                <td>@detalle.Producto.Nombre</td>
+                                                                <td>$@detalle.Producto.PrecioUnitario</td>
+                                                                <td>@detalle.Descuento %</td>
+                                                                <td>$@detalle.ValorTotal</td>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <td colspan="5"></td> @* Celdas vacías para los detalles si no hay detalles *@
+                                                        }
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            
                         </div>
-                    }
-                }
+                       
+                    </div>
+                    
+
+                </div>
+                <!-- /.container-fluid -->
 
             </div>
         </div>
-    </div>
+        <!-- End of Content Wrapper -->
 
-</div>
+    </div>
+    <!-- End of Page Wrapper -->
+
+
+
+
+</body>
+
+</html>
+
+
 
 <script>
+
+    function mostrarDetalleVenta(button) {
+        // Recupera los datos almacenados en los atributos de datos
+        var fechaVenta = button.getAttribute('data-fecha');
+        var numeroVenta = button.getAttribute('data-numero-venta');
+        var nombreCliente = button.getAttribute('data-nombre-cliente');
+        var duiCliente = button.getAttribute('data-dui-cliente');
+        var totalPagado = button.getAttribute('data-total-pagado');
+        var direccionCliente = button.getAttribute('data-direccion-cliente');
+        var telefonoCliente = button.getAttribute('data-telefono-cliente');
+        var formaPago = button.getAttribute('data-forma-pago');
+        var descuento = button.getAttribute('data-descuento');
+        var impuesto = button.getAttribute('data-impuesto');
+        var total = button.getAttribute('data-total');
+        var usuario = button.getAttribute('data-usuario');
+
+        // Detalle de venta
+        var cantidad = button.getAttribute('data-cantidad');
+        var nombreDetalle = button.getAttribute('data-productonombre'); // Ajusta según tus datos
+        var valorTotalDetalle = button.getAttribute('data-valortotal'); // Ajusta según tus datos
+
+        // Asigna los valores del modelo a los campos del modal
+        $("#txtFechaVenta").val(fechaVenta);
+        $("#txtNumeroVenta").val(numeroVenta);
+        $("#txtNombreCliente").val(nombreCliente);
+        $("#txtDUICliente").val(duiCliente);
+        $("#txtTotalPagado").val(totalPagado);
+        $("#txtDireccionCliente").val(direccionCliente);
+        $("#txtTelefonoCliente").val(telefonoCliente);
+        $("#txtFormaPago").val(formaPago);
+        $("#txtDescuento").val(descuento);
+        $("#txtImpuesto").val(impuesto);
+        $("#txtTotal").val(total);
+        $("#txtUsuario").val(usuario);
+
+        // Detalle de venta
+        $("#txtCantidad").val(cantidad);
+        $("#txtNombreProductoDetalle").val(nombreProductoDetalle);
+        $("#txtValorTotalDetalle").val(valorTotalDetalle);
+
+        // Muestra el modal
+        $("#modalData").modal("show");
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll('.customer-card');
+        const cardContainer = document.getElementById('card-container');
+        const cardsPerPage = 5;
+        const totalCards = cards.length;
+        const totalPages = Math.ceil(totalCards / cardsPerPage);
+
+        function showPage(pageNumber) {
+            cards.forEach(card => card.style.display = 'none');
+            const startIndex = (pageNumber - 1) * cardsPerPage;
+            const endIndex = startIndex + cardsPerPage;
+            for (let i = startIndex; i < endIndex && i < totalCards; i++) {
+                cards[i].style.display = 'block';
+            }
+        }
+
+        // Mostrar solo las primeras 5 tarjetas inicialmente
+        showPage(1);
+
+        function initPagination() {
+            const nav = document.createElement('nav');
+            nav.setAttribute('aria-label', 'Page navigation example');
+
+            const ul = document.createElement('ul');
+            ul.classList.add('pagination', 'justify-content-center');
+
+            const prevLi = document.createElement('li');
+            prevLi.classList.add('page-item', 'disabled');
+
+            const prevLink = document.createElement('a');
+            prevLink.classList.add('page-link');
+            prevLink.href = '#';
+            prevLink.tabIndex = -1;
+            prevLink.textContent = 'Previous';
+
+            prevLi.appendChild(prevLink);
+            ul.appendChild(prevLi);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+
+                const link = document.createElement('a');
+                link.classList.add('page-link');
+                link.href = '#';
+                link.textContent = i;
+
+                link.addEventListener('click', function () {
+                    showPage(i);
+                });
+
+                li.appendChild(link);
+                ul.appendChild(li);
+            }
+
+            const nextLi = document.createElement('li');
+            nextLi.classList.add('page-item');
+
+            const nextLink = document.createElement('a');
+            nextLink.classList.add('page-link');
+            nextLink.href = '#';
+            nextLink.textContent = 'Next';
+
+            nextLi.appendChild(nextLink);
+            ul.appendChild(nextLi);
+
+            nav.appendChild(ul);
+            document.body.appendChild(nav);
+
+            // Agregar el evento click para los botones "Previous" y "Next"
+            const prevButton = document.querySelector('.pagination .page-item.disabled .page-link');
+            const nextButton = document.querySelector('.pagination .page-item:not(.disabled) .page-link');
+
+            prevButton.addEventListener('click', function () {
+                const currentPage = parseInt(document.querySelector('.pagination .page-item.active .page-link').textContent);
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                }
+            });
+
+            nextButton.addEventListener('click', function () {
+                const currentPage = parseInt(document.querySelector('.pagination .page-item.active .page-link').textContent);
+                if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
+            });
+        }
+
+        initPagination();
+    });
+
+
+
+
+    function showDetails(idVenta) {
+        // You can use JavaScript to fetch additional details for the selected sale and update modal fields
+        // Example: Use AJAX to fetch details and update the modal fields based on the idVenta
+        // For simplicity, you can replace this with your own logic.
+        console.log("Showing details for sale with IdVenta: " + idVenta);
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         const cards = document.querySelectorAll('.customer-card');
         const cardContainer = document.getElementById('card-container');
@@ -229,3 +465,34 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.js"></script>
+
+
+
+
+<!-- ============================================================
+=SCRIPTS PARA ESTA PAGINA
+===============================================================-->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<script src="vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+<script src="vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+<script src="vendor/datatables/extensiones/js/jszip.min.js"></script>
+<script src="vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+<script src="vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+
+<script src="vendor/jquery-ui/jquery-ui.js"></script>
+<script src="vendor/jquery-ui/idioma/datepicker-es.js"></script>
+
+<!-- SOLO ES DE EJEMPLO - IGNORAR -->
+<script src="js/vistas/datatables-demo.js"></script>

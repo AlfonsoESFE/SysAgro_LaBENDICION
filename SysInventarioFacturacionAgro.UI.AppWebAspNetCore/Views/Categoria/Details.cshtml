@@ -1,63 +1,44 @@
-﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Compra
+﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Categoria
 
 @{
     ViewData["Title"] = "Details";
-    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario> usuarios = ViewBag.Usuarios as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario>;
-    List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor> proveedores = ViewBag.Proveedor as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Proveedor>;
-
 }
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles Compra</h1>
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Detalles Categoría</h1>
     </div>
     <div class="card-body">
-        <form asp-action="Edit" class="container">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdCompra" class="form-control" />
-
-            <dl class="row">
-                <dt class="col-md-4">
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="Edit">
                     <div class="form-group">
-                        <label asp-for="NumeroCompra" class="control-label">Número de Compra</label>
-                        <input asp-for="NumeroCompra" class="form-control" readonly />
+                        <label asp-for="Codigo" class="control-label">Código</label>
+                        <input asp-for="Codigo" class="form-control" disabled />
                     </div>
-                </dt>
-                <dt class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="FechaCompra" class="control-label">Fecha de Compra</label>
-                        <input asp-for="FechaCompra" class="form-control" readonly />
+                        <label asp-for="Nombre" class="control-label">Nombre</label>
+                        <input asp-for="Nombre" class="form-control" disabled />
                     </div>
-                </dt>
-                <dt class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="FormaPago" class="control-label">Forma de Pago</label>
-                        <input asp-for="FormaPago" class="form-control" readonly />
+                        <label asp-for="Descripcion" class="control-label">Descripción</label>
+                        <input asp-for="Descripcion" class="form-control" disabled />
                     </div>
-                </dt>
-                <dt class="col-md-4">
-                    <div class="form-group">
-                        <label asp-for="IdProveedor" class="control-label">Proveedor</label>
-                        <input asp-for="Proveedor.Nombre" class="form-control" readonly />
-                    </div>
-                </dt>
-                <dt class="col-md-4">
-                    <div class="form-group">
-                        <label asp-for="IdUsuario" class="control-label">Usuario</label>
-                        <input asp-for="Usuario.Nombre" class="form-control" readonly />
-                    </div>
-                </dt>
-            </dl>
-
-            <!-- Botones -->
-            <div class="form-group" style="margin-top: 10px;">
-                <a class="btn btn-success" href="@Url.Action("Edit", new { IdCompra = Model.IdCompra })" style="margin-right: 10px;">
-                    <i class="fas fa-pencil-alt"></i> Editar
-                </a>
-                <a class="btn btn-danger" asp-action="Index" style="margin-left: 10px;">
-                    <i class="fas fa-times"></i> Regresar
-                </a>
+                </form>
             </div>
-        </form>
+        </div>
+        @* BOTONES DE DETALLE DE CATEGORÍA *@
+        <div class="botonestabla">
+            <a class="btn btn-success" style="background-color: #264DA0; color: white; margin-right: 10px;" href="@Url.Action("Edit", new { IdCategoria = Model.IdCategoria })">
+                <i class="fas fa-pencil-alt"></i> Ir a Modificar
+            </a>
+
+            <a class="btn btn-danger" href="@Url.Action("Index")" style="margin-left: 10px;">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
+        </div>
     </div>
+
 </div>
+
+

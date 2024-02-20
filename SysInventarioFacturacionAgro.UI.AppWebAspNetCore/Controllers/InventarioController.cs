@@ -22,6 +22,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
         ProductoBL ProductoBL = new ProductoBL();
         UsuarioBL usuarioBL = new UsuarioBL();
 
+        #region METODOS CRUD DE INVENTARIO
+
         // GET: DetallePedidoController
         public async Task<IActionResult> Index(Inventario pInventario = null)
         {
@@ -147,6 +149,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             }
         }
 
+
+#endregion
         public async Task<IActionResult> Ajuste()
         {
             ViewBag.Usuario = await usuarioBL.ObtenerTodosAsync();

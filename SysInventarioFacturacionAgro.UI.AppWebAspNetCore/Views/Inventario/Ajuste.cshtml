@@ -1,89 +1,85 @@
 ﻿@model SysInventarioFacturacionAgro.EntidadesDeNegocio.Inventario
 
-@{
+@*@{
     Layout = null;
-}
+}*@
+
 @{
     ViewData["Title"] = "Ajuste";
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario> usuarios = ViewBag.Usuario as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario>;
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
 }
 
-<div class="Ajuste-container" style="background-color: #d3f7cd; padding: 20px;">
-
-    <div class="Ajuste">
-        <h1 class="text-center my-2" style="font-family: 'YourDesiredFont', sans-serif; font-size: 34px; font-weight: bold; margin-bottom: 0;">
-            Crear
-        </h1>
-        <h4 class="text-center my-2" style="font-family: 'YourDesiredFont', sans-serif; font-size: 30px; font-weight: bold; margin-top: 0;">
-            Ajuste de Inventario
-        </h4>
-
-        <hr />
-        <form asp-action="Ajuste">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group text-center">
-                        <label asp-for="Cantidad" class="control-label"></label>
-                        <input asp-for="Cantidad" class="form-control text-center" oninput="validarInput(this)" />
-                        <span asp-validation-for="Cantidad" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group text-center">
-                            <label asp-for="Diferencia" class="control-label"></label>
-                            <select asp-for="Diferencia" class="form-control text-center">
-                                <option value="">SELECCIONAR</option>
-                                <option selected value="1">AUMENTAR</option>
-                                <option value="2">DISMINUIR</option>
-                            </select>
-                            <span asp-validation-for="Diferencia" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4">
-                    <div class="form-group text-center">
-                        <label asp-for="Detalles" class="control-label"></label>
-                        <input asp-for="Detalles" class="form-control text-center" />
-                        <span asp-validation-for="Detalles" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group text-center">
-                        <label asp-for="IdProducto" class="control-label"></label>
-                        <select asp-for="IdProducto" class="form-control text-center">
-                            <option selected value="">SELECCIONAR</option>
-                            @foreach (var item in productos)
-                            {
-                                <option value="@item.IdProducto">@item.Nombre</option>
-                            }
-                        </select>
-                        <span asp-validation-for="IdProducto" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Resto de tus campos -->
-            @*@BOTONES EDITADOS CON ICONOS Y COLORES PERSONALIZADOS@*@
-            <div class="form-group" style="margin-top: 10px; text-align: center;">
-                <button type="submit" class="btn btn-success" style="margin-right: 10px; background-color: #a4f99c; border-color: #a4f99c;">
-                    <i class="fas fa-save"></i> Guardar
-                </button>
-                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px; background-color: #ff6b6b; border-color: #ff6b6b;">
-                    <i class="fas fa-times"></i> Cancelar
-                </button>
-            </div>
-            <span class="text-danger">@ViewBag.Error</span>
-        </form>
-
-
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Crear Ajuste en Inventario</h1>
     </div>
-</div>
 
+    <hr />
+    <form asp-action="Ajuste">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group text-center">
+                    <label asp-for="Cantidad" class="control-label"></label>
+                    <input asp-for="Cantidad" class="form-control text-center" oninput="validarInput(this)" />
+                    <span asp-validation-for="Cantidad" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group text-center">
+                    <label asp-for="IdProducto" class="control-label"></label>
+                    <select asp-for="IdProducto" class="form-control text-center">
+                        <option selected value="">SELECCIONAR</option>
+                        @foreach (var item in productos)
+                        {
+                            <option value="@item.IdProducto">@item.Nombre</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdProducto" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group text-center">
+                    <label asp-for="Diferencia" class="control-label"></label>
+                    <select asp-for="Diferencia" class="form-control text-center">
+                        <option value="">SELECCIONAR</option>
+                        <option selected value="1">AUMENTAR</option>
+                        <option value="2">DISMINUIR</option>
+                    </select>
+                    <span asp-validation-for="Diferencia" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group text-center">
+                    <label asp-for="Detalles" class="control-label"></label>
+                    <input asp-for="Detalles" class="form-control text-center" />
+                    <span asp-validation-for="Detalles" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Resto de tus campos -->
+        @*@BOTONES EDITADOS CON ICONOS Y COLORES PERSONALIZADOS@*@
+        <div class="form-group" style="margin-top: 10px; text-align: center;">
+            <button type="submit" class="btn btn-success" style="margin-right: 10px; background-color: #a4f99c; border-color: #a4f99c;">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px; background-color: #ff6b6b; border-color: #ff6b6b;">
+                <i class="fas fa-times"></i> Cancelar
+            </button>
+        </div>
+        <span class="text-danger">@ViewBag.Error</span>
+    </form>
+
+
+</div>
 
 <style>
     .Ajuste-container {

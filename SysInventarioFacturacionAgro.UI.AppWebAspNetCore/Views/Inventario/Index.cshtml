@@ -10,128 +10,166 @@
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario> usuario = ViewBag.Usuario as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Usuario>;
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
 }
-<h1>Buscar Ajustes de Inventario</h1>
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Index">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Producto</label>
-                        <select name="IdProducto" class="form-control">
-                            <option selected value="0">SELECCIONAR</option>
-                            @foreach (var item in productos)
-                            {
-                                <option value="@item.IdProducto">@item.Nombre</option>
-                            }
-                        </select>
+
+
+
+
+<style>
+    @@media print {
+        .print-hide {
+            display: none !important;
+        }
+    }
+</style>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary" style="font-size: 1.5rem;">Buscar Ajuste en Inventario</h1>
+    </div>
+    <div class="card-body">
+        <div class="row ml-4">
+            <div class="col-md-12">
+                <form asp-action="Index">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                <select name="IdProducto" class="form-control">
+                                    <option selected value="0">SELECCIONAR PRODUCTO</option>
+                                    @foreach (var item in productos)
+                                    {
+                                        <option value="@item.IdProducto">@item.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        
                     </div>
+
+                    <div class="form-group" style="margin-top: 10px;">
+                        <button type="submit" class="btn btn-primary" style="background-color: #0074D9; color: white;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+
+                        <!-- Agrega este botón en tu HTML -->
+                        <button type="button" class="btn btn-secondary " style="float:right" onclick="printDiv('Imprimir')">
+                            <i class="fas fa-print"></i> Imprimir
+                        </button>
+
+                        <!-- Agrega este botón para exportar a Excel -->
+                        <button type="button" class="btn btn-success" onclick="exportToExcel('Imprimir')">
+                            <i class="fas fa-file-excel"></i> Exportar a Excel
+                        </button>
+
+
+                        <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Ajuste")'">
+                            <i class="fas fa-plus"></i> Agregar
+                        </button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="Imprimir"  class="row mt-3">
+            <div class="col-md-12">
+                <div class="table-responsive paginationjs ml-3">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Cantidad Ajustada</th>
+                                <th>Nombre Producto</th>
+                                <th>Cantidad en Stock</th>
+                                <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+                                <th>@Html.DisplayNameFor(model => model.Detalles)</th>
+                                <th>@Html.DisplayNameFor(model => model.Diferencia)</th>
+                                <th colspan="3">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr data-page="@numPage">
+                                    <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Producto.Nombre)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Producto.CantidadStock)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Usuario.Nombre)</td><td>@Html.DisplayFor(modelItem => item.Detalles)</td>
+                                    @if (item.Diferencia == 1)
+                                    {
+                                        <td>AUMENTAR</td>
+                                    }
+                                    else if (item.Diferencia == 2)
+                                    {
+                                        <td>DISMINUIR</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+
+
+
+                                    <td class="botonestabla">
+                                        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdInventario = item.IdInventario })'">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </button>
+                                    </td>
+
+                                    @*<td class="botonestabla">
+                                        <button type="button" class="btn btn-primary" style="background-color: #264DA0; color: white" onclick="window.location.href='@Url.Action("Edit", new { IdProveedor = item.IdProveedor })'">
+                                            <i class="fas fa-pencil-alt"></i> Modificar
+                                        </button>
+                                    </td>
+                                    <td class="botonestabla">
+                                        <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("Details", new { IdProveedor = item.IdProveedor })'">
+                                            <i class="fas fa-eye"></i> Detalles
+                                        </button>
+                                    </td>
+                                    <td class="botonestabla">
+                                        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdProveedor = item.IdProveedor })'">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </button>
+                                    </td>*@
+                                </tr>
+                                numRegistros++;
+                                if (numRegistros == numRegistrosPorPage)
+                                {
+                                    numPage++;
+                                    numRegistros = 0;
+                                }
+                            }
+                            @{
+                                if (numRegistros == 0)
+                                {
+                                    numPage--;
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
 
-            @* BOTONES DE BUSCAR Y CREAR INVENTARIO*@
-
-            <div class="form-group" style="margin-top: 10px;">
-                <button type="submit" class="btn btn-primary" style="background-color: #0074D9; color: white;">
-                    <i class="fas fa-search"></i> Buscar
-                </button>
-
-
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">
-                    Agregar Ajuste
-                </button>
+        @if (numPage > 1)
+        {
+            <div class="row mt-3" style="overflow:auto">
+                <div class="col-md-12">
+                    <ul class="pagination paginationjs" data-numpage="@numPage" data-pageactive="1">
+                        <li class="page-item" data-typepage="Previous"><a class="page-link" href="#">Previous</a></li>
+                        @for (var i = 1; i <= numPage; i++)
+                        {
+                            <li class="page-item" data-page="@i" data-typepage="Item"><a class="page-link" href="#">@i</a></li>
+                        }
+                        <li class="page-item" data-typepage="Next"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </div>
             </div>
-
-
-        </form>
+        }
     </div>
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cantidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProducto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProducto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Detalles)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Diferencia)
-            </th>
-            <th colspan="3">Acciones</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Producto.CantidadStock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Detalles)
-                </td>
-                @if (item.Diferencia == 1)
-                {
-                    <td>AUMENTAR</td>
-                }
-                else if (item.Diferencia == 2)
-                {
-                    <td>DISMINUIR</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @*BOTONES CRUD EDITAR - LEER - ELIMINAR DETALLE PEDIDO*@
 
 
-                <td class="botonestabla">
-                    <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("Details", new { IdInventario = item.IdInventario })'">
-                        <i class="fas fa-eye"></i> Detalles
-                    </button>
-                </td>
-                <td class="botonestabla">
-                    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdInventario = item.IdInventario })'">
-                        <i class="fas fa-trash"></i> Eliminar
-                    </button>
-                </td>
-            </tr>
 
-            numRegistros++;
-            if (numRegistros == numRegistrosPorPage)
-            {
-                numPage++;
-                numRegistros = 0;
-            }
-        }
-        @{
-            if (numRegistros == 0)
-            {
-                numPage--;
-            }
-        }
-    </tbody>
-</table>
 @if (numPage > 1)
 {
     <div class="row" style="overflow:auto">
@@ -171,6 +209,65 @@
 </div>
 
 <script>
+    
+    $(document).ready(function () {
+        // Inicializar DataTables con la tabla Imprimir
+        var table = $('#myDataTable').DataTable({
+            // ... Configuración adicional de DataTables ...
+        });
+    });
+
+    // Función para exportar a Excel
+    function exportToExcel(tableId) {
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange;
+        var j = 0;
+
+        // Recorrer todas las filas de la tabla y agregar celdas a tab_text
+        $('#' + tableId + ' table tr').each(function () {
+            tab_text += $(this).html() + "</tr>";
+            tab_text += "<tr>";
+            j++;
+        });
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); // Remover cualquier enlace
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // Remover imágenes
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // Remover input
+        tab_text = tab_text.replace(/<button[^>]*>|<\/button>/gi, ""); // Remover botones
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        // Si es Internet Explorer o Edge
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./) || ua.indexOf("Edge") > 0) {
+            textRange = document.body.createTextRange();
+            textRange.moveToElementText(document.getElementById('Imprimir'));
+            textRange.execCommand("Copy");
+            window.navigator.msSaveBlob(new Blob([tab_text], { type: 'application/vnd.ms-excel' }), 'AjusteInventario.xls');
+        } else { // Otros navegadores
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+        }
+        return false;
+    }
+
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        // Remove the "Acciones" header and the buttons
+        printContents = printContents.replace(/<th colspan="4">Acciones<\/th>/, '');
+
+        // Replace the content of the specific <td> with an empty string
+        printContents = printContents.replace(/<td class="botonestabla".*?>[\s\S]*?<\/td>/g, '<td class="botonestabla"></td>');
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+
     var exampleModal = document.getElementById('exampleModal');
     exampleModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
@@ -184,5 +281,4 @@
             modalBody.innerHTML = data;
         });
     });
-
 </script>

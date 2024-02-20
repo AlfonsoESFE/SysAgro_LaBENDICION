@@ -2,3 +2,147 @@
     ViewData["Title"] = "Home Page";
 }
 
+<!-- Content Row -->
+<div class="card-body">
+    <div class="row">
+
+        <!-- Usuario -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <a asp-area="" asp-controller="Usuario" asp-action="Index" class="card-link">
+                <div class="card border-left-primary shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-primary mb-1">
+                                    Administrar Usuarios
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <small class="text-muted">Haz clic para administrar usuarios</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Producto -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <a asp-area="" asp-controller="Producto" asp-action="Index" class="card-link">
+                <div class="card border-left-success shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-success mb-1">
+                                    Administrar Productos
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-cube fa-2x text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <small class="text-muted">Haz clic para gestionar productos</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Compra -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <a asp-area="" asp-controller="DetallesCompra" asp-action="Compra" class="card-link">
+                <div class="card border-left-info shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-info mb-1">
+                                    Registrar Compras
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-shopping-cart fa-2x text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <small class="text-muted">Haz clic para registrar compras</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Venta -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <a asp-area="" asp-controller="DetalleVenta" asp-action="Venta" class="card-link">
+                <div class="card border-left-warning shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-warning mb-1">
+                                    Gestionar Ventas
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-tags fa-2x text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <small class="text-muted">Haz clic para gestionar ventas</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Ajuste de Inventario -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <a asp-area="" asp-controller="Inventario" asp-action="Index" class="card-link">
+                <div class="card border-left-danger shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-danger mb-1">
+                                    Realizar Ajustes de Inventario
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-sync-alt fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <small class="text-muted">Haz clic para realizar ajustes de inventario</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Reportes -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <a asp-area="" asp-controller="DetalleVenta" asp-action="Reportes" class="card-link">
+                <div class="card border-left-secondary shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-secondary mb-1">
+                                    Ver Reportes
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-bar fa-2x text-secondary"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <small class="text-muted">Haz clic para ver reportes</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- End Content Row -->
+</div>

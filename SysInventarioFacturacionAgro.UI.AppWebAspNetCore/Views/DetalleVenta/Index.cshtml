@@ -2,11 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    int numPage = 1;
-    int numRegistros = 0;
-    int numRegistrosPorPage = 10;
-    int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
-    int topActual = Convert.ToInt32(ViewBag.Top);
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta> ventas = ViewBag.Venta as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Venta>;
     List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysInventarioFacturacionAgro.EntidadesDeNegocio.Producto>;
 }
@@ -44,7 +39,7 @@
                 </form>
             </div>
         </div>
-        <table class="table">
+        <table class="table table-bordered" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Cantidad)</th>
@@ -52,7 +47,6 @@
                     <th>@Html.DisplayNameFor(model => model.Venta.NumeroVenta)</th>
                     <th>@Html.DisplayNameFor(model => model.ValorTotal)</th>
                     <th colspan="3">Acciones</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -79,36 +73,28 @@
                             </button>
                         </td>
                     </tr>
-
-                    numRegistros++;
-                    if (numRegistros == numRegistrosPorPage)
-                    {
-                        numPage++;
-                        numRegistros = 0;
-                    }
-                }
-                @{
-                    if (numRegistros == 0)
-                    {
-                        numPage--;
-                    }
                 }
             </tbody>
         </table>
-        @if (numPage > 1)
-        {
-            <div class="row" style="overflow:auto">
-                <div class="col-md-12">
-                    <ul class="pagination paginationjs" data-numpage="@numPage" data-pageactive="1">
-                        <li class="page-item" data-typepage="Previous"><a class="page-link" href="#">Previous</a></li>
-                        @for (var i = 1; i <= numPage; i++)
-                        {
-                            <li class="page-item" data-page="@i" data-typepage="Item"><a class="page-link" href="#">@i</a></li>
-                        }
-                        <li class="page-item" data-typepage="Next"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        }
     </div>
 </div>
+@section Scripts {
+    <!-- Add the existing scripts here if they are not included in your layout -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <!-- Add the DataTables initialization script here -->
+    <script>
+        $(document).ready(function () {
+            $('#tbdata').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+        });
+    </script>
+}
