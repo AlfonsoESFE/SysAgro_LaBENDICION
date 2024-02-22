@@ -142,6 +142,7 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        #region METODOS PARA LOS PROCESOS DE COMPRA Y FACTURA INVERSA - REGISTRAR COMPRAS CON DETALLES Y REPORTES
 
         public async Task<IActionResult> Compra(int? campo, DetallesCompra pDetalleCompra = null)
         {
@@ -231,6 +232,8 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
 
             return View();
         }
+
+#endregion
 
     }
 }

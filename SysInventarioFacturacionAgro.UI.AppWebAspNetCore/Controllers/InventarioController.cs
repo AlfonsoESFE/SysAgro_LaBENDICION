@@ -159,7 +159,7 @@ namespace SysInventarioFacturacionAgro.UI.AppWebAspNetCore.Controllers
             return View();
         }
 
-        // POST: DetallePedidoController/Create
+        // POST: InventaroController/Ajuste
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Ajuste(Inventario pInventario, int Diferencia)

@@ -2,6 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+
+    a.disabled {
+        pointer-events: none; /* Deshabilita la interacción del usuario */
+        color: #6c757d; /* Cambia el color para indicar inactividad */
+    }
+
+</style>
+
+
 <!-- Content Row -->
 <div class="card-body">
     <div class="row">
@@ -54,7 +64,7 @@
 
         <!-- Compra -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <a asp-area="" asp-controller="DetallesCompra" asp-action="Compra" class="card-link">
+            <a asp-area="" asp-controller="DetallesCompra" asp-action="Compra" class="card-link disabled">
                 <div class="card border-left-info shadow h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
